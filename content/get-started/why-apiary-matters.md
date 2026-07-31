@@ -1,5 +1,5 @@
 ---
-name: "Why APIary matters"
+name: "Why Apiary matters"
 status: "real"
 ---
 Apiary empowers our organisation to deliver consistent, accessible, and high-quality digital products faster — creating real business value and enabling scalable growth.
@@ -16,11 +16,7 @@ As our digital products grow in complexity and scale, teams often struggle with 
 
 ## The business impact
 
-- Faster time to market — less duplication and clearer processes speed up feature delivery
-- Cost savings — reduced design and development rework frees resources for innovation
-- Improved product quality — consistent design and accessibility increase user satisfaction
-- Stronger cross-team alignment — shared language and tools reduce bottlenecks and misaligned priorities
-- Future-proof scalability — a centralised system makes adapting to new requirements easier and less costly
+<table class="apy-table"><thead><tr><th>Page</th><th>Last edited</th></tr></thead><tbody><tr><td>Faster time to market</td><td>less duplication and clearer processes speed up feature delivery</td></tr><tr><td>Cost savings</td><td>reduced design and development rework frees resources for innovation</td></tr><tr><td>Improved product quality</td><td>consistent design and accessibility increase user satisfaction</td></tr><tr><td>Stronger cross-team alignment</td><td>shared language and tools reduce bottlenecks and misaligned priorities</td></tr><tr><td>Future-proof scalability</td><td>a centralised system makes adapting to new requirements easier and less costly</td></tr></tbody></table>
 
 ## What we risk without Apiary
 

@@ -8,9 +8,7 @@ This page guides developers working on RAA's digital products to use Apiary effi
 
 ## What Apiary offers
 
-- Foundations — core design elements like colour, typography, spacing, and design tokens
-- Components — reusable UI building blocks for web and mobile
-- Patterns — proven solutions for common design and development challenges
+<table class="apy-table"><thead><tr><th>Page</th><th>Last edited</th></tr></thead><tbody><tr><td>Foundations</td><td>core design elements like colour, typography, spacing, and design tokens</td></tr><tr><td>Components</td><td>reusable UI building blocks for web and mobile</td></tr><tr><td>Patterns</td><td>proven solutions for common design and development challenges</td></tr></tbody></table>
 
 ## How designs are shared
 

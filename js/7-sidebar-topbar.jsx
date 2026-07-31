@@ -15,7 +15,7 @@ function Sidebar({ page, navigate }) {
       <button onClick={() => navigate({ kind: "home" })} style={{ display: "block", width: "100%", textAlign: "left", padding: "7px 16px", background: page.kind === "home" ? ACCENT_TINT : "none", border: "none", cursor: "pointer", fontSize: 13, fontWeight: page.kind === "home" ? 700 : 400 }}>Home</button>
 
       <div style={{ marginTop: 8 }}>
-        <button onClick={() => toggle("getStarted")} style={{ display: "flex", alignItems: "center", gap: 5, width: "100%", padding: "7px 16px", background: "none", border: "none", cursor: "pointer", fontSize: 11, fontWeight: 600, color: FAINT, textTransform: "uppercase", fontFamily: FONT_MONO }}>
+        <button onClick={() => toggle("getStarted")} style={{ display: "flex", alignItems: "center", gap: 5, width: "100%", padding: "7px 16px", background: "none", border: "none", cursor: "pointer", fontSize: 12, fontWeight: 700, color: FAINT, textTransform: "uppercase", fontFamily: FONT_MONO, letterSpacing: "0.03em" }}>
           {openGroups.getStarted ? "▾" : "▸"} Get Started
         </button>
         {openGroups.getStarted && NAV.getStartedItems.map((it) => (
@@ -26,7 +26,7 @@ function Sidebar({ page, navigate }) {
       </div>
 
       <div style={{ marginTop: 8 }}>
-        <button onClick={() => toggle("foundations")} style={{ display: "flex", alignItems: "center", gap: 5, width: "100%", padding: "7px 16px", background: "none", border: "none", cursor: "pointer", fontSize: 11, fontWeight: 600, color: FAINT, textTransform: "uppercase", fontFamily: FONT_MONO }}>
+        <button onClick={() => toggle("foundations")} style={{ display: "flex", alignItems: "center", gap: 5, width: "100%", padding: "7px 16px", background: "none", border: "none", cursor: "pointer", fontSize: 12, fontWeight: 700, color: FAINT, textTransform: "uppercase", fontFamily: FONT_MONO, letterSpacing: "0.03em" }}>
           {openGroups.foundations ? "▾" : "▸"} Foundations
         </button>
         {openGroups.foundations && NAV.foundationKeys.map((k) => (
@@ -37,14 +37,14 @@ function Sidebar({ page, navigate }) {
       </div>
 
       <div style={{ marginTop: 8 }}>
-        <div style={{ padding: "7px 16px", fontSize: 11, fontWeight: 700, color: FAINT, fontFamily: FONT_MONO, textTransform: "uppercase" }}>Components</div>
+        <div style={{ padding: "7px 16px", fontSize: 12, fontWeight: 700, color: FAINT, fontFamily: FONT_MONO, textTransform: "uppercase", letterSpacing: "0.03em" }}>Components</div>
         {NAV.componentGroups.map((g) => {
           const familiesInGroup = NAV.families.filter((f) => familyGroupKey(f) === g.key);
           const memberIds = getFamilyMemberIds();
           const standalone = NAV.components.filter((c) => c.groupKey === g.key && !memberIds.has(c.id));
           return (
             <div key={g.key}>
-              <button onClick={() => toggle(g.key)} style={{ display: "flex", alignItems: "center", gap: 5, width: "100%", padding: "5px 16px 5px 20px", background: "none", border: "none", cursor: "pointer", fontSize: 11, fontWeight: 600, color: FAINT, textTransform: "uppercase", fontFamily: FONT_MONO }}>
+              <button onClick={() => toggle(g.key)} style={{ display: "flex", alignItems: "center", gap: 5, width: "100%", padding: "5px 16px 5px 20px", background: "none", border: "none", cursor: "pointer", fontSize: 12, fontWeight: 700, color: FAINT, textTransform: "uppercase", fontFamily: FONT_MONO, letterSpacing: "0.03em" }}>
                 {openGroups[g.key] ? "▾" : "▸"} {g.label}
               </button>
               {openGroups[g.key] && (

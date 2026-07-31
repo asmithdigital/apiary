@@ -1,5 +1,5 @@
 ---
-name: "Start using APIary"
+name: "Start using Apiary"
 status: "real"
 ---
 One place to help everyone build consistent, accessible, user-first products — faster.
@@ -27,17 +27,11 @@ _Apiary helps reduce duplication, maintain accessibility, align across teams, an
 
 ## What you'll find inside
 
-- Foundations — core design principles, colours, typography, accessibility standards, and layout guidelines
-- Design Tokens — centralised variables for colours, spacing, fonts, and more to ensure consistency and easy updates
-- Components — reusable UI elements for web and mobile apps designed for consistency and efficiency
-- Patterns — pre-built design solutions for common UI problems, helping avoid duplication
-- How-to Guides — practical role-specific onboarding and workflow guides to get the most from Apiary
+<table class="apy-table"><thead><tr><th>Page</th><th>Last edited</th></tr></thead><tbody><tr><td>Foundations</td><td>core design principles, colours, typography, accessibility standards, and layout guidelines</td></tr><tr><td>Design Tokens</td><td>centralised variables for colours, spacing, fonts, and more to ensure consistency and easy updates</td></tr><tr><td>Components</td><td>reusable UI elements for web and mobile apps designed for consistency and efficiency</td></tr><tr><td>Patterns</td><td>pre-built design solutions for common UI problems, helping avoid duplication</td></tr><tr><td>How-to Guides</td><td>practical role-specific onboarding and workflow guides to get the most from Apiary</td></tr></tbody></table>
 
 ## Start by role
 
-- 🎨 Designer Onboarding — use shared Figma libraries, document components, and collaborate effectively with developers
-- 💻 Developer Onboarding — implement designs accurately using design specs, Storybook, and reusable design tokens to speed development
-- ✍️ Content Onboarding (coming soon) — create consistent UI copy, align content with patterns, and contribute to Apiary documentation
+<table class="apy-table"><thead><tr><th>Page</th><th>Last edited</th></tr></thead><tbody><tr><td>🎨 Designer Onboarding</td><td>use shared Figma libraries, document components, and collaborate effectively with developers</td></tr><tr><td>💻 Developer Onboarding</td><td>implement designs accurately using design specs, Storybook, and reusable design tokens to speed development</td></tr><tr><td>✍️ Content Onboarding (coming soon)</td><td>create consistent UI copy, align content with patterns, and contribute to Apiary documentation</td></tr></tbody></table>
 
 ## Still have questions?
 
