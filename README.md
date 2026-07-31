@@ -1,67 +1,87 @@
 # APIary
 
-RAA's real design system reference — components, foundations, and Get Started
-content captured directly from real Figma/Zeroheight sources, not written
-from memory. This is a static site with **no build step**: clone it, edit a
-JSON file, push, done.
+RAA's real design system reference, built as an actual CMS: log into GitHub,
+edit a markdown or JSON file, commit — the live site reflects it within a
+minute. No build step, no npm install, no "also update it somewhere else."
 
-## How this is structured
+## The rule this repo follows
+
+- **A written paragraph of guidance, a Do/Don't, an accessibility note, a
+  Get Started page?** That's a `.md` file in `content/`. Edit it like a
+  document.
+- **A hex code, a pixel value, a token name, a list of real captured
+  values?** That's a small `.json` file next to it. It's a table, not prose
+  — markdown isn't the right shape for it.
+- **The menu structure — sidebar groups, families, foundations, Get Started
+  items?** All one file: `content/nav.json`. Add an item there and it shows
+  up everywhere it needs to, automatically.
+- **Rendering logic — how a page lays out, what a tab does?** That's the
+  `.jsx` files in `js/`. You shouldn't need to touch these for a content
+  change.
+
+## File structure
 
 ```
-index.html          — the only HTML file. Loads Babel Standalone + app.js.
-app.js               — every React component (Sidebar, DetailPage, FamilyPage,
-                        FoundationsPage, GetStartedPage, HomePage, the preview
-                        engine, etc). This is real code — logic, not content.
-data/*.json          — every real value: component specs, guidelines,
-                        foundation content, Get Started pages, colour ramps,
-                        spacing scale, families. This is real content, not code.
-.nojekyll            — tells GitHub Pages to serve files exactly as they are.
+index.html                    — loads everything, in order. Rarely needs editing.
+js/0-bootstrap.mjs             — loads React/ReactDOM/lucide-react/marked from CDN
+js/0-markdown.js               — the tiny hand-written frontmatter reader
+js/1-identity.jsx              — colours/fonts + the live component-preview engine
+js/2-markdown-view.jsx         — renders fetched markdown, the version picker
+js/3-detail-page.jsx           — a single component's page (and grouped families)
+js/4-foundations-page.jsx      — Colour/Spacing/Typography/etc pages
+js/5-get-started-page.jsx      — the Get Started pages
+js/6-home-page.jsx             — the landing page
+js/7-sidebar-topbar.jsx        — navigation, driven entirely by nav.json
+js/8-app.jsx                   — routing (real URLs, e.g. #/component/button) + boot
+
+content/nav.json               — THE single menu source of truth
+content/manifest.json          — which real version files exist, per item
+content/R.json                 — real RAA brand values (logo colours etc)
+content/components/<id>/
+  specs.json                  — real captured values (tabular — stays JSON)
+  v1.md, v2.md, ...            — real documentation (versioned — markdown)
+content/foundations/<key>/
+  data.json                   — real tabular data (colour ramps, spacing scale, etc)
+  v1.md                       — real narrative content
+content/get-started/<key>.md   — each Get Started page
 ```
 
-**The rule this repo follows:** if it's a label, a real captured value, a
-token name, or a paragraph of documentation, it lives in `data/*.json`. If
-it's rendering logic — how a page lays out, what a tab strip does, how a
-component preview draws itself — it lives in `app.js`. Update a JSON file
-and the site updates immediately on next load. No code change needed.
+## Editing content (the actual daily workflow)
 
-## Editing content
+1. On GitHub, open `content/components/button/v1.md`.
+2. Click the pencil icon (Edit this file).
+3. Change a paragraph, a Do/Don't item, whatever.
+4. Commit directly to `main`.
+5. Wait about a minute, refresh the live site. Done.
 
-Every file in `data/` is plain JSON — editable directly in the GitHub web UI
-(click the file, click the pencil icon, edit, commit) or in any text editor.
-The most commonly edited ones:
+No code touched, nothing to build, nothing to update in two places.
 
-- `COMPONENTS.json` — real captured specs per component (id, tokenFindings, etc.)
-- `GUIDELINES.json` — real Do/Don't, accessibility, content guidance per component
-- `GET_STARTED_CONTENT.json` — the Get Started pages (What is APIary, onboarding, etc.)
-- `FOUNDATION_NARRATIVE.json` — the written Foundations pages (Colour, Icons, etc.)
+## Adding a new version of a component's documentation
 
-Each JSON file corresponds exactly to one data structure `app.js` fetches by
-name at startup — the key names in `app.js`'s `DATA_FILES` map match the
-filenames here 1:1.
+1. Duplicate `content/components/<id>/v1.md` as `v2.md`, edit it.
+2. Open `content/manifest.json`, find that component's array, add `"v2"`.
+3. Commit both files together. The site now defaults to `v2` and offers a
+   dropdown back to `v1`.
 
-## Running it locally
+## Adding a brand-new menu item
 
-Because `app.js` fetches JSON with `fetch()`, opening `index.html` directly
-as a `file://` URL will fail (browsers block `fetch` against local files for
-security). Serve the folder instead:
+Edit `content/nav.json` — add the entry to the relevant array
+(`getStartedItems`, `foundationKeys` + `foundationLabels`, etc.), then create
+the matching content file it points to (e.g. `content/get-started/new-key.md`).
+That's genuinely it — the sidebar, search, and routing all read from this one
+file.
+
+## Running locally
+
+`fetch()` can't read local files over `file://`, so serve the folder:
 
 ```bash
-cd apiary-app
+cd apiary-cms
 python3 -m http.server 8000
 ```
 
-Then open `http://localhost:8000` in a browser.
+Open `http://localhost:8000`.
 
 ## Deploying
 
-Push to GitHub, then turn on Pages for this repo (Settings → Pages → Deploy
-from a branch → main → /root). GitHub Pages serves static files exactly like
-this over https, which is all `fetch()` and the ESM CDN imports need.
-
-## Known simplification
-
-Icons come from `lucide-react`, loaded via `esm.sh` (a CDN that re-serves npm
-packages as browser ES modules) rather than an npm install — this keeps the
-"no build step" promise. If `esm.sh` availability ever becomes a concern,
-vendor `react`, `react-dom`, and `lucide-react` into this repo and change the
-three import URLs at the top of `app.js` to relative paths.
+Push to GitHub, then Settings → Pages → Deploy from a branch → `main` → `/`.

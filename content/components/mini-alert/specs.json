@@ -1,0 +1,37 @@
+{
+  "name": "MiniAlert",
+  "groupKey": "feedback",
+  "source": "src/imports/MiniAlert/index.tsx",
+  "summary": "A compact single-line variant of Alert, desktop and mobile.",
+  "variantsRaw": "device=Desktop|Mobile · type=Change|Confirmation|Error|Information|Warning|Skeleton",
+  "tokenFindings": [
+    {
+      "field": "Colours",
+      "value": "Same as Alert",
+      "token": null
+    },
+    {
+      "field": "Padding",
+      "value": "12px vertical, 18px horizontal",
+      "token": null
+    }
+  ],
+  "capturedNotes": [
+    "Information/Desktop's title uses a font-size 0 wrapper with sized inner spans — a real rendering artefact from a mixed-style text node.",
+    "Confirmation/Desktop nests the close icon inside the content block, structurally different from every other Desktop variant."
+  ],
+  "preview": {
+    "kind": "container",
+    "states": [
+      {
+        "label": "Information",
+        "bg": "#F1F7FB",
+        "border": "1px solid #73AFD5",
+        "radius": 4,
+        "w": 320,
+        "h": 44,
+        "sample": "Mini alert"
+      }
+    ]
+  }
+}

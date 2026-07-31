@@ -1,0 +1,58 @@
+{
+  "name": "LinkBack",
+  "groupKey": "actions",
+  "source": "src/imports/LinkBack/index.tsx",
+  "summary": "A back-navigation link with a leading arrow. Shares its colour states with LinkInformation, LinkExternal, and LinkInternal.",
+  "variantsRaw": "State=Active|Default|Focus|Hover|Visited",
+  "tokenFindings": [
+    {
+      "field": "Default",
+      "value": "#00349F, underlined",
+      "token": null
+    },
+    {
+      "field": "Hover",
+      "value": "#0D59FF, underlined",
+      "token": null
+    },
+    {
+      "field": "Active / Visited",
+      "value": "#441FCC, underlined",
+      "token": null
+    },
+    {
+      "field": "Focus",
+      "value": "background #0D59FF, text white, no underline",
+      "token": null
+    },
+    {
+      "field": "Gap (arrow to text)",
+      "value": "6px",
+      "token": null
+    }
+  ],
+  "capturedNotes": [],
+  "preview": {
+    "kind": "link",
+    "states": [
+      {
+        "label": "Default",
+        "text": "#00349F"
+      },
+      {
+        "label": "Hover",
+        "text": "#0D59FF"
+      },
+      {
+        "label": "Visited",
+        "text": "#441FCC"
+      },
+      {
+        "label": "Focus",
+        "text": "#fff",
+        "bg": "#0D59FF",
+        "underline": false
+      }
+    ]
+  }
+}

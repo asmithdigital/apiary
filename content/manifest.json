@@ -1,0 +1,246 @@
+{
+  "components": {
+    "button": [
+      "v1"
+    ],
+    "chip": [
+      "v1"
+    ],
+    "lozenge": [
+      "v1"
+    ],
+    "link-back": [
+      "v1"
+    ],
+    "link-information": [
+      "v1"
+    ],
+    "link-external": [
+      "v1"
+    ],
+    "link-internal": [
+      "v1"
+    ],
+    "text-field-regular": [
+      "v1"
+    ],
+    "textarea": [
+      "v1"
+    ],
+    "input-counter": [
+      "v1"
+    ],
+    "select": [
+      "v1"
+    ],
+    "checkbox-basic": [
+      "v1"
+    ],
+    "checkbox-horizontal": [
+      "v1"
+    ],
+    "checkbox-horizontal-2": [
+      "v1"
+    ],
+    "radio-basic": [
+      "v1"
+    ],
+    "radio-horizontal": [
+      "v1"
+    ],
+    "radio-tile": [
+      "v1"
+    ],
+    "toggle": [
+      "v1"
+    ],
+    "toggle-lg": [
+      "v1"
+    ],
+    "range-slider": [
+      "v1"
+    ],
+    "date": [
+      "v1"
+    ],
+    "calendar": [
+      "v1"
+    ],
+    "filters": [
+      "v1"
+    ],
+    "alert": [
+      "v1"
+    ],
+    "mini-alert": [
+      "v1"
+    ],
+    "alert-helper": [
+      "v1"
+    ],
+    "badge": [
+      "v1"
+    ],
+    "skeleton": [
+      "v1"
+    ],
+    "spinner": [
+      "v1"
+    ],
+    "tooltip": [
+      "v1"
+    ],
+    "progress-linear": [
+      "v1"
+    ],
+    "linear-5-step": [
+      "v1"
+    ],
+    "vertical-stepper": [
+      "v1"
+    ],
+    "step-item-horizontal": [
+      "v1"
+    ],
+    "banner": [
+      "v1"
+    ],
+    "breadcrumb": [
+      "v1"
+    ],
+    "pagination": [
+      "v1"
+    ],
+    "section-title": [
+      "v1"
+    ],
+    "nav-side-parent": [
+      "v1"
+    ],
+    "nav-side-child": [
+      "v1"
+    ],
+    "nav-side-accordion": [
+      "v1"
+    ],
+    "nav-side": [
+      "v1"
+    ],
+    "modal-basic": [
+      "v1"
+    ],
+    "modal-warning": [
+      "v1"
+    ],
+    "modal-detailed": [
+      "v1"
+    ],
+    "drawer": [
+      "v1"
+    ],
+    "popup-menu": [
+      "v1"
+    ],
+    "need-help-dropdown": [
+      "v1"
+    ],
+    "helper-chat": [
+      "v1"
+    ],
+    "live-chat": [
+      "v1"
+    ],
+    "information-drawer": [
+      "v1"
+    ],
+    "accordion": [
+      "v1"
+    ],
+    "accordion-detailed": [
+      "v1"
+    ],
+    "blockquote": [
+      "v1"
+    ],
+    "table": [
+      "v1"
+    ],
+    "helper": [
+      "v1"
+    ],
+    "card-cover-type": [
+      "v1"
+    ],
+    "card-desktop": [
+      "v1"
+    ],
+    "tile-cover-level": [
+      "v1"
+    ],
+    "item": [
+      "v1"
+    ],
+    "promo-card": [
+      "v1"
+    ],
+    "journey-footer": [
+      "v1"
+    ],
+    "site-footer": [
+      "v1"
+    ],
+    "header-desktop": [
+      "v1"
+    ],
+    "header-mobile": [
+      "v1"
+    ],
+    "qtb-sticky-header": [
+      "v1"
+    ],
+    "claims-mobile-menu": [
+      "v1"
+    ],
+    "form-row-group": [
+      "v1"
+    ]
+  },
+  "foundations": {
+    "colour": [
+      "v1"
+    ],
+    "spacing": [
+      "v1"
+    ],
+    "elevation": [
+      "v1"
+    ],
+    "typography": [
+      "v1"
+    ],
+    "icons": [
+      "v1"
+    ],
+    "logo": [
+      "v1"
+    ],
+    "accessibility": [
+      "v1"
+    ],
+    "design-tokens": [
+      "v1"
+    ]
+  },
+  "getStarted": {
+    "what-is-apiary": true,
+    "why-apiary-matters": true,
+    "design-principles": true,
+    "news-updates": true,
+    "start-using": true,
+    "designer-onboarding": true,
+    "developer-onboarding": true,
+    "resources": true,
+    "support": true,
+    "release-phases": true
+  }
+}

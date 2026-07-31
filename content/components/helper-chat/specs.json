@@ -1,0 +1,36 @@
+{
+  "name": "HelperChat",
+  "groupKey": "overlays",
+  "source": "src/imports/HelperChat/index.tsx",
+  "summary": "A speech-bubble tip from the RAA Helper character, 3 layout positions.",
+  "variantsRaw": "layout=Bottom|Right|Top",
+  "tokenFindings": [
+    {
+      "field": "Bubble",
+      "value": "bg #F5F2FB, text #533F8C",
+      "token": null
+    },
+    {
+      "field": "Avatar",
+      "value": "64×64px Helper illustration",
+      "token": null
+    }
+  ],
+  "capturedNotes": [
+    "Top layout's bubble tail points the wrong way (rounded-tl instead of rounded-bl) compared to Right/Bottom — real visual bug."
+  ],
+  "preview": {
+    "kind": "container",
+    "states": [
+      {
+        "label": "Bottom",
+        "bg": "#F5F2FB",
+        "text": "#533F8C",
+        "radius": 12,
+        "w": 220,
+        "h": 70,
+        "sample": "Helper tip"
+      }
+    ]
+  }
+}

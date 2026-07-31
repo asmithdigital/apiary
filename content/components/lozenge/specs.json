@@ -1,0 +1,93 @@
+{
+  "name": "Lozenge",
+  "groupKey": "actions",
+  "source": "src/imports/Lozenge/index.tsx",
+  "summary": "A small coloured status marker, 13 types. Corner radius 2px throughout.",
+  "variantsRaw": "Type=Primary 1|Primary 2|Secondary 1|Secondary 2|Tertiary 1-7|Muted|Invalid",
+  "tokenFindings": [
+    {
+      "field": "Primary 1",
+      "value": "#FFE600, text #000000",
+      "token": null
+    },
+    {
+      "field": "Primary 2",
+      "value": "#000000, text #FFFFFF",
+      "token": null
+    },
+    {
+      "field": "Secondary 1",
+      "value": "#130064, text #FFFFFF",
+      "token": null
+    },
+    {
+      "field": "Tertiary 5",
+      "value": "#007064, text #FFFFFF",
+      "token": null
+    },
+    {
+      "field": "Invalid",
+      "value": "#E60E22, text #FFFFFF",
+      "token": null
+    },
+    {
+      "field": "Muted",
+      "value": "rgba(0,0,0,0.05), text #000000",
+      "token": null
+    },
+    {
+      "field": "Padding",
+      "value": "2px vertical, 6px horizontal",
+      "token": null
+    },
+    {
+      "field": "Corner radius",
+      "value": "2px",
+      "token": null
+    },
+    {
+      "field": "Gap",
+      "value": "4px (5px on Tertiary 6 — inconsistent)",
+      "token": null
+    },
+    {
+      "field": "Type",
+      "value": "National 2 · Medium · 12px · line-height 18px",
+      "token": null
+    }
+  ],
+  "capturedNotes": [],
+  "preview": {
+    "kind": "button",
+    "states": [
+      {
+        "label": "Primary 1",
+        "bg": "#FFE600",
+        "text": "#000",
+        "radius": 2,
+        "padding": "2px 6px"
+      },
+      {
+        "label": "Secondary 1",
+        "bg": "#130064",
+        "text": "#fff",
+        "radius": 2,
+        "padding": "2px 6px"
+      },
+      {
+        "label": "Tertiary 5",
+        "bg": "#007064",
+        "text": "#fff",
+        "radius": 2,
+        "padding": "2px 6px"
+      },
+      {
+        "label": "Invalid",
+        "bg": "#E60E22",
+        "text": "#fff",
+        "radius": 2,
+        "padding": "2px 6px"
+      }
+    ]
+  }
+}

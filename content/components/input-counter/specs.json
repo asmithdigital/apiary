@@ -1,0 +1,48 @@
+{
+  "name": "InputCounter",
+  "groupKey": "forms",
+  "source": "src/imports/InputCounter/index.tsx + InputCounter-1/index.tsx",
+  "summary": "A numeric stepper. Two real instances exist — a static one and a stateful one that reuses the full Button component inline. Merged into one entry.",
+  "variantsRaw": "state=Default|Disabled|Focus|Hover|Invalid|Value",
+  "tokenFindings": [
+    {
+      "field": "Minus/plus button",
+      "value": "44×44px, bg white",
+      "token": null
+    },
+    {
+      "field": "Corner radius",
+      "value": "4px",
+      "token": null
+    },
+    {
+      "field": "Border (Default input)",
+      "value": "1px solid #7F7F7F",
+      "token": null
+    },
+    {
+      "field": "Border (Invalid)",
+      "value": "1px solid #E60E22",
+      "token": null
+    },
+    {
+      "field": "Value text",
+      "value": "National 2 · Regular · 14px, centred",
+      "token": null
+    }
+  ],
+  "capturedNotes": [
+    "The stateful variant (InputCounter-1) contains a full 870+ line inline copy of the Button component rather than importing it — real maintenance risk, not just a documentation note."
+  ],
+  "preview": {
+    "kind": "field",
+    "states": [
+      {
+        "label": "Default",
+        "w": 140,
+        "border": "1px solid #7F7F7F",
+        "sample": "12"
+      }
+    ]
+  }
+}

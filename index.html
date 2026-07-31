@@ -8,21 +8,50 @@
   <style>
     html, body { margin: 0; padding: 0; }
     * { box-sizing: border-box; }
+    .apy-prose h2 { font-size: 16px; font-weight: 700; margin: 22px 0 8px; color: #0F172A; }
+    .apy-prose p { margin: 0 0 10px; }
+    .apy-prose ul { margin: 0 0 14px; padding-left: 20px; }
+    .apy-prose li { margin-bottom: 4px; }
+    .apy-prose strong { color: #0F172A; }
+    .apy-prose blockquote { border-left: 3px solid #5B5BD6; background: #EEF2FF; padding: 10px 14px; margin: 14px 0; }
   </style>
 </head>
 <body>
   <div id="root"></div>
 
   <!--
-    No build step, on purpose — this repo can be edited directly in the
-    GitHub web UI or a plain text editor and it just works when served.
-    Babel Standalone does the one thing a browser can't do natively:
-    turn JSX into React.createElement(...) calls. Everything else in
-    app.js is real ES modules, loaded straight from esm.sh (a CDN that
-    re-serves npm packages as browser-ready ES modules) — no npm install,
-    no bundler, no dist folder to keep in sync.
+    Every file below is real, editable, plain-text source. Edit any .jsx
+    file here or any .md/.json file in /content/ directly in the GitHub
+    web UI, commit, and it's live within a minute — no build, no npm
+    install. See README.md for the full explanation of why this works.
   -->
+
+  <!-- Step 1: load React/ReactDOM/lucide-react/marked from CDN as real ES modules. -->
+  <script type="module" src="./js/0-bootstrap.mjs"></script>
+  <!-- Step 2: the hand-written markdown/frontmatter reader — plain JS, no JSX, no Babel needed. -->
+  <script src="./js/0-markdown.js"></script>
+
+  <!-- Step 3: Babel Standalone does the one thing a browser can't do natively: turn JSX into real JS. -->
   <script src="https://unpkg.com/@babel/standalone@7.24.7/babel.min.js"></script>
-  <script type="text/babel" data-type="module" data-presets="react" src="./app.js"></script>
+  <script>
+    // Forces the classic React.createElement output instead of the modern
+    // "automatic" runtime — the automatic runtime needs real ES modules,
+    // which these plain <script type="text/babel"> tags deliberately are
+    // not (that's what lets them all share one scope, like old-school
+    // multi-file script tags, with no bundler in between).
+    Babel.registerPreset("apiary-react", {
+      presets: [[Babel.availablePresets["react"], { runtime: "classic" }]],
+    });
+  </script>
+
+  <!-- Step 4: every real component file, in dependency order, all sharing one scope. -->
+  <script type="text/babel" data-presets="apiary-react" src="./js/1-identity.jsx"></script>
+  <script type="text/babel" data-presets="apiary-react" src="./js/2-markdown-view.jsx"></script>
+  <script type="text/babel" data-presets="apiary-react" src="./js/3-detail-page.jsx"></script>
+  <script type="text/babel" data-presets="apiary-react" src="./js/4-foundations-page.jsx"></script>
+  <script type="text/babel" data-presets="apiary-react" src="./js/5-get-started-page.jsx"></script>
+  <script type="text/babel" data-presets="apiary-react" src="./js/6-home-page.jsx"></script>
+  <script type="text/babel" data-presets="apiary-react" src="./js/7-sidebar-topbar.jsx"></script>
+  <script type="text/babel" data-presets="apiary-react" src="./js/8-app.jsx"></script>
 </body>
 </html>
