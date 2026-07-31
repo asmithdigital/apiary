@@ -1,0 +1,232 @@
+{
+  "typography": {
+    "intro": "Typography defines the visual voice of our products, balancing accessibility, hierarchy, and style to support clear, consistent communication across platforms.",
+    "body": "Apiary provides a comprehensive set of typography styles defined by visual properties such as font size, weight, line height, and letter spacing. The design system does not prescribe specific HTML elements (like <h1>, <p>), as the correct semantic structure depends on the component's context and page hierarchy. This approach allows teams to maintain both visual consistency and semantic accessibility. As body text styles vary between applications, this page focuses on the visual style definitions rather than fixed HTML element assignments.",
+    "blocks": [
+      {
+        "title": "Weights and sizes",
+        "body": "The typography styles support clear hierarchy and emphasis by providing a flexible range of font weights and sizes.",
+        "list": [
+          "Extra Bold — 42px/48px, 36px/42px, 30px/36px, 24px/30px (font size / line height)",
+          "Bold — available from 42px down to 12px, each with matching line heights",
+          "Medium, Regular, Underline — available in sizes from 42px to 12px with matching line heights"
+        ],
+        "note": "Each style is designed to maintain readability and visual consistency across the product. TODO in the source: visual examples and Figma references still to be added."
+      },
+      {
+        "title": "Usage guidelines",
+        "list": [
+          "Use typography styles to clearly communicate hierarchy and meaning without relying solely on font size or weight",
+          "Choose semantic HTML heading levels based on content structure, not visual appearance",
+          "Body text styles may differ between applications — refer to specific app guidelines when needed",
+          "Ensure text contrast meets accessibility standards for legibility",
+          "Use underline styles sparingly, primarily for links or subtle emphasis, to avoid confusing users"
+        ]
+      }
+    ]
+  },
+  "icons": {
+    "intro": "Icons are essential visual elements that support navigation, actions, and communication across our digital products. They provide quick, intuitive cues that help users interact efficiently.",
+    "body": "Icons act as quick visual cues that enhance usability, reinforce meaning, and support consistency across our digital products. In Apiary, they appear in navigation, buttons, alerts, inputs, and more.",
+    "blocks": [
+      {
+        "title": "Where things stand today",
+        "body": "Currently, icons are used in several ways:",
+        "list": [
+          "Designers copy and paste individual icons into squad specs from a shared Figma file",
+          "Some components embed icon fonts (such as Font Awesome) via text layers",
+          "There are no defined sizes, spacing rules, or standard icon components"
+        ],
+        "note": "We're moving to a shared set of reusable, fixed-size icons that can be used consistently across all components. This will improve accessibility, reduce manual design work, and streamline the developer experience."
+      },
+      {
+        "title": "Use icons to",
+        "list": [
+          "Reinforce meaning (e.g. a warning icon in an alert)",
+          "Represent an action (e.g. a plus icon for \"Add\")",
+          "Aid quick scanning and enhance navigation (e.g. icons in menus)"
+        ]
+      },
+      {
+        "title": "Avoid using icons when",
+        "list": [
+          "They serve only as decoration — every icon should have a clear purpose",
+          "They are used without accompanying text, unless the meaning is universally understood"
+        ]
+      },
+      {
+        "title": "Icon sizes (standardising to two)",
+        "list": [
+          "Small — 16×16px: tags, form fields, compact UI, inline with text",
+          "Large — 24×24px: buttons, alerts, modals, empty states, banners, standalone contexts"
+        ],
+        "note": "Token names: icon-sm (width/height size-sm), icon-lg (width/height size-lg). Designers should size icons manually to fit these values until components are updated."
+      },
+      {
+        "title": "Placement and alignment",
+        "list": [
+          "Icons should align to the layout grid and follow existing spacing rules",
+          "Maintain clear padding between icons and adjacent text or elements",
+          "When placed next to text, ensure vertical alignment to the text baseline",
+          "Icons should be optically centred within containers"
+        ]
+      },
+      {
+        "title": "Icon sets",
+        "list": [
+          "Component-based icons (preferred) — a reusable Figma library with fixed sizing",
+          "Typography-based icons (legacy) — icon fonts (e.g. Font Awesome) via text layers, still permitted in some dynamic text use cases"
+        ]
+      },
+      {
+        "title": "Usage in components",
+        "body": "Icons must follow component layout and spacing rules. Use icon variants from the Figma component library. Avoid resizing or detaching icons to maintain consistency.",
+        "note": "TODO in the source: show icons used correctly in a button, tag, and alert component, with spacing guides/redlines."
+      },
+      {
+        "title": "Colour & contrast",
+        "body": "Functional icons must meet accessibility colour contrast ratios. Decorative icons may use brand colours but should never compromise readability.",
+        "note": "TODO in the source: examples of high/low contrast icons on light/dark backgrounds."
+      },
+      {
+        "title": "Icon types",
+        "list": [
+          "Functional — status indicators, actions (e.g. edit, close, info)",
+          "Decorative — visual enhancements that don't convey meaning"
+        ],
+        "note": "TODO in the source: a categorised grid of functional vs decorative icon examples."
+      },
+      {
+        "title": "Using the Icon component in Figma",
+        "body": "Use the Icon Set component in Figma to ensure consistency and scalability. Select icons from the dropdown or variant picker — avoid pasting SVGs or detaching layers.",
+        "note": "Tip: you can swap icons by selecting a different name from the dropdown — no need to resize or detach. TODO in the source: a screenshot of the picker."
+      },
+      {
+        "title": "Content guidelines",
+        "list": [
+          "Use recognisable, platform-appropriate icons",
+          "Don't invent new symbols — rely on system-standard or widely accepted visuals",
+          "Pair icons with descriptive text unless the icon is universally understood (e.g. close, search)"
+        ]
+      },
+      {
+        "title": "Do / Don't",
+        "list": [
+          "Do: use predefined 16px or 24px sizes — Don't: use random or resized icons",
+          "Do: use the Figma icon component — Don't: paste standalone SVGs",
+          "Do: maintain padding and alignment — Don't: eyeball icon placement",
+          "Do: ensure functional icons meet colour contrast requirements — Don't: use low-contrast icons for functional purposes"
+        ]
+      }
+    ]
+  },
+  "colour": {
+    "intro": "A clear and consistent colour system helps us design user-friendly, accessible, and brand-aligned experiences.",
+    "body": "Colour in Apiary supports branding, usability, and emotion — helping teams create consistent, inclusive products that scale across platforms. By using a shared colour system, we reduce duplication, improve readability, and build trust with our users.",
+    "blocks": [
+      {
+        "title": "How we use colour",
+        "list": [
+          "Branding — strengthens brand recognition and visual identity through consistent use of primary and secondary colours",
+          "Functional cues — supports usability by indicating interaction states (hover, active, disabled) and system status (error, success)",
+          "Emotion and focus — creates a visual tone that builds trust and guides attention",
+          "Accessibility — ensures text and interface elements meet contrast guidelines for everyone, including users with vision impairments"
+        ]
+      },
+      {
+        "title": "Our colour system",
+        "list": [
+          "Primary and secondary brand colours",
+          "Neutrals and greys for layout and background elements",
+          "Semantic colours for messaging and status indicators",
+          "Accessible colour pairings that meet WCAG standards"
+        ],
+        "note": "Colour usage examples and pairings live in Figma files and component documentation."
+      },
+      {
+        "title": "Using colour in your work",
+        "body": "Always use the colours defined in the Apiary design system — not custom values — to ensure consistency across products. Designs should reference the official Figma libraries, and developers should follow specifications provided in design handovers. We're preparing our colour system to support design tokens in future stages."
+      },
+      {
+        "title": "Next steps",
+        "list": [
+          "Use the official colour styles from the Figma library",
+          "Follow guidance in the component or pattern documentation",
+          "Stay tuned for updates on colour tokens and developer resources"
+        ]
+      }
+    ]
+  },
+  "accessibility": {
+    "intro": "Designing for accessibility means creating inclusive experiences that everyone can use — regardless of ability.",
+    "body": "Accessibility ensures that people with diverse needs can perceive, understand, navigate, and interact with our products. It's not a separate layer — it's a core part of how we design and build digital experiences.",
+    "blocks": [
+      {
+        "title": "Why accessibility matters",
+        "body": "Digital accessibility improves usability for all users — including those with vision, hearing, motor, or cognitive challenges. It also helps us meet legal standards, align with our brand values, and reduce rework by baking in best practices early.",
+        "list": [
+          "Build more inclusive products",
+          "Reduce support issues and user frustration",
+          "Improve search engine visibility and performance",
+          "Support scalability across devices and platforms"
+        ]
+      },
+      {
+        "title": "Core principles (WCAG)",
+        "list": [
+          "Perceivable — ensure users can perceive content through clear contrast, text alternatives, and adaptable layouts",
+          "Operable — make interfaces usable by different input methods (keyboard, assistive tech) and avoid elements that cause physical reactions",
+          "Understandable — provide predictable, readable, and helpful designs that guide users and reduce confusion",
+          "Robust — build content that works reliably across current and future technologies and devices"
+        ]
+      },
+      {
+        "title": "Accessibility in Apiary",
+        "body": "Accessibility isn't an add-on — it's embedded directly into components and patterns. Wherever possible, accessible behaviours and markup are built into:",
+        "list": [
+          "Component specifications",
+          "Design documentation",
+          "Developer handoffs"
+        ],
+        "note": "As Apiary evolves, we will continue enhancing accessibility coverage — adding contrast standards, keyboard behaviours, ARIA roles, and more."
+      }
+    ],
+    "cta": "Need to check a component's accessibility details? Visit the Components section of Apiary."
+  },
+  "design-tokens": {
+    "intro": "Design tokens are the core building blocks that define and unify the visual style of our products, enabling consistency and scalability across design and development.",
+    "blocks": [
+      {
+        "title": "What is a design token?",
+        "body": "Design tokens are named variables that store design decisions such as colours, typography, spacing, and other style properties. Instead of hardcoding values directly into code or design files, tokens provide a functional name that describes the purpose of the style (e.g. color-primary, spacing-small), abstracting the actual value."
+      },
+      {
+        "title": "Why use design tokens?",
+        "list": [
+          "Maintain consistency — tokens ensure all teams use the same colours, fonts, spacing, and other styles",
+          "Simplify updates — changing a token value updates all instances where it's used",
+          "Bridge design and development — tokens serve as a shared language between designers and developers",
+          "Scale efficiently — style changes propagate quickly and reliably across multiple platforms and components"
+        ]
+      },
+      {
+        "title": "How we use design tokens",
+        "body": "While we are currently in the process of defining and implementing design tokens, our goal is to provide a global set of tokens accessible by both design and development teams. Once established, developers will reference tokens directly from a shared repository in formats compatible with their codebases (e.g. JSON)."
+      },
+      {
+        "title": "Types of design tokens",
+        "list": [
+          "Colour — brand colours, semantic colours (success, error), UI-specific colours",
+          "Typography — font families, sizes, weights, line heights, letter spacing",
+          "Spacing — margins, paddings, layout-related dimensions",
+          "Sizing — widths, heights, other dimension properties",
+          "Opacity — transparency levels for UI elements",
+          "Borders — widths, styles, colours for borders",
+          "Shadow/Elevation — depth and shadow effects",
+          "Animation/Transition — timing, duration, easing for UI animations"
+        ]
+      }
+    ],
+    "cta": "💡 Design tokens are coming soon — we're currently defining and setting up our global design tokens. Once ready, you'll be able to use them directly in your projects."
+  }
+}

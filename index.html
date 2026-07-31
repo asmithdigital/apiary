@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>APIary — RAA real design system reference</title>
+  <link rel="icon" href="data:,">
+  <style>
+    html, body { margin: 0; padding: 0; }
+    * { box-sizing: border-box; }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+
+  <!--
+    No build step, on purpose — this repo can be edited directly in the
+    GitHub web UI or a plain text editor and it just works when served.
+    Babel Standalone does the one thing a browser can't do natively:
+    turn JSX into React.createElement(...) calls. Everything else in
+    app.js is real ES modules, loaded straight from esm.sh (a CDN that
+    re-serves npm packages as browser-ready ES modules) — no npm install,
+    no bundler, no dist folder to keep in sync.
+  -->
+  <script src="https://unpkg.com/@babel/standalone@7.24.7/babel.min.js"></script>
+  <script type="text/babel" data-type="module" data-presets="react" src="./app.js"></script>
+</body>
+</html>

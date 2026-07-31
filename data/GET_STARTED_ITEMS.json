@@ -1,0 +1,42 @@
+[
+  {
+    "key": "what-is-apiary",
+    "label": "What is APIary"
+  },
+  {
+    "key": "why-apiary-matters",
+    "label": "Why APIary matters"
+  },
+  {
+    "key": "design-principles",
+    "label": "Design principles"
+  },
+  {
+    "key": "news-updates",
+    "label": "Latest news & updates"
+  },
+  {
+    "key": "start-using",
+    "label": "Start using APIary"
+  },
+  {
+    "key": "designer-onboarding",
+    "label": "Designer onboarding"
+  },
+  {
+    "key": "developer-onboarding",
+    "label": "Developer onboarding"
+  },
+  {
+    "key": "resources",
+    "label": "Resources"
+  },
+  {
+    "key": "support",
+    "label": "Support"
+  },
+  {
+    "key": "release-phases",
+    "label": "Release phases"
+  }
+]

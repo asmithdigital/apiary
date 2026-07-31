@@ -1,0 +1,116 @@
+[
+  {
+    "id": "fam-link",
+    "label": "Link",
+    "members": [
+      "link-back",
+      "link-information",
+      "link-external",
+      "link-internal"
+    ]
+  },
+  {
+    "id": "fam-alert",
+    "label": "Alert",
+    "members": [
+      "alert",
+      "mini-alert",
+      "alert-helper"
+    ]
+  },
+  {
+    "id": "fam-text-input",
+    "label": "Text input",
+    "members": [
+      "text-field-regular",
+      "textarea"
+    ]
+  },
+  {
+    "id": "fam-checkbox",
+    "label": "Checkbox",
+    "members": [
+      "checkbox-basic",
+      "checkbox-horizontal",
+      "checkbox-horizontal-2"
+    ]
+  },
+  {
+    "id": "fam-radio",
+    "label": "Radio",
+    "members": [
+      "radio-basic",
+      "radio-horizontal",
+      "radio-tile"
+    ]
+  },
+  {
+    "id": "fam-toggle",
+    "label": "Toggle",
+    "members": [
+      "toggle",
+      "toggle-lg"
+    ]
+  },
+  {
+    "id": "fam-modal",
+    "label": "Modal",
+    "members": [
+      "modal-basic",
+      "modal-warning",
+      "modal-detailed"
+    ]
+  },
+  {
+    "id": "fam-footer",
+    "label": "Footer",
+    "members": [
+      "journey-footer",
+      "site-footer"
+    ]
+  },
+  {
+    "id": "fam-header",
+    "label": "Header",
+    "members": [
+      "header-desktop",
+      "header-mobile",
+      "qtb-sticky-header"
+    ]
+  },
+  {
+    "id": "fam-navigation",
+    "label": "Navigation (side)",
+    "members": [
+      "nav-side-parent",
+      "nav-side-child",
+      "nav-side-accordion",
+      "nav-side"
+    ]
+  },
+  {
+    "id": "fam-accordion",
+    "label": "Accordion",
+    "members": [
+      "accordion",
+      "accordion-detailed"
+    ]
+  },
+  {
+    "id": "fam-help-popup",
+    "label": "Help popup",
+    "members": [
+      "popup-menu",
+      "need-help-dropdown"
+    ]
+  },
+  {
+    "id": "fam-stepper",
+    "label": "Stepper",
+    "members": [
+      "step-item-horizontal",
+      "vertical-stepper",
+      "linear-5-step"
+    ]
+  }
+]

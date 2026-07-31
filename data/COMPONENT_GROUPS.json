@@ -1,0 +1,34 @@
+[
+  {
+    "key": "actions",
+    "label": "Actions"
+  },
+  {
+    "key": "forms",
+    "label": "Forms"
+  },
+  {
+    "key": "feedback",
+    "label": "Feedback & Status"
+  },
+  {
+    "key": "navigation",
+    "label": "Navigation"
+  },
+  {
+    "key": "overlays",
+    "label": "Overlays"
+  },
+  {
+    "key": "content",
+    "label": "Content Display"
+  },
+  {
+    "key": "cards",
+    "label": "Cards & Tiles"
+  },
+  {
+    "key": "journey",
+    "label": "Journey & Site Frames"
+  }
+]
