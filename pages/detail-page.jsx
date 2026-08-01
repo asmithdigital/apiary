@@ -20,6 +20,12 @@ function StatusBadge({ status }) {
   return <span className={"apy-status apy-status-" + key}>{labels[key] || status}</span>;
 }
 
+function ColorSwatch({ value }) {
+  const match = typeof value === "string" && value.match(/#[0-9a-fA-F]{3,8}|rgba?\([^)]+\)/);
+  if (!match) return null;
+  return <span style={{ display: "inline-block", width: 14, height: 14, borderRadius: 4, background: match[0], marginRight: 8, verticalAlign: "middle", border: "1px solid var(--color-line)" }} />;
+}
+
 function useComponentContent(id, version) {
   const [specs, setSpecs] = useState(null);
   const [doc, setDoc] = useState(null);
@@ -57,14 +63,24 @@ function ComponentTabsBody({ id, version }) {
               <Section id="preview">
                 <div className="apy-eyebrow">Preview</div>
                 <p className="apy-lead">{headline}</p>
-                <div className="apy-example-card">
-                  <ComponentPreview item={specs} />
+                <div className="apy-example-card" style={{ display: "flex", justifyContent: "center" }}>
+                  {doc.meta.image ? (
+                    <img src={`./content/components/${id}/${doc.meta.image}`} alt={`${specs.name} preview`} />
+                  ) : (
+                    <ComponentPreview item={specs} />
+                  )}
                 </div>
                 {doc.meta.image && (
-                  <div style={{ marginTop: 16 }}>
-                    <div className="apy-eyebrow" style={{ marginBottom: 8 }}>Image asset — content/components/{id}/{doc.meta.image}</div>
-                    <img src={`./content/components/${id}/${doc.meta.image}`} alt={`${specs.name} preview`} style={{ display: "block", border: "1px solid var(--color-line)", borderRadius: 8 }} />
-                    <p style={{ fontSize: 12, color: "var(--color-faint)", marginTop: 6 }}>Auto-generated from real specs, not a Figma export — drop a real SVG export in at this exact path/filename to replace it.</p>
+                  <p style={{ fontSize: 12, color: "var(--color-faint)", marginTop: 10, fontStyle: "italic" }}>
+                    Generated from real specs — swap in a real Figma export at <code>content/components/{id}/{doc.meta.image}</code> when ready.
+                  </p>
+                )}
+                {specs.preview?.states?.length > 1 && (
+                  <div style={{ marginTop: 28 }}>
+                    <div className="apy-eyebrow">All states</div>
+                    <div className="apy-example-card">
+                      <ComponentPreview item={specs} />
+                    </div>
                   </div>
                 )}
               </Section>
@@ -85,7 +101,7 @@ function ComponentTabsBody({ id, version }) {
                         <tr key={i}>
                           <td className="apy-spec-property">{f.field}</td>
                           <td>
-                            {f.value && <div className="apy-spec-value">{f.value}</div>}
+                            {f.value && <div className="apy-spec-value"><ColorSwatch value={f.value} />{f.value}</div>}
                             {f.note && <div className="apy-spec-note">{f.note}</div>}
                           </td>
                         </tr>
@@ -102,7 +118,12 @@ function ComponentTabsBody({ id, version }) {
                   <p style={{ fontSize: 15, color: "var(--color-faint)", fontStyle: "italic" }}>Nothing flagged — no real inconsistencies found in the exported code.</p>
                 ) : (
                   <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
-                    {specs.capturedNotes.map((n, i) => <div key={i} className="apy-note-box">{n}</div>)}
+                    {specs.capturedNotes.map((n, i) => (
+                      <div key={i} className="apy-note-box">
+                        <span className="apy-note-icon">⚑</span>
+                        <span>{n}</span>
+                      </div>
+                    ))}
                   </div>
                 )}
               </Section>

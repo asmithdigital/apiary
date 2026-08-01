@@ -42,4 +42,5 @@
 .apy-spec-note { font-size: 12px; color: var(--color-faint); margin-top: 2px; }
 .apy-spec-group-title { font-size: 13px; font-weight: 700; color: var(--color-ink); margin: 20px 0 8px; }
 
-.apy-note-box { border-left: 3px solid var(--color-accent); background: var(--color-accent-tint); padding: 10px 14px; font-size: var(--text-sm); line-height: 1.6; }
+.apy-note-box { display: flex; align-items: flex-start; gap: 10px; border-left: 3px solid var(--color-amber-dark); background: var(--color-warn-bg); padding: 12px 16px; font-size: var(--text-sm); line-height: 1.6; border-radius: 0 8px 8px 0; }
+.apy-note-icon { color: var(--color-amber-dark); font-size: 15px; flex-shrink: 0; margin-top: 1px; }
