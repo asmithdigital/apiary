@@ -1,0 +1,23 @@
+name = "apiary-content-api"
+main = "src/index.js"
+compatibility_date = "2024-11-01"
+
+# Created by `wrangler kv namespace create apiary-content` — see README below.
+kv_namespaces = [
+  { binding = "CONTENT_KV", id = "REPLACE_WITH_REAL_KV_NAMESPACE_ID" }
+]
+
+[vars]
+GITHUB_OWNER = "asmithdigital"
+GITHUB_REPO = "apiary"
+GITHUB_BRANCH = "main"
+APP_URL = "https://asmithdigital.github.io/apiary"
+# Fill this in with your real deployed Worker URL once you have it, then redeploy.
+OAUTH_CALLBACK_URL = "https://REPLACE-WITH-YOUR-WORKER-SUBDOMAIN.workers.dev/auth/callback"
+ALLOWED_ORIGIN = "https://asmithdigital.github.io"
+
+# Real secrets are NOT set here — they're set via `wrangler secret put`, so
+# they never end up committed to the repo. See README for the exact commands:
+#   GITHUB_CLIENT_ID
+#   GITHUB_CLIENT_SECRET
+#   SYNC_SECRET

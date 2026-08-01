@@ -1,18 +1,36 @@
-// Stage 1 of the editing UI — no backend yet, by design. An edit updates
-// this in-memory map, which fetchMarkdown checks before hitting the network.
-// A page reload clears it and goes back to the real file on GitHub. Stage 2
-// (a real Save) would replace this map with an actual GitHub API commit.
+// Stage 2 — real persistence. fetchMarkdown/fetchJSON now read through the
+// Worker (KV first, the real GitHub file as fallback), and saves go through
+// it too. SESSION_OVERRIDES stays as a same-tab instant-preview cache so a
+// save shows immediately without waiting on a round trip, but the Worker
+// call is what actually persists it for everyone.
 const SESSION_OVERRIDES = {};
-function saveMarkdownOverride(url, rawBody, meta) {
+async function saveMarkdownOverride(url, rawBody, meta) {
   const fm = Object.entries(meta || {}).map(([k, v]) => `${k}: ${JSON.stringify(v)}`).join("\n");
-  SESSION_OVERRIDES[url] = `---\n${fm}\n---\n\n${rawBody}`;
+  const full = `---\n${fm}\n---\n\n${rawBody}`;
+  SESSION_OVERRIDES[url] = full; // instant local preview
+
+  const repoPath = url.replace(/^\.\//, "");
+  const token = sessionStorage.getItem("apiary_gh_token");
+  if (!token) {
+    return { ok: false, error: "Not logged in — this only saved for your current tab. Sign in with GitHub to make it real." };
+  }
+  try {
+    const res = await fetch(`${window.APIARY_API}/content`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
+      body: JSON.stringify({ path: repoPath, content: full, message: `Edit ${repoPath} via Apiary editor` }),
+    });
+    const data = await res.json();
+    if (!res.ok) return { ok: false, error: data.error || `Save failed (${res.status})` };
+    return { ok: true, ...data };
+  } catch (e) {
+    return { ok: false, error: `Network error saving: ${e.message}` };
+  }
 }
 window.saveMarkdownOverride = saveMarkdownOverride;
 window.hasSessionEdit = (url) => Object.prototype.hasOwnProperty.call(SESSION_OVERRIDES, url);
 
 // A tiny, hand-written frontmatter reader — deliberately not a dependency.
-// Splits a markdown file into { meta, body }. meta comes from the
-// --- key: "value" --- block at the top; body is everything after it.
 function parseFrontmatter(raw) {
   const match = raw.match(/^---\n([\s\S]*?)\n---\n?/);
   if (!match) return { meta: {}, body: raw };
@@ -28,12 +46,6 @@ function parseFrontmatter(raw) {
   return { meta, body: raw.slice(match[0].length) };
 }
 
-// Fetches and parses one markdown file. `marked` (loaded via CDN in
-// index.html as a global) turns the body into real HTML. Before that, the
-// body is compiled as a real Handlebars template — frontmatter becomes the
-// variable context, so `{{> do-dont}}` in a content file actually receives
-// that file's own `do`/`dont` arrays, with the styling living only in
-// partials/templates/do-dont.hbs, not copy-pasted into every content file.
 let partialsRegistered = false;
 async function registerContentPartials() {
   if (partialsRegistered) return;
@@ -52,9 +64,23 @@ async function fetchMarkdown(url) {
   if (Object.prototype.hasOwnProperty.call(SESSION_OVERRIDES, url)) {
     raw = SESSION_OVERRIDES[url];
   } else {
-    const res = await fetch(url);
-    if (!res.ok) throw new Error(`Failed to load ${url}: ${res.status}`);
-    raw = await res.text();
+    const repoPath = url.replace(/^\.\//, "");
+    const apiUrl = window.APIARY_API && !window.APIARY_API.includes("REPLACE-WITH")
+      ? `${window.APIARY_API}/content?path=${encodeURIComponent(repoPath)}`
+      : null;
+    if (apiUrl) {
+      const res = await fetch(apiUrl);
+      if (!res.ok) throw new Error(`Failed to load ${repoPath} from the API: ${res.status}`);
+      const data = await res.json();
+      raw = data.value;
+    } else {
+      // No real Worker configured yet (js/config.js still has the
+      // placeholder) — fall back to the plain static file, exactly like
+      // Stage 1, so the site still works before Stage 2 is wired up.
+      const res = await fetch(url);
+      if (!res.ok) throw new Error(`Failed to load ${url}: ${res.status}`);
+      raw = await res.text();
+    }
   }
   const { meta, body } = parseFrontmatter(raw);
   let compiled = body;

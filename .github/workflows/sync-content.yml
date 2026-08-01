@@ -1,0 +1,35 @@
+name: Sync edited content to the database
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "content/**/*.md"
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Push changed markdown files to the Worker
+        run: |
+          CHANGED=$(git diff --name-only HEAD^ HEAD -- 'content/**/*.md' || true)
+          if [ -z "$CHANGED" ]; then
+            echo "No markdown content changed in this push."
+            exit 0
+          fi
+          for f in $CHANGED; do
+            if [ ! -f "$f" ]; then
+              echo "Skipping deleted file $f"
+              continue
+            fi
+            echo "Syncing $f to the database..."
+            jq -n --arg path "$f" --rawfile content "$f" '{path: $path, content: $content}' > /tmp/payload.json
+            curl -sf -X POST "${{ secrets.WORKER_URL }}/sync" \
+              -H "X-Sync-Secret: ${{ secrets.SYNC_SECRET }}" \
+              -H "Content-Type: application/json" \
+              --data-binary @/tmp/payload.json
+          done

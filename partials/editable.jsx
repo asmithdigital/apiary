@@ -6,6 +6,41 @@
    replaces the Save handler with a real GitHub API commit; nothing else
    here needs to change when that happens.
 ============================================================================= */
+// Real GitHub login — click it, approve on GitHub's real login screen, land
+// back here with a real token stored for this browser tab (sessionStorage,
+// not localStorage — closing the tab signs you out, which is the safer
+// default for a shared/team machine).
+function AuthButton() {
+  const [user, setUser] = useState(sessionStorage.getItem("apiary_gh_user"));
+
+  useEffect(() => {
+    const hash = window.location.hash;
+    const match = hash.match(/token=([^&]+)/);
+    if (match && hash.includes("auth-success")) {
+      const token = decodeURIComponent(match[1]);
+      sessionStorage.setItem("apiary_gh_token", token);
+      fetch("https://api.github.com/user", { headers: { Authorization: `Bearer ${token}` } })
+        .then((r) => r.json())
+        .then((u) => { sessionStorage.setItem("apiary_gh_user", u.login); setUser(u.login); window.location.hash = "#/"; });
+    }
+  }, []);
+
+  if (user) {
+    return (
+      <div style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 13 }}>
+        <span style={{ color: "var(--color-faint)" }}>Signed in as <strong style={{ color: "var(--color-ink)" }}>{user}</strong></span>
+        <button onClick={() => { sessionStorage.removeItem("apiary_gh_token"); sessionStorage.removeItem("apiary_gh_user"); setUser(null); }}
+          style={{ background: "none", border: "1px solid var(--color-line)", borderRadius: 6, padding: "4px 10px", cursor: "pointer", fontSize: 12 }}>Sign out</button>
+      </div>
+    );
+  }
+  return (
+    <a href={`${window.APIARY_API}/auth/start`} className="apy-btn-primary" style={{ padding: "6px 14px", fontSize: 13, textDecoration: "none" }}>
+      Sign in with GitHub
+    </a>
+  );
+}
+
 function MarkdownToolbar({ onInsert }) {
   const buttons = [
     { label: "B", title: "Bold", wrap: "**" },
@@ -49,13 +84,20 @@ function EditableMarkdown({ url, doc, onSaved }) {
     requestAnimationFrame(() => { el.focus(); });
   };
 
+  const [saveMsg, setSaveMsg] = useState(null);
   const save = async () => {
     setSaving(true);
-    window.saveMarkdownOverride(url, draft, doc.meta);
+    setSaveMsg(null);
+    const result = await window.saveMarkdownOverride(url, draft, doc.meta);
     const updated = await fetchMarkdown(url);
     setSaving(false);
-    setEditing(false);
     onSaved(updated);
+    if (result.ok) {
+      setSaveMsg({ type: "success", text: result.committedToGithub ? "Saved — committed to GitHub and live for everyone." : "Saved to the database." });
+      setTimeout(() => setEditing(false), 900);
+    } else {
+      setSaveMsg({ type: "error", text: result.error });
+    }
   };
 
   if (!editing) {
@@ -78,7 +120,9 @@ function EditableMarkdown({ url, doc, onSaved }) {
         rows={16}
       />
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "10px 12px", borderTop: "1px solid var(--color-line)" }}>
-        <span style={{ fontSize: 12, color: "var(--color-faint)" }}>Saves for this session only — reload reverts it. No backend yet.</span>
+        <span style={{ fontSize: 12, color: saveMsg ? (saveMsg.type === "success" ? "var(--color-success-text)" : "var(--color-danger-text)") : "var(--color-faint)" }}>
+          {saveMsg ? saveMsg.text : "Saves for real once you're logged in — see the Sign in button in the top bar."}
+        </span>
         <div style={{ display: "flex", gap: 8 }}>
           <button onClick={() => setEditing(false)} style={{ padding: "6px 14px", fontSize: 13, border: "1px solid var(--color-line)", background: "#fff", borderRadius: 6, cursor: "pointer" }}>Cancel</button>
           <button onClick={save} disabled={saving} className="apy-btn-primary" style={{ padding: "6px 16px", fontSize: 13 }}>{saving ? "Saving…" : "Save"}</button>

@@ -96,3 +96,82 @@ python3 -m http.server 8000
 ## Deploying
 
 Push to GitHub → Settings → Pages → Deploy from a branch → `main` → `/`.
+
+## Stage 2 — real persistence (the database)
+
+This is real infrastructure, not just files — I couldn't test this myself
+the way I tested everything else in this repo (no access to your real
+Cloudflare/GitHub accounts), so treat first setup as "we debug it together,"
+not "this is guaranteed to work first try."
+
+### What you're setting up
+
+- **Cloudflare KV** — the actual database. One value per content file.
+- **A Cloudflare Worker** (`worker/`) — the only thing that touches secrets.
+  Reads check KV, fall back to the real file on GitHub. Writes go to KV
+  *and* commit back to GitHub, so the `.md` file in this repo stays a real,
+  accurate copy — not a separate thing that drifts out of sync.
+- **A GitHub OAuth App** — so each person logs in as themselves.
+- **A GitHub Action** (`.github/workflows/sync-content.yml`) — if someone
+  edits a `.md` file directly on GitHub instead of through the app, this
+  pushes that edit into the database too.
+
+### Setup, in order
+
+**1. Install Wrangler (Cloudflare's CLI) and log in**
+```bash
+npm install -g wrangler
+wrangler login
+```
+This opens a browser to authorize Wrangler against your Cloudflare account.
+
+**2. Create the KV namespace (the database itself)**
+```bash
+cd worker
+wrangler kv namespace create apiary-content
+```
+This prints an `id`. Copy it into `worker/wrangler.toml`, replacing
+`REPLACE_WITH_REAL_KV_NAMESPACE_ID`.
+
+**3. Create the GitHub OAuth App**
+On GitHub: Settings → Developer settings → OAuth Apps → New OAuth App.
+- Homepage URL: `https://asmithdigital.github.io/apiary`
+- Authorization callback URL: leave a placeholder for now, you'll update it
+  in step 5 once you know your real Worker URL.
+Save it, then copy the **Client ID**, and generate + copy a **Client secret**.
+
+**4. Set the real secrets** (never go in `wrangler.toml`, never get committed)
+```bash
+wrangler secret put GITHUB_CLIENT_ID
+wrangler secret put GITHUB_CLIENT_SECRET
+wrangler secret put SYNC_SECRET
+```
+For `SYNC_SECRET`, just make up any long random string — it's only used to
+let the GitHub Action talk to the Worker.
+
+**5. Deploy the Worker**
+```bash
+wrangler deploy
+```
+This prints your real Worker URL, e.g. `https://apiary-content-api.yourname.workers.dev`.
+
+- Update `worker/wrangler.toml`'s `OAUTH_CALLBACK_URL` with
+  `<that URL>/auth/callback`, then `wrangler deploy` again.
+- Go back to the GitHub OAuth App settings and update the Authorization
+  callback URL to match.
+- Update `js/config.js` in this repo with that same real Worker URL.
+
+**6. Set the GitHub Action's secrets**
+On GitHub: this repo → Settings → Secrets and variables → Actions:
+- `WORKER_URL` — your real Worker URL
+- `SYNC_SECRET` — the exact same string you set in step 4
+
+**7. Add your team as collaborators**
+This repo → Settings → Collaborators → Add people. They need a GitHub
+account and to be added here to get write access — that's what the Worker
+checks before letting a save go through.
+
+**8. Push this repo, then test it for real**
+Commit and push everything (including the now-correct `wrangler.toml` and
+`js/config.js`), then open the live site, click **Sign in with GitHub** in
+the top bar, approve it, and try editing something real.

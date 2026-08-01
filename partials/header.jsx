@@ -33,6 +33,7 @@ function Header({ onNavigate }) {
           </div>
         )}
       </div>
+      <AuthButton />
     </div>
   );
 }
