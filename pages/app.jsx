@@ -43,14 +43,14 @@ function APIary() {
   }, []);
 
   if (page.kind === "home") {
-    return <div style={{ fontFamily: FONT, color: "#000" }}><HomePage navigate={navigate} /></div>;
+    return <div className="apy-home-wrap"><HomePage navigate={navigate} /></div>;
   }
   return (
-    <div style={{ display: "flex", flexDirection: "column", height: "100vh", background: "#fff", fontFamily: FONT, color: "#000" }}>
-      <TopBar onNavigate={navigate} />
-      <div style={{ flex: 1, display: "flex", overflow: "hidden" }}>
+    <div className="apy-app-shell">
+      <Header onNavigate={navigate} />
+      <div className="apy-body-row">
         <Sidebar page={page} navigate={navigate} />
-        <div style={{ flex: 1, overflowY: "auto" }}>
+        <div className="apy-content-scroll">
           {page.kind === "getstarted" && <GetStartedPage pageKey={page.ref} pageLabel={NAV.getStartedLabels[page.ref]} />}
           {page.kind === "foundation" && <FoundationsPage foundationKey={page.ref} foundationLabel={NAV.foundationLabels[page.ref]} />}
           {page.kind === "component" && <DetailPage id={page.ref.id} name={page.ref.name} />}

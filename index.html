@@ -3,68 +3,53 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>APIary — RAA real design system reference</title>
+  <title>Apiary — RAA real design system reference</title>
   <link rel="icon" href="data:,">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@700;800&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
-  <style>
-    html, body { margin: 0; padding: 0; font-size: 16px; }
-    * { box-sizing: border-box; }
-    body { font-family: Inter, -apple-system, 'Segoe UI', sans-serif; }
-    .apy-prose { font-size: 15px; line-height: 1.75; }
-    .apy-prose h2 { font-size: 18px; font-weight: 700; margin: 26px 0 10px; color: #0F172A; }
-    .apy-prose p { margin: 0 0 12px; }
-    .apy-prose ul { margin: 0 0 16px; padding-left: 22px; }
-    .apy-prose li { margin-bottom: 6px; }
-    .apy-prose strong { color: #0F172A; }
-    .apy-prose blockquote { border-left: 3px solid #5B5BD6; background: #EEF2FF; padding: 12px 16px; margin: 16px 0; border-radius: 0 6px 6px 0; }
-    .apy-prose .apy-do { border: 1px solid #A7F3D0; background: #ECFDF5; border-radius: 8px; padding: 14px 18px; margin: 16px 0; }
-    .apy-prose .apy-do strong { color: #059669; text-transform: uppercase; font-size: 12px; letter-spacing: 0.04em; }
-    .apy-prose .apy-dont { border: 1px solid #FECACA; background: #FEF2F2; border-radius: 8px; padding: 14px 18px; margin: 16px 0; }
-    .apy-prose .apy-dont strong { color: #DC2626; text-transform: uppercase; font-size: 12px; letter-spacing: 0.04em; }
-    .apy-prose .apy-warn { border: 1px solid #FDE68A; background: #FFFBEB; border-radius: 8px; padding: 14px 18px; margin: 16px 0; }
-    .apy-prose .apy-warn strong { color: #B45309; text-transform: uppercase; font-size: 12px; letter-spacing: 0.04em; }
-    .apy-prose .apy-table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 14px; }
-    .apy-prose .apy-table th { text-align: left; font-size: 11px; text-transform: uppercase; color: #64748B; padding: 6px 10px; border-bottom: 2px solid #E2E8F0; }
-    .apy-prose .apy-table td { padding: 8px 10px; border-bottom: 1px solid #F1F5F9; }
-  </style>
+
+  <!-- Real, separate CSS files — find the one that covers what you want to
+       restyle. theme.css is the one file to check first: every colour and
+       font used anywhere on the site is a variable defined there. -->
+  <link rel="stylesheet" href="./css/theme.css">
+  <link rel="stylesheet" href="./css/base.css">
+  <link rel="stylesheet" href="./css/layout.css">
+  <link rel="stylesheet" href="./css/sidebar.css">
+  <link rel="stylesheet" href="./css/components.css">
+  <link rel="stylesheet" href="./css/prose.css">
 </head>
 <body>
   <div id="root"></div>
 
   <!--
-    Every file below is real, editable, plain-text source. Edit any .jsx
-    file here or any .md/.json file in /content/ directly in the GitHub
-    web UI, commit, and it's live within a minute — no build, no npm
-    install. See README.md for the full explanation of why this works.
+    Everything below is real, editable, plain-text source — no build step.
+    partials/ = reusable chrome (header, sidebar, tabs, preview engine).
+    pages/    = one file per page type.
+    content/  = every real markdown/JSON value the site shows.
+    See README.md for the full explanation and editing workflow.
   -->
-
-  <!-- Step 1: load React/ReactDOM/lucide-react/marked from CDN as real ES modules. -->
   <script type="module" src="./js/0-bootstrap.mjs"></script>
-  <!-- Step 2: the hand-written markdown/frontmatter reader — plain JS, no JSX, no Babel needed. -->
   <script src="./js/0-markdown.js"></script>
 
-  <!-- Step 3: Babel Standalone does the one thing a browser can't do natively: turn JSX into real JS. -->
   <script src="https://unpkg.com/@babel/standalone@7.24.7/babel.min.js"></script>
   <script>
-    // Forces the classic React.createElement output instead of the modern
-    // "automatic" runtime — the automatic runtime needs real ES modules,
-    // which these plain <script type="text/babel"> tags deliberately are
-    // not (that's what lets them all share one scope, like old-school
-    // multi-file script tags, with no bundler in between).
     Babel.registerPreset("apiary-react", {
       presets: [[Babel.availablePresets["react"], { runtime: "classic" }]],
     });
   </script>
 
-  <!-- Step 4: every real component file, in dependency order, all sharing one scope. -->
-  <script type="text/babel" data-presets="apiary-react" src="./js/1-identity.jsx"></script>
-  <script type="text/babel" data-presets="apiary-react" src="./js/2-markdown-view.jsx"></script>
-  <script type="text/babel" data-presets="apiary-react" src="./js/3-detail-page.jsx"></script>
-  <script type="text/babel" data-presets="apiary-react" src="./js/4-foundations-page.jsx"></script>
-  <script type="text/babel" data-presets="apiary-react" src="./js/5-get-started-page.jsx"></script>
-  <script type="text/babel" data-presets="apiary-react" src="./js/6-home-page.jsx"></script>
-  <script type="text/babel" data-presets="apiary-react" src="./js/7-sidebar-topbar.jsx"></script>
-  <script type="text/babel" data-presets="apiary-react" src="./js/8-app.jsx"></script>
+  <!-- Partials — reusable chrome, loaded first so pages below can use them. -->
+  <script type="text/babel" data-presets="apiary-react" src="./partials/preview-engine.jsx"></script>
+  <script type="text/babel" data-presets="apiary-react" src="./partials/layout-chrome.jsx"></script>
+  <script type="text/babel" data-presets="apiary-react" src="./partials/markdown-view.jsx"></script>
+  <script type="text/babel" data-presets="apiary-react" src="./partials/header.jsx"></script>
+  <script type="text/babel" data-presets="apiary-react" src="./partials/sidebar.jsx"></script>
+
+  <!-- Pages -->
+  <script type="text/babel" data-presets="apiary-react" src="./pages/detail-page.jsx"></script>
+  <script type="text/babel" data-presets="apiary-react" src="./pages/foundations-page.jsx"></script>
+  <script type="text/babel" data-presets="apiary-react" src="./pages/get-started-page.jsx"></script>
+  <script type="text/babel" data-presets="apiary-react" src="./pages/home.jsx"></script>
+  <script type="text/babel" data-presets="apiary-react" src="./pages/app.jsx"></script>
 </body>
 </html>

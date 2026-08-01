@@ -1,87 +1,116 @@
-# APIary
+# Apiary
 
-RAA's real design system reference, built as an actual CMS: log into GitHub,
-edit a markdown or JSON file, commit — the live site reflects it within a
-minute. No build step, no npm install, no "also update it somewhere else."
+RAA's real design system reference. Every visible piece of text is a real
+markdown or JSON file; every reusable piece of UI is its own small file;
+every style is a real CSS class. No build step — edit on GitHub, it's live
+within a minute.
 
-## The rule this repo follows
+## Where to find things
 
-- **A written paragraph of guidance, a Do/Don't, an accessibility note, a
-  Get Started page?** That's a `.md` file in `content/`. Edit it like a
-  document.
-- **A hex code, a pixel value, a token name, a list of real captured
-  values?** That's a small `.json` file next to it. It's a table, not prose
-  — markdown isn't the right shape for it.
-- **The menu structure — sidebar groups, families, foundations, Get Started
-  items?** All one file: `content/nav.json`. Add an item there and it shows
-  up everywhere it needs to, automatically.
-- **Rendering logic — how a page lays out, what a tab does?** That's the
-  `.jsx` files in `js/`. You shouldn't need to touch these for a content
-  change.
+**Want to change a colour, font, or spacing value anywhere on the site?**
+Open `css/theme.css` — it's a list of variables. Change one, it updates
+everywhere that value is used.
 
-## File structure
+**Want to restyle the menu?** `css/sidebar.css`.
+**Want to restyle buttons, tabs, tags, tables?** `css/components.css`.
+**Want to restyle how real documentation content looks (Do/Don't boxes,
+headings, lists)?** `css/prose.css`.
+
+**Want to change what the header does?** `partials/header.jsx`.
+**Want to change what the menu shows or how it behaves?** `partials/sidebar.jsx`
+— but if you just want to *add an item* to the menu, you don't need this
+file at all, see below.
+
+**Want to edit a component's real documentation?**
+`content/components/<id>/v1.md` — open it, edit the text, commit.
+
+**Want to add a menu item?** Edit `content/nav.json` only — every menu
+(sidebar, search, families, foundations, Get Started) reads from this one
+file. You don't need to touch any `.jsx` file to add, rename, or reorder a
+menu entry.
+
+## Full file structure
 
 ```
-index.html                    — loads everything, in order. Rarely needs editing.
-js/0-bootstrap.mjs             — loads React/ReactDOM/lucide-react/marked from CDN
-js/0-markdown.js               — the tiny hand-written frontmatter reader
-js/1-identity.jsx              — colours/fonts + the live component-preview engine
-js/2-markdown-view.jsx         — renders fetched markdown, the version picker
-js/3-detail-page.jsx           — a single component's page (and grouped families)
-js/4-foundations-page.jsx      — Colour/Spacing/Typography/etc pages
-js/5-get-started-page.jsx      — the Get Started pages
-js/6-home-page.jsx             — the landing page
-js/7-sidebar-topbar.jsx        — navigation, driven entirely by nav.json
-js/8-app.jsx                   — routing (real URLs, e.g. #/component/button) + boot
+index.html                 — loads the CSS files, then every partial and page, in order.
 
-content/nav.json               — THE single menu source of truth
-content/manifest.json          — which real version files exist, per item
-content/R.json                 — real RAA brand values (logo colours etc)
-content/components/<id>/
-  specs.json                  — real captured values (tabular — stays JSON)
-  v1.md, v2.md, ...            — real documentation (versioned — markdown)
-content/foundations/<key>/
-  data.json                   — real tabular data (colour ramps, spacing scale, etc)
-  v1.md                       — real narrative content
-content/get-started/<key>.md   — each Get Started page
+css/
+  theme.css                 — every colour/font/spacing variable. Check here first.
+  base.css                  — resets, base typography.
+  layout.css                — the app shell: sidebar width, topbar, content column.
+  sidebar.css                — the menu itself, plus search.
+  components.css              — buttons, tags, tabs, pills, spec rows.
+  prose.css                  — styling for rendered markdown (Do/Don't boxes, tables).
+
+partials/                  — reusable chrome, used by more than one page.
+  header.jsx                 — the top bar: logo + search.
+  sidebar.jsx                 — the menu, entirely driven by content/nav.json.
+  layout-chrome.jsx           — GrayBand (page title banner), TabStrip, Section,
+                                 ContentsRail (the "on this page" secondary menu —
+                                 this one has no content file on purpose, it's
+                                 built from whatever headings exist on the
+                                 current page).
+  markdown-view.jsx            — turns fetched markdown into styled HTML, plus
+                                 the version dropdown.
+  preview-engine.jsx           — the logo mark, the real/foundation tags, and
+                                 the engine that draws each component's live
+                                 preview from its real specs.json.
+
+pages/                     — one file per page type.
+  home.jsx
+  detail-page.jsx             — a single component's page, and the
+                                 family-grouped version for related variants.
+  foundations-page.jsx
+  get-started-page.jsx
+  app.jsx                     — routing (real URLs like #/component/button) + boot.
+
+js/
+  0-bootstrap.mjs             — loads React/ReactDOM/lucide-react/marked from CDN.
+  0-markdown.js               — the hand-written frontmatter reader.
+
+content/                   — every real value the site shows. This is what
+                              you'll spend most of your time editing.
+  site.md                     — hero tagline, button labels, small UI text
+                                 that isn't tied to a specific page.
+  nav.json                    — THE single menu source of truth.
+  manifest.json               — which real version files exist, per item.
+  R.json                      — real RAA brand values (logo colours).
+  components/<id>/
+    specs.json                — real captured values (tabular — stays JSON).
+    v1.md, v2.md, ...          — real documentation (versioned — markdown).
+  foundations/<key>/
+    data.json                 — real tabular data (colour ramps, spacing scale).
+    v1.md                     — real narrative content.
+  get-started/<key>.md        — each Get Started page.
 ```
 
-## Editing content (the actual daily workflow)
+## One honest exception
 
-1. On GitHub, open `content/components/button/v1.md`.
-2. Click the pencil icon (Edit this file).
-3. Change a paragraph, a Do/Don't item, whatever.
-4. Commit directly to `main`.
-5. Wait about a minute, refresh the live site. Done.
+The "Loading real data…" message that flashes for a second while the site
+boots is still hardcoded in `pages/app.jsx`, not in a content file — it
+appears *before* any content has loaded, so there's nothing to fetch it
+from yet. Everything else is real content.
 
-No code touched, nothing to build, nothing to update in two places.
+## Editing content — the daily workflow
 
-## Adding a new version of a component's documentation
+1. On GitHub, open the file (e.g. `content/components/button/v1.md`).
+2. Click the pencil icon.
+3. Edit, commit to `main`.
+4. Wait ~1 minute, refresh the live site.
 
-1. Duplicate `content/components/<id>/v1.md` as `v2.md`, edit it.
-2. Open `content/manifest.json`, find that component's array, add `"v2"`.
-3. Commit both files together. The site now defaults to `v2` and offers a
-   dropdown back to `v1`.
+## Adding a menu item
 
-## Adding a brand-new menu item
-
-Edit `content/nav.json` — add the entry to the relevant array
-(`getStartedItems`, `foundationKeys` + `foundationLabels`, etc.), then create
-the matching content file it points to (e.g. `content/get-started/new-key.md`).
-That's genuinely it — the sidebar, search, and routing all read from this one
-file.
+Edit `content/nav.json` only, then create the content file it points to.
 
 ## Running locally
 
-`fetch()` can't read local files over `file://`, so serve the folder:
-
 ```bash
-cd apiary-cms
+cd apiary-v2
 python3 -m http.server 8000
 ```
 
-Open `http://localhost:8000`.
+`fetch()` can't read `file://` URLs, so it has to be served, not double-clicked.
 
 ## Deploying
 
-Push to GitHub, then Settings → Pages → Deploy from a branch → `main` → `/`.
+Push to GitHub → Settings → Pages → Deploy from a branch → `main` → `/`.

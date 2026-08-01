@@ -1,6 +1,7 @@
-// Fetches everything for one component: real specs (JSON) + real
-// documentation (markdown, versioned). Edit either file in the repo and
-// this reflects it on next load — no code change needed.
+/* =============================================================================
+   PAGE: detail-page — a single component's page (Overview/Guidelines/Specs/
+   QA Notes), and the family-grouped version for related variants.
+============================================================================= */
 function useComponentContent(id, version) {
   const [specs, setSpecs] = useState(null);
   const [doc, setDoc] = useState(null);
@@ -18,34 +19,34 @@ function useComponentContent(id, version) {
   return { specs, doc, error };
 }
 
-function ComponentTabsBody({ id, name }) {
+function ComponentTabsBody({ id }) {
   const versions = MANIFEST.components[id] || ["v1"];
   const [version, setVersion] = useState(versions[versions.length - 1]);
   const { specs, doc, error } = useComponentContent(id, version);
   const [tab, setTab] = useState("Overview");
   const tabs = ["Overview", "Guidelines", "Specs", "QA Notes"];
 
-  if (error) return <div style={{ padding: 40, color: "#DC2626" }}>Failed to load real content: {error}</div>;
+  if (error) return <div style={{ padding: 40, color: "var(--color-danger-text)" }}>Failed to load real content: {error}</div>;
   if (!specs || !doc) return <div style={{ padding: 40 }}><LoadingRow /></div>;
 
   const headline = specs.summary ? specs.summary.split(/(?<=\.)\s+/)[0] : "";
 
   return (
     <div>
-      <div style={{ padding: "16px 40px 0" }}>
-        <div style={{ maxWidth: CONTENT_MAX, margin: "0 auto", display: "flex", justifyContent: "flex-end" }}>
+      <div className="apy-content-col" style={{ paddingTop: 16, paddingBottom: 0 }}>
+        <div className="apy-content-col-inner" style={{ justifyContent: "flex-end" }}>
           <VersionPicker versions={versions} active={version} onChange={setVersion} />
         </div>
       </div>
       <TabStrip tabs={tabs} active={tab} onChange={setTab} />
-      <div style={{ padding: "0 40px" }}>
-        <div style={{ display: "flex", maxWidth: CONTENT_MAX, margin: "0 auto" }}>
-          <div style={{ flex: 1, padding: "28px 0", maxWidth: 720 }}>
+      <div className="apy-content-col">
+        <div className="apy-content-col-inner">
+          <div className="apy-content-main">
             {tab === "Overview" && (
               <Section id="preview" title="Preview">
-                <p style={{ fontSize: 14, color: BODY, marginBottom: 14 }}>{headline}</p>
+                <p style={{ fontSize: 16, color: "var(--color-body)", marginBottom: 14 }}>{headline}</p>
                 <ComponentPreview item={specs} />
-                <p style={{ fontSize: 12, color: FAINT, marginTop: 10 }}>Source: {specs.source}</p>
+                <p style={{ fontSize: 13, color: "var(--color-faint)", marginTop: 10 }}>Source: {specs.source}</p>
               </Section>
             )}
             {tab === "Guidelines" && (
@@ -55,16 +56,16 @@ function ComponentTabsBody({ id, name }) {
             )}
             {tab === "Specs" && (
               <Section id="specs" title="Real values">
-                <div style={{ fontSize: 12, color: FAINT, marginBottom: 12 }}>Variants: {specs.variantsRaw}</div>
+                <div style={{ fontSize: 13, color: "var(--color-faint)", marginBottom: 12 }}>Variants: {specs.variantsRaw}</div>
                 <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
                   {specs.tokenFindings.map((f, i) => (
-                    <div key={i} style={{ display: "flex", justifyContent: "space-between", gap: 12, border: `1px solid ${LINE}`, borderRadius: 6, padding: "8px 12px" }}>
+                    <div key={i} className="apy-spec-row">
                       <div>
-                        <div style={{ fontSize: 13, fontWeight: 600 }}>{f.field}</div>
-                        {f.value && <div style={{ fontSize: 12, color: BODY, fontFamily: "monospace", marginTop: 2 }}>{f.value}</div>}
-                        {f.note && <div style={{ fontSize: 12, color: f.unconfirmed ? AMBER[600] : FAINT, marginTop: 2 }}>{f.note}</div>}
+                        <div className="apy-spec-field">{f.field}</div>
+                        {f.value && <div className="apy-spec-value">{f.value}</div>}
+                        {f.note && <div style={{ fontSize: 13, color: f.unconfirmed ? "var(--color-warn-text)" : "var(--color-faint)", marginTop: 2 }}>{f.note}</div>}
                       </div>
-                      {f.unconfirmed && <span style={{ fontSize: 11, fontWeight: 600, color: AMBER[600], background: AMBER[50], padding: "2px 7px", borderRadius: 3, height: "fit-content", whiteSpace: "nowrap" }}>unconfirmed</span>}
+                      {f.unconfirmed && <span className="apy-spec-unconfirmed">unconfirmed</span>}
                     </div>
                   ))}
                 </div>
@@ -73,12 +74,10 @@ function ComponentTabsBody({ id, name }) {
             {tab === "QA Notes" && (
               <Section id="usage" title="Flags found in code">
                 {specs.capturedNotes.length === 0 ? (
-                  <p style={{ fontSize: 13, color: FAINT, fontStyle: "italic" }}>Nothing flagged — no real inconsistencies found in the exported code.</p>
+                  <p style={{ fontSize: 15, color: "var(--color-faint)", fontStyle: "italic" }}>Nothing flagged — no real inconsistencies found in the exported code.</p>
                 ) : (
                   <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
-                    {specs.capturedNotes.map((n, i) => (
-                      <div key={i} style={{ borderLeft: `3px solid ${ACCENT}`, background: ACCENT_TINT, padding: "10px 14px", fontSize: 13, lineHeight: 1.6 }}>{n}</div>
-                    ))}
+                    {specs.capturedNotes.map((n, i) => <div key={i} className="apy-note-box">{n}</div>)}
                   </div>
                 )}
               </Section>
@@ -94,7 +93,7 @@ function DetailPage({ id, name }) {
   return (
     <div>
       <GrayBand title={name} extra={<RealTag />} />
-      <ComponentTabsBody id={id} name={name} />
+      <ComponentTabsBody id={id} />
     </div>
   );
 }
@@ -112,16 +111,16 @@ function FamilyPage({ family }) {
   return (
     <div>
       <GrayBand title={family.label} description={`${family.members.length} real variants grouped on one page.`} extra={<RealTag />} />
-      <div style={{ padding: "16px 40px 0", borderBottom: `1px solid ${LINE}` }}>
-        <div style={{ display: "flex", gap: 8, maxWidth: CONTENT_MAX, margin: "0 auto", flexWrap: "wrap" }}>
+      <div className="apy-content-col" style={{ paddingTop: 16, paddingBottom: 0, borderBottom: "1px solid var(--color-line)" }}>
+        <div className="apy-content-col-inner" style={{ flexWrap: "wrap", gap: 8 }}>
           {family.members.map((id) => (
-            <button key={id} onClick={() => setSelectedId(id)} style={{ background: selectedId === id ? ACCENT : "none", color: selectedId === id ? "#fff" : BODY, border: `1px solid ${selectedId === id ? ACCENT : LINE}`, borderRadius: 999, padding: "6px 14px", fontSize: 13, fontWeight: 600, cursor: "pointer", marginBottom: 10 }}>
+            <button key={id} onClick={() => setSelectedId(id)} className={"apy-pill" + (selectedId === id ? " active" : "")}>
               {names[id] || id}
             </button>
           ))}
         </div>
       </div>
-      <ComponentTabsBody id={selectedId} name={names[selectedId] || selectedId} />
+      <ComponentTabsBody id={selectedId} />
     </div>
   );
 }

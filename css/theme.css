@@ -1,0 +1,51 @@
+/* ============================================================================
+   THEME — every colour, font, and spacing value the site uses. Change a
+   value here and it updates everywhere that value is used. This is the
+   file to open first if you want to restyle something.
+============================================================================ */
+:root {
+  /* Fonts */
+  --font-body: Inter, -apple-system, 'Segoe UI', sans-serif;
+  --font-display: 'Plus Jakarta Sans', Inter, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Courier New', monospace;
+
+  /* Colours — APIary's own tool identity (indigo/amber/slate). RAA's real
+     brand colours only ever appear inside real captured component data,
+     never here in the site's own chrome. */
+  --color-accent: #5B5BD6;
+  --color-accent-hover: #4F46E5;
+  --color-accent-tint: #EEF2FF;
+  --color-amber: #FBBF24;
+  --color-amber-dark: #D97706;
+
+  --color-ink: #0F172A;      /* headings, primary text */
+  --color-body: #475569;     /* body copy */
+  --color-faint: #64748B;    /* secondary/muted text */
+  --color-line: #E2E8F0;     /* borders */
+  --color-band: #F8FAFC;     /* section backgrounds */
+  --color-white: #FFFFFF;
+
+  --color-success-bg: #ECFDF5;
+  --color-success-border: #A7F3D0;
+  --color-success-text: #059669;
+  --color-danger-bg: #FEF2F2;
+  --color-danger-border: #FECACA;
+  --color-danger-text: #DC2626;
+  --color-warn-bg: #FFFBEB;
+  --color-warn-border: #FDE68A;
+  --color-warn-text: #B45309;
+
+  /* Layout */
+  --sidebar-width: 250px;
+  --content-max: 1080px;
+  --topbar-height: 56px;
+
+  /* Type scale */
+  --text-xs: 12px;
+  --text-sm: 14px;
+  --text-base: 16px;
+  --text-md: 17px;
+  --text-lg: 20px;
+  --text-xl: 22px;
+  --text-2xl: 32px;
+}

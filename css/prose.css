@@ -1,0 +1,19 @@
+/* Styling for rendered markdown content (real documentation, guidelines). */
+.apy-prose { font-size: var(--text-md); line-height: 1.8; color: var(--color-body); }
+.apy-prose h2 { font-size: var(--text-lg); font-weight: 700; margin: 28px 0 12px; color: var(--color-ink); }
+.apy-prose p { margin: 0 0 12px; }
+.apy-prose ul { margin: 0 0 16px; padding-left: 22px; }
+.apy-prose li { margin-bottom: 6px; }
+.apy-prose strong { color: var(--color-ink); }
+.apy-prose blockquote { border-left: 3px solid var(--color-accent); background: var(--color-accent-tint); padding: 12px 16px; margin: 16px 0; border-radius: 0 6px 6px 0; }
+
+.apy-prose .apy-do { border: 1px solid var(--color-success-border); background: var(--color-success-bg); border-radius: 8px; padding: 14px 18px; margin: 16px 0; }
+.apy-prose .apy-do strong { color: var(--color-success-text); text-transform: uppercase; font-size: 13px; letter-spacing: 0.04em; }
+.apy-prose .apy-dont { border: 1px solid var(--color-danger-border); background: var(--color-danger-bg); border-radius: 8px; padding: 14px 18px; margin: 16px 0; }
+.apy-prose .apy-dont strong { color: var(--color-danger-text); text-transform: uppercase; font-size: 13px; letter-spacing: 0.04em; }
+.apy-prose .apy-warn { border: 1px solid var(--color-warn-border); background: var(--color-warn-bg); border-radius: 8px; padding: 14px 18px; margin: 16px 0; }
+.apy-prose .apy-warn strong { color: var(--color-warn-text); text-transform: uppercase; font-size: 13px; letter-spacing: 0.04em; }
+
+.apy-prose .apy-table { width: 100%; border-collapse: collapse; margin: 14px 0; font-size: var(--text-base); }
+.apy-prose .apy-table th { text-align: left; font-size: 13px; text-transform: uppercase; color: var(--color-faint); padding: 8px 10px; border-bottom: 2px solid var(--color-line); }
+.apy-prose .apy-table td { padding: 8px 10px; border-bottom: 1px solid #F1F5F9; }
