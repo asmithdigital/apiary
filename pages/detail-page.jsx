@@ -20,6 +20,23 @@ function StatusBadge({ status }) {
   return <span className={"apy-status apy-status-" + key}>{labels[key] || status}</span>;
 }
 
+function CaptionedStateGrid({ item }) {
+  const states = item.preview?.states || [];
+  if (states.length < 2) return null;
+  return (
+    <div className="apy-caption-grid">
+      {states.map((s, i) => (
+        <div key={i} className="apy-caption-card">
+          <div className="apy-caption-card-example">
+            <ComponentPreview item={{ ...item, preview: { ...item.preview, states: [s] } }} />
+          </div>
+          <div className="apy-caption-card-label">{s.label}</div>
+        </div>
+      ))}
+    </div>
+  );
+}
+
 function ColorSwatch({ value }) {
   const match = typeof value === "string" && value.match(/#[0-9a-fA-F]{3,8}|rgba?\([^)]+\)/);
   if (!match) return null;
@@ -77,10 +94,8 @@ function ComponentTabsBody({ id, version }) {
                 )}
                 {specs.preview?.states?.length > 1 && (
                   <div style={{ marginTop: 28 }}>
-                    <div className="apy-eyebrow">All states</div>
-                    <div className="apy-example-card">
-                      <ComponentPreview item={specs} />
-                    </div>
+                    <div className="apy-eyebrow">Real states</div>
+                    <CaptionedStateGrid item={specs} />
                   </div>
                 )}
               </Section>

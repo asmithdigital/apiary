@@ -3,7 +3,7 @@
 .apy-tag-foundation { color: #4D4D4D; background: #F1EEE5; }
 
 /* Status badge — a real lifecycle label, not a data-provenance label. */
-.apy-status { display: inline-flex; align-items: center; padding: 3px 8px; border-radius: 5px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; font-family: var(--font-mono); }
+.apy-status { display: inline-flex; align-items: center; padding: 2px 6px; border-radius: 4px; font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; font-family: var(--font-mono); }
 .apy-status-stable { background: #ECFDF5; color: #059669; box-shadow: inset 0 0 0 1px #A7F3D0; }
 .apy-status-new { background: #EEF2FF; color: #4F46E5; box-shadow: inset 0 0 0 1px #C7D2FE; }
 .apy-status-updated { background: #EFF6FF; color: #2563EB; box-shadow: inset 0 0 0 1px #BFDBFE; }
@@ -12,8 +12,8 @@
 
 .apy-tabstrip { border-bottom: 1px solid var(--color-line); padding: 0 40px; }
 .apy-tabstrip-inner { display: flex; gap: 24px; max-width: var(--content-max); margin: 0 auto; }
-.apy-tab { background: none; border: none; cursor: pointer; padding: 13px 2px; font-size: var(--text-sm); color: var(--color-faint); font-weight: 500; border-bottom: 2px solid transparent; margin-bottom: -1px; }
-.apy-tab.active { color: #000; font-weight: 700; border-bottom-color: #000; }
+.apy-tab { background: none; border: none; cursor: pointer; padding: 10px 16px; font-size: 14px; color: var(--color-faint); font-weight: 600; border-bottom: 2px solid transparent; margin-bottom: -1px; }
+.apy-tab.active { color: var(--color-accent); font-weight: 700; border-bottom-color: var(--color-accent); }
 
 .apy-pill { border-radius: 999px; padding: 6px 14px; font-size: var(--text-sm); font-weight: 600; cursor: pointer; border: 1px solid var(--color-line); background: none; color: var(--color-body); margin-bottom: 10px; }
 .apy-pill.active { background: var(--color-accent); border-color: var(--color-accent); color: #fff; }
@@ -25,9 +25,16 @@
 
 /* Section eyebrow + card — the "light gray rounded card holding a live
    example" pattern used throughout Overview. */
-.apy-eyebrow { font-size: 11px; font-family: var(--font-mono); text-transform: uppercase; letter-spacing: 0.12em; color: var(--color-faint); font-weight: 700; margin-bottom: 14px; }
+.apy-eyebrow { font-size: 12px; font-family: var(--font-mono); text-transform: uppercase; letter-spacing: 1.2px; color: var(--color-faint); font-weight: 600; margin-bottom: 16px; }
 .apy-example-card { background: var(--color-band); border: 1px solid var(--color-line); border-radius: 16px; padding: 32px; margin-bottom: 16px; }
 .apy-lead { font-size: 16px; color: var(--color-body); line-height: 1.7; max-width: 640px; margin-bottom: 28px; }
+
+/* The small captioned card grid — this pattern was genuinely missing.
+   Each real state gets its own white card, not one big pile of buttons. */
+.apy-caption-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 12px; }
+.apy-caption-card { background: #fff; border: 1px solid var(--color-line); border-radius: 16px; padding: 16px; box-shadow: 0 1px 3px rgba(0,0,0,0.1), 0 1px 2px -1px rgba(0,0,0,0.1); }
+.apy-caption-card-example { margin-bottom: 10px; display: flex; }
+.apy-caption-card-label { font-size: 12px; color: var(--color-faint); }
 
 /* Real spec table — a proper table, not a stack of boxes. */
 .apy-spec-card { border: 1px solid var(--color-line); border-radius: 16px; overflow: hidden; }
