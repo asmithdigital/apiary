@@ -16,6 +16,21 @@ function Sidebar({ page, navigate }) {
   const [openGroups, setOpenGroups] = useState({ getStarted: true, foundations: true, actions: true });
   const toggle = (k) => setOpenGroups((o) => ({ ...o, [k]: !o[k] }));
 
+  // Stage 1 "add a page" — mutates the shared NAV object directly (it's
+  // plain data, not React state) and seeds a blank session-only content
+  // override so the new page has something to show. navigate() right after
+  // forces the whole tree (including this sidebar) to re-render and pick it
+  // up. No backend yet — this only lasts for the current session.
+  function addGetStartedPage() {
+    const label = window.prompt("New Get Started page title:");
+    if (!label) return;
+    const key = label.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
+    NAV.getStartedItems.push({ key, label, section: "About" });
+    NAV.getStartedLabels[key] = label;
+    window.saveMarkdownOverride(`./content/get-started/${key}.md`, "_New page — click Edit above to add real content._", { name: label, status: "pending" });
+    navigate({ kind: "getstarted", ref: key });
+  }
+
   const getStartedSections = [];
   NAV.getStartedItems.forEach((it) => {
     const sec = it.section || "About";
@@ -29,9 +44,12 @@ function Sidebar({ page, navigate }) {
       <button onClick={() => navigate({ kind: "home" })} className={"apy-nav-home" + (page.kind === "home" ? " active" : "")}>Home</button>
 
       <div className="apy-nav-section">
-        <button onClick={() => toggle("getStarted")} className="apy-nav-section-label">
-          {openGroups.getStarted ? "▾" : "▸"} Get Started
-        </button>
+        <div className="apy-nav-section-label-row" style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+          <button onClick={() => toggle("getStarted")} className="apy-nav-section-label" style={{ flex: 1 }}>
+            {openGroups.getStarted ? "▾" : "▸"} Get Started
+          </button>
+          <button className="apy-sidebar-add-btn" title="Add a new Get Started page" onClick={addGetStartedPage}>+</button>
+        </div>
         {openGroups.getStarted && getStartedSections.map((sec) => (
           <div key={sec.name}>
             <button onClick={() => toggle("gs-" + sec.name)} className="apy-nav-group-label">
@@ -47,9 +65,20 @@ function Sidebar({ page, navigate }) {
       </div>
 
       <div className="apy-nav-section">
-        <button onClick={() => toggle("foundations")} className="apy-nav-section-label">
-          {openGroups.foundations ? "▾" : "▸"} Foundations
-        </button>
+        <div className="apy-nav-section-label-row" style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+          <button onClick={() => toggle("foundations")} className="apy-nav-section-label" style={{ flex: 1 }}>
+            {openGroups.foundations ? "▾" : "▸"} Foundations
+          </button>
+          <button className="apy-sidebar-add-btn" title="Add a new Foundation page" onClick={() => {
+            const label = window.prompt("New Foundation page title:");
+            if (!label) return;
+            const key = label.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
+            NAV.foundationKeys.push(key);
+            NAV.foundationLabels[key] = label;
+            window.saveMarkdownOverride(`./content/foundations/${key}/v1.md`, "_New foundation — click Edit above to add real content._", { name: label, status: "pending" });
+            navigate({ kind: "foundation", ref: key });
+          }}>+</button>
+        </div>
         {openGroups.foundations && NAV.foundationKeys.map((k) => (
           <button key={k} onClick={() => navigate({ kind: "foundation", ref: k })} className={"apy-nav-item" + (page.kind === "foundation" && page.ref === k ? " active" : "")}>
             {NAV.foundationLabels[k]}

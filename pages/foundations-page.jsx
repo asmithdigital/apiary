@@ -139,12 +139,14 @@ function FoundationsPage({ foundationKey, foundationLabel }) {
   const [doc, setDoc] = useState(null);
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
+  const [displayLabel, setDisplayLabel] = useState(foundationLabel);
+  useEffect(() => { setDisplayLabel(foundationLabel); }, [foundationLabel]);
   useEffect(() => {
     let cancelled = false;
     setDoc(null); setData(null); setError(null);
     Promise.all([
       fetchMarkdown(`./content/foundations/${foundationKey}/v1.md`),
-      fetchJSON(`./content/foundations/${foundationKey}/data.json`),
+      fetchJSON(`./content/foundations/${foundationKey}/data.json`).catch(() => ({})),
     ]).then(([d, dt]) => { if (!cancelled) { setDoc(d); setData(dt); } })
       .catch((e) => { if (!cancelled) setError(e.message); });
     return () => { cancelled = true; };
@@ -156,12 +158,12 @@ function FoundationsPage({ foundationKey, foundationLabel }) {
 
   return (
     <div>
-      <GrayBand title={foundationLabel} extra={<FoundationTag />} description={foundationKey === "design-tokens" ? "The real source of truth — edit content/tokens.json and every value here (and eventually every component spec) updates." : "Colour, spacing, elevation, and typography carry real captured or documented values."} />
+      <GrayBand title={displayLabel} extra={<FoundationTag />} description={foundationKey === "design-tokens" ? "The real source of truth — edit content/tokens.json and every value here (and eventually every component spec) updates." : "Colour, spacing, elevation, and typography carry real captured or documented values."} onTitleSave={setDisplayLabel} />
       <div className="apy-content-col" style={{ paddingTop: 28, paddingBottom: 28 }}>
         <div className="apy-content-col-inner" style={{ gap: 40 }}>
           <div style={{ flex: 1, maxWidth: 700 }}>
             {foundationKey === "design-tokens" ? <TokensPage /> : <>
-            <MarkdownBody html={doc.html} />
+            <EditableMarkdown url={`./content/foundations/${foundationKey}/v1.md`} doc={doc} onSaved={setDoc} />
             {DataRenderer && <div style={{ marginTop: 24 }}><DataRenderer data={data} /></div>}
             </>}
           </div>

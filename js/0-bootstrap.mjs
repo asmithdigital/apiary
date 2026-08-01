@@ -1,4 +1,4 @@
-import ReactLib, { useState, useEffect, useMemo } from "https://esm.sh/react@18.3.1";
+import ReactLib, { useState, useEffect, useMemo, useRef } from "https://esm.sh/react@18.3.1";
 import ReactDOMClient from "https://esm.sh/react-dom@18.3.1/client?deps=react@18.3.1";
 import {
   Search, ChevronRight, ChevronDown, ChevronLeft, X as XIcon, Check, Plus, Minus,
@@ -16,6 +16,7 @@ window.React = ReactLib;
 window.useState = useState;
 window.useEffect = useEffect;
 window.useMemo = useMemo;
+window.useRef = useRef;
 window.ReactDOM = ReactDOMClient;
 window.marked = marked;
 window.LucideIcons = {

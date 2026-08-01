@@ -4,12 +4,12 @@
    menu). ContentsRail has no content file of its own on purpose — it's
    built from whatever real section headings exist on the current page.
 ============================================================================= */
-function GrayBand({ title, description, extra }) {
+function GrayBand({ title, description, extra, onTitleSave }) {
   return (
     <div className="apy-gray-band">
       <div className="apy-gray-band-inner">
         <div className="apy-gray-band-title-row">
-          <h1>{title}</h1>
+          {onTitleSave ? <EditableTitle title={title} onSave={onTitleSave} /> : <h1>{title}</h1>}
           {extra}
         </div>
         {description && <p className="apy-gray-band-desc">{description}</p>}

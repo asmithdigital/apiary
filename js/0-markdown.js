@@ -1,3 +1,15 @@
+// Stage 1 of the editing UI — no backend yet, by design. An edit updates
+// this in-memory map, which fetchMarkdown checks before hitting the network.
+// A page reload clears it and goes back to the real file on GitHub. Stage 2
+// (a real Save) would replace this map with an actual GitHub API commit.
+const SESSION_OVERRIDES = {};
+function saveMarkdownOverride(url, rawBody, meta) {
+  const fm = Object.entries(meta || {}).map(([k, v]) => `${k}: ${JSON.stringify(v)}`).join("\n");
+  SESSION_OVERRIDES[url] = `---\n${fm}\n---\n\n${rawBody}`;
+}
+window.saveMarkdownOverride = saveMarkdownOverride;
+window.hasSessionEdit = (url) => Object.prototype.hasOwnProperty.call(SESSION_OVERRIDES, url);
+
 // A tiny, hand-written frontmatter reader — deliberately not a dependency.
 // Splits a markdown file into { meta, body }. meta comes from the
 // --- key: "value" --- block at the top; body is everything after it.
@@ -36,9 +48,14 @@ async function registerContentPartials() {
 
 async function fetchMarkdown(url) {
   await registerContentPartials();
-  const res = await fetch(url);
-  if (!res.ok) throw new Error(`Failed to load ${url}: ${res.status}`);
-  const raw = await res.text();
+  let raw;
+  if (Object.prototype.hasOwnProperty.call(SESSION_OVERRIDES, url)) {
+    raw = SESSION_OVERRIDES[url];
+  } else {
+    const res = await fetch(url);
+    if (!res.ok) throw new Error(`Failed to load ${url}: ${res.status}`);
+    raw = await res.text();
+  }
   const { meta, body } = parseFrontmatter(raw);
   let compiled = body;
   try {

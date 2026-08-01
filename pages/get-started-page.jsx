@@ -7,6 +7,8 @@
 function GetStartedPage({ pageKey, pageLabel, navigate }) {
   const [doc, setDoc] = useState(null);
   const [error, setError] = useState(null);
+  const [displayLabel, setDisplayLabel] = useState(pageLabel);
+  useEffect(() => { setDisplayLabel(pageLabel); }, [pageLabel]);
   useEffect(() => {
     let cancelled = false;
     setDoc(null); setError(null);
@@ -27,11 +29,11 @@ function GetStartedPage({ pageKey, pageLabel, navigate }) {
 
   return (
     <div>
-      <GrayBand title={pageLabel} description={isPending ? "Structure is here, real content isn't yet." : undefined} />
+      <GrayBand title={displayLabel} description={isPending ? "Structure is here, real content isn't yet." : undefined} onTitleSave={setDisplayLabel} />
       <div className="apy-content-col" style={{ paddingTop: 28, paddingBottom: 28 }}>
         <div className="apy-content-col-inner" style={{ gap: 40 }}>
           <div style={{ flex: 1, maxWidth: 700 }}>
-            <MarkdownBody html={doc.html} />
+            <EditableMarkdown url={`./content/get-started/${pageKey}.md`} doc={doc} onSaved={setDoc} />
 
             {(prev || next) && (
               <div style={{ display: "flex", justifyContent: "space-between", marginTop: 40, paddingTop: 24, borderTop: "1px solid var(--color-line)" }}>

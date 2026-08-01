@@ -57,12 +57,12 @@ function useComponentContent(id, version) {
       .catch((e) => { if (!cancelled) setError(e.message); });
     return () => { cancelled = true; };
   }, [id, version]);
-  return { specs, doc, error };
+  return { specs, doc, error, setDoc };
 }
 
 function ComponentTabsBody({ id, version }) {
   const versions = sortVersions(MANIFEST.components[id] || ["v1"]);
-  const { specs, doc, error } = useComponentContent(id, version);
+  const { specs, doc, error, setDoc } = useComponentContent(id, version);
   const [tab, setTab] = useState("Overview");
   const tabs = ["Overview", "Guidelines", "Specs", "Known Issues", "Changelog"];
 
@@ -103,7 +103,7 @@ function ComponentTabsBody({ id, version }) {
             )}
             {tab === "Guidelines" && (
               <Section id="guidelines">
-                <MarkdownBody html={doc.html} />
+                <EditableMarkdown url={`./content/components/${id}/${version}.md`} doc={doc} onSaved={setDoc} />
               </Section>
             )}
             {tab === "Specs" && (
@@ -175,6 +175,8 @@ function DetailPage({ id, name }) {
   const versionsSorted = sortVersions(MANIFEST.components[id] || ["v1"]);
   const [version, setVersion] = useState(versionsSorted[versionsSorted.length - 1]);
   const [status, setStatus] = useState("stable");
+  const [displayName, setDisplayName] = useState(name);
+  useEffect(() => { setDisplayName(name); }, [name]);
   useEffect(() => {
     fetchMarkdown(`./content/components/${id}/${version}.md`).then((d) => setStatus(d.meta.status || "stable"));
   }, [id, version]);
@@ -184,7 +186,7 @@ function DetailPage({ id, name }) {
       <div className="apy-gray-band">
         <div className="apy-gray-band-inner" style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", flexWrap: "wrap", gap: 12 }}>
           <div className="apy-gray-band-title-row">
-            <h1>{name}</h1>
+            <EditableTitle title={displayName} onSave={setDisplayName} />
             <StatusBadge status={status} />
           </div>
           <VersionPicker versions={versionsSorted} active={version} onChange={setVersion} />
