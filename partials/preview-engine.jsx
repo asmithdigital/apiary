@@ -1,7 +1,7 @@
 /* =============================================================================
-   PARTIAL: preview-engine — the logo mark, the "Real capture"/"Foundation"
-   tags, and the engine that renders each component's live preview from its
-   real captured specs.json. Find this file if you need to change how a
+   PARTIAL: preview-engine — the logo mark, the "Foundation" tag, and the
+   engine that renders each component's live preview from its real
+   captured specs.json. Find this file if you need to change how a
    component's live preview is drawn.
 ============================================================================= */
 let R; // real RAA brand values, populated at boot from content/R.json
@@ -14,9 +14,6 @@ function Mark({ size = 22 }) {
   );
 }
 
-function RealTag() {
-  return <span className="apy-tag apy-tag-real">Real capture</span>;
-}
 function FoundationTag() {
   return <span className="apy-tag apy-tag-foundation">Foundation</span>;
 }

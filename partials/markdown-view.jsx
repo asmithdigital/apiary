@@ -8,7 +8,7 @@ function MarkdownBody({ html }) {
 }
 
 function VersionPicker({ versions, active, onChange }) {
-  if (!versions || versions.length < 2) return null;
+  if (!versions || versions.length === 0) return null;
   return (
     <select value={active} onChange={(e) => onChange(e.target.value)} className="apy-version-picker">
       {versions.map((v) => (

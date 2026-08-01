@@ -17,13 +17,36 @@ function parseFrontmatter(raw) {
 }
 
 // Fetches and parses one markdown file. `marked` (loaded via CDN in
-// index.html as a global) turns the body into real HTML.
+// index.html as a global) turns the body into real HTML. Before that, the
+// body is compiled as a real Handlebars template — frontmatter becomes the
+// variable context, so `{{> do-dont}}` in a content file actually receives
+// that file's own `do`/`dont` arrays, with the styling living only in
+// partials/templates/do-dont.hbs, not copy-pasted into every content file.
+let partialsRegistered = false;
+async function registerContentPartials() {
+  if (partialsRegistered) return;
+  const names = ["do-dont", "callout"];
+  await Promise.all(names.map(async (name) => {
+    const res = await fetch(`./partials/templates/${name}.hbs`);
+    const source = await res.text();
+    window.Handlebars.registerPartial(name, source);
+  }));
+  partialsRegistered = true;
+}
+
 async function fetchMarkdown(url) {
+  await registerContentPartials();
   const res = await fetch(url);
   if (!res.ok) throw new Error(`Failed to load ${url}: ${res.status}`);
   const raw = await res.text();
   const { meta, body } = parseFrontmatter(raw);
-  const html = window.marked ? window.marked.parse(body) : body;
+  let compiled = body;
+  try {
+    compiled = window.Handlebars.compile(body)(meta);
+  } catch (e) {
+    console.warn(`Handlebars compile failed for ${url}, showing raw markdown:`, e.message);
+  }
+  const html = window.marked ? window.marked.parse(compiled) : compiled;
   return { meta, html, raw: body };
 }
 

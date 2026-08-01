@@ -8,6 +8,9 @@ import {
   CheckCircle2, XCircle,
 } from "https://esm.sh/lucide-react@0.383.0?deps=react@18.3.1";
 import { marked } from "https://esm.sh/marked@12.0.2";
+import Handlebars from "https://esm.sh/handlebars@4.7.8";
+
+window.Handlebars = Handlebars;
 
 window.React = ReactLib;
 window.useState = useState;

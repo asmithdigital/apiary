@@ -1,0 +1,20 @@
+<div class="apy-do-dont-grid">
+{{#if do}}
+<div class="apy-do">
+<strong>Do</strong>
+<ul>
+{{#each do}}<li>{{this}}</li>
+{{/each}}
+</ul>
+</div>
+{{/if}}
+{{#if dont}}
+<div class="apy-dont">
+<strong>Don't</strong>
+<ul>
+{{#each dont}}<li>{{this}}</li>
+{{/each}}
+</ul>
+</div>
+{{/if}}
+</div>

@@ -96,6 +96,43 @@ function IconsData({ data }) {
   );
 }
 
+function TokensPage() {
+  const [tokens, setTokens] = useState(null);
+  useEffect(() => { fetchJSON("./content/tokens.json").then(setTokens); }, []);
+  if (!tokens) return <div style={{ padding: 40 }}><LoadingRow /></div>;
+  return (
+    <div>
+      {tokens._meta?.note && (
+        <div style={{ borderLeft: "3px solid var(--color-warn-border)", background: "var(--color-warn-bg)", padding: "12px 16px", fontSize: 14, color: "var(--color-body)", lineHeight: 1.6, marginBottom: 24, borderRadius: "0 8px 8px 0" }}>
+          <strong style={{ color: "var(--color-warn-text)" }}>PROVISIONAL — </strong>{tokens._meta.note}
+        </div>
+      )}
+      {Object.entries(tokens).filter(([k]) => k !== "_meta").map(([category, entries]) => (
+        <div key={category} style={{ marginBottom: 28 }}>
+          <div className="apy-eyebrow">{category}</div>
+          <div className="apy-spec-card">
+            <table className="apy-spec-table">
+              <thead><tr><th>Token</th><th>Value</th><th>Confirmed?</th></tr></thead>
+              <tbody>
+                {Object.entries(entries).map(([name, t]) => (
+                  <tr key={name}>
+                    <td className="apy-spec-property">{name}</td>
+                    <td>
+                      <span className="apy-spec-value">{t.value}</span>
+                      {/^#|rgba?\(/.test(t.value) && <span style={{ display: "inline-block", width: 14, height: 14, borderRadius: 3, background: t.value, marginLeft: 8, verticalAlign: "middle", border: "1px solid var(--color-line)" }} />}
+                    </td>
+                    <td style={{ fontSize: 13, color: t.confirmed ? "var(--color-success-text)" : "var(--color-warn-text)" }}>{t.confirmed ? "Yes — real" : "Provisional"}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+}
+
 const FOUNDATION_DATA_RENDERERS = { colour: ColourData, spacing: SpacingData, typography: TypographyData, elevation: ElevationData, icons: IconsData };
 
 function FoundationsPage({ foundationKey, foundationLabel }) {
@@ -116,10 +153,12 @@ function FoundationsPage({ foundationKey, foundationLabel }) {
 
   return (
     <div>
-      <GrayBand title={foundationLabel} extra={<FoundationTag />} description="Colour, spacing, elevation, and typography carry real captured or documented values; Accessibility and Design Tokens are the team's real narrative pages, not yet backed by live tokens." />
+      <GrayBand title={foundationLabel} extra={<FoundationTag />} description={foundationKey === "design-tokens" ? "The real source of truth — edit content/tokens.json and every value here (and eventually every component spec) updates." : "Colour, spacing, elevation, and typography carry real captured or documented values."} />
       <div className="apy-content-col" style={{ paddingTop: 28, paddingBottom: 28 }}><div className="apy-gray-band-inner">
+        {foundationKey === "design-tokens" ? <TokensPage /> : <>
         <MarkdownBody html={doc.html} />
         {DataRenderer && <div style={{ marginTop: 24 }}><DataRenderer data={data} /></div>}
+        </>}
       </div></div>
     </div>
   );

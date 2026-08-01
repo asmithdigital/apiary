@@ -10,7 +10,7 @@ function GetStartedPage({ pageKey, pageLabel }) {
   const isPending = doc.meta.status === "pending";
   return (
     <div>
-      <GrayBand title={pageLabel} extra={!isPending ? <RealTag /> : undefined} description={isPending ? "Structure is here, real content isn't yet." : "Real content from the team's Zeroheight pages, word for word."} />
+      <GrayBand title={pageLabel} description={isPending ? "Structure is here, real content isn't yet." : undefined} />
       <div style={{ padding: "28px 40px", maxWidth: "var(--content-max)", margin: "0 auto" }}>
         <MarkdownBody html={doc.html} />
       </div>

@@ -7,10 +7,16 @@
 .apy-prose strong { color: var(--color-ink); }
 .apy-prose blockquote { border-left: 3px solid var(--color-accent); background: var(--color-accent-tint); padding: 12px 16px; margin: 16px 0; border-radius: 0 6px 6px 0; }
 
-.apy-prose .apy-do { border: 1px solid var(--color-success-border); background: var(--color-success-bg); border-radius: 8px; padding: 14px 18px; margin: 16px 0; }
-.apy-prose .apy-do strong { color: var(--color-success-text); text-transform: uppercase; font-size: 13px; letter-spacing: 0.04em; }
-.apy-prose .apy-dont { border: 1px solid var(--color-danger-border); background: var(--color-danger-bg); border-radius: 8px; padding: 14px 18px; margin: 16px 0; }
-.apy-prose .apy-dont strong { color: var(--color-danger-text); text-transform: uppercase; font-size: 13px; letter-spacing: 0.04em; }
+.apy-prose .apy-do-dont-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 16px 0; }
+.apy-prose .apy-do-dont-grid .apy-do, .apy-prose .apy-do-dont-grid .apy-dont { margin: 0; }
+@media (max-width: 640px) { .apy-prose .apy-do-dont-grid { grid-template-columns: 1fr; } }
+
+.apy-prose .apy-do { border: 2px solid var(--color-success-border); background: #ECFDF599; border-radius: 16px; padding: 20px; margin: 16px 0; }
+.apy-prose .apy-do strong { display: inline-flex; align-items: center; gap: 6px; color: var(--color-success-text); text-transform: uppercase; font-size: 12px; letter-spacing: 0.06em; font-weight: 700; }
+.apy-prose .apy-do strong::before { content: "✓"; display: inline-flex; align-items: center; justify-content: center; width: 16px; height: 16px; border-radius: 50%; background: var(--color-success-text); color: #fff; font-size: 10px; }
+.apy-prose .apy-dont { border: 2px solid var(--color-danger-border); background: #FEF2F299; border-radius: 16px; padding: 20px; margin: 16px 0; }
+.apy-prose .apy-dont strong { display: inline-flex; align-items: center; gap: 6px; color: var(--color-danger-text); text-transform: uppercase; font-size: 12px; letter-spacing: 0.06em; font-weight: 700; }
+.apy-prose .apy-dont strong::before { content: "✕"; display: inline-flex; align-items: center; justify-content: center; width: 16px; height: 16px; border-radius: 50%; background: var(--color-danger-text); color: #fff; font-size: 10px; }
 .apy-prose .apy-warn { border: 1px solid var(--color-warn-border); background: var(--color-warn-bg); border-radius: 8px; padding: 14px 18px; margin: 16px 0; }
 .apy-prose .apy-warn strong { color: var(--color-warn-text); text-transform: uppercase; font-size: 13px; letter-spacing: 0.04em; }
 
