@@ -582,43 +582,53 @@
   "getStartedItems": [
     {
       "key": "what-is-apiary",
-      "label": "What is Apiary"
+      "label": "What is Apiary",
+      "section": "About"
     },
     {
       "key": "why-apiary-matters",
-      "label": "Why Apiary matters"
+      "label": "Why Apiary matters",
+      "section": "About"
     },
     {
       "key": "design-principles",
-      "label": "Design principles"
+      "label": "Design principles",
+      "section": "About"
     },
     {
       "key": "news-updates",
-      "label": "Latest news & updates"
+      "label": "Latest news & updates",
+      "section": "About"
     },
     {
       "key": "start-using",
-      "label": "Start using Apiary"
+      "label": "Start using Apiary",
+      "section": "Onboarding"
     },
     {
       "key": "designer-onboarding",
-      "label": "Designer onboarding"
+      "label": "Designer onboarding",
+      "section": "Onboarding"
     },
     {
       "key": "developer-onboarding",
-      "label": "Developer onboarding"
+      "label": "Developer onboarding",
+      "section": "Onboarding"
     },
     {
       "key": "resources",
-      "label": "Resources"
+      "label": "Resources",
+      "section": "Resources & Support"
     },
     {
       "key": "support",
-      "label": "Support"
+      "label": "Support",
+      "section": "Resources & Support"
     },
     {
       "key": "release-phases",
-      "label": "Release phases"
+      "label": "Release phases",
+      "section": "Resources & Support"
     }
   ],
   "getStartedLabels": {

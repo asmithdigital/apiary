@@ -61,9 +61,10 @@ function useComponentContent(id, version) {
 }
 
 function ComponentTabsBody({ id, version }) {
+  const versions = sortVersions(MANIFEST.components[id] || ["v1"]);
   const { specs, doc, error } = useComponentContent(id, version);
   const [tab, setTab] = useState("Overview");
-  const tabs = ["Overview", "Guidelines", "Specs", "QA Notes"];
+  const tabs = ["Overview", "Guidelines", "Specs", "Known Issues", "Changelog"];
 
   if (error) return <div style={{ padding: 40, color: "var(--color-danger-text)" }}>Failed to load real content: {error}</div>;
   if (!specs || !doc) return <div style={{ padding: 40 }}><LoadingRow /></div>;
@@ -108,27 +109,30 @@ function ComponentTabsBody({ id, version }) {
             {tab === "Specs" && (
               <Section id="specs">
                 <div className="apy-eyebrow">Real captured values — {specs.variantsRaw}</div>
-                <div className="apy-spec-card">
-                  <table className="apy-spec-table">
-                    <thead><tr><th>Property</th><th>Value</th></tr></thead>
-                    <tbody>
-                      {specs.tokenFindings.map((f, i) => (
-                        <tr key={i}>
-                          <td className="apy-spec-property">{f.field}</td>
-                          <td>
-                            {f.value && <div className="apy-spec-value"><ColorSwatch value={f.value} />{f.value}</div>}
-                            {f.note && <div className="apy-spec-note">{f.note}</div>}
-                          </td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
+                <div className="apy-spec-layout">
+                  <div className="apy-example-card" style={{ margin: 0 }}>
+                    <ComponentPreview item={specs} />
+                  </div>
+                  <div className="apy-spec-token-list">
+                    {specs.tokenFindings.map((f, i) => (
+                      <div key={i} className="apy-spec-token-row">
+                        <div>
+                          <div className="apy-spec-token-name">{f.field}</div>
+                          {f.note && <div className="apy-spec-note">{f.note}</div>}
+                        </div>
+                        <span className="apy-spec-token-code"><ColorSwatch value={f.value} />{f.token || f.value}</span>
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </Section>
             )}
-            {tab === "QA Notes" && (
+            {tab === "Known Issues" && (
               <Section id="usage">
-                <div className="apy-eyebrow">Flags found in the real code</div>
+                <div className="apy-eyebrow">Real inconsistencies flagged in the captured code</div>
+                <p style={{ fontSize: 13, color: "var(--color-faint)", marginBottom: 16 }}>
+                  Not the same as QA sign-off against a build ticket — that needs a real workflow tied to your ticketing system, which this static content system doesn't do. This is specifically what the real code capture itself flagged as inconsistent.
+                </p>
                 {specs.capturedNotes.length === 0 ? (
                   <p style={{ fontSize: 15, color: "var(--color-faint)", fontStyle: "italic" }}>Nothing flagged — no real inconsistencies found in the exported code.</p>
                 ) : (
@@ -141,6 +145,23 @@ function ComponentTabsBody({ id, version }) {
                     ))}
                   </div>
                 )}
+              </Section>
+            )}
+            {tab === "Changelog" && (
+              <Section id="changelog">
+                <div className="apy-eyebrow">Version history</div>
+                <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
+                  {versions.map((v, i) => (
+                    <div key={v} style={{ display: "flex", gap: 16, padding: "14px 0", borderBottom: i < versions.length - 1 ? "1px solid var(--color-line)" : "none" }}>
+                      <div style={{ fontFamily: "var(--font-mono)", fontSize: 13, fontWeight: 700, color: "var(--color-accent)", flexShrink: 0, width: 50 }}>{v}</div>
+                      <div style={{ fontSize: 14, color: "var(--color-body)" }}>
+                        {v === versions[0]
+                          ? "Initial real capture — pulled from the team's actual Figma component code and Zeroheight documentation, not written from memory."
+                          : "Updated content — see this version's markdown file for what changed."}
+                      </div>
+                    </div>
+                  ))}
+                </div>
               </Section>
             )}
           </div>

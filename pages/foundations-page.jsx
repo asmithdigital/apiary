@@ -138,28 +138,41 @@ const FOUNDATION_DATA_RENDERERS = { colour: ColourData, spacing: SpacingData, ty
 function FoundationsPage({ foundationKey, foundationLabel }) {
   const [doc, setDoc] = useState(null);
   const [data, setData] = useState(null);
+  const [error, setError] = useState(null);
   useEffect(() => {
     let cancelled = false;
-    setDoc(null); setData(null);
+    setDoc(null); setData(null); setError(null);
     Promise.all([
       fetchMarkdown(`./content/foundations/${foundationKey}/v1.md`),
       fetchJSON(`./content/foundations/${foundationKey}/data.json`),
-    ]).then(([d, dt]) => { if (!cancelled) { setDoc(d); setData(dt); } });
+    ]).then(([d, dt]) => { if (!cancelled) { setDoc(d); setData(dt); } })
+      .catch((e) => { if (!cancelled) setError(e.message); });
     return () => { cancelled = true; };
   }, [foundationKey]);
 
+  if (error) return <div style={{ padding: 40, color: "var(--color-danger-text)" }}>Failed to load this foundation: {error}</div>;
   if (!doc || !data) return <div style={{ padding: 40 }}><LoadingRow /></div>;
   const DataRenderer = FOUNDATION_DATA_RENDERERS[foundationKey];
 
   return (
     <div>
       <GrayBand title={foundationLabel} extra={<FoundationTag />} description={foundationKey === "design-tokens" ? "The real source of truth — edit content/tokens.json and every value here (and eventually every component spec) updates." : "Colour, spacing, elevation, and typography carry real captured or documented values."} />
-      <div className="apy-content-col" style={{ paddingTop: 28, paddingBottom: 28 }}><div className="apy-gray-band-inner">
-        {foundationKey === "design-tokens" ? <TokensPage /> : <>
-        <MarkdownBody html={doc.html} />
-        {DataRenderer && <div style={{ marginTop: 24 }}><DataRenderer data={data} /></div>}
-        </>}
-      </div></div>
+      <div className="apy-content-col" style={{ paddingTop: 28, paddingBottom: 28 }}>
+        <div className="apy-content-col-inner" style={{ gap: 40 }}>
+          <div style={{ flex: 1, maxWidth: 700 }}>
+            {foundationKey === "design-tokens" ? <TokensPage /> : <>
+            <MarkdownBody html={doc.html} />
+            {DataRenderer && <div style={{ marginTop: 24 }}><DataRenderer data={data} /></div>}
+            </>}
+          </div>
+          <div style={{ width: 240, flexShrink: 0 }}>
+            <div className="apy-caption-card">
+              <div className="apy-eyebrow" style={{ marginBottom: 10 }}>On this page</div>
+              <PageOutline />
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

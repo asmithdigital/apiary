@@ -16,6 +16,14 @@ function Sidebar({ page, navigate }) {
   const [openGroups, setOpenGroups] = useState({ getStarted: true, foundations: true, actions: true });
   const toggle = (k) => setOpenGroups((o) => ({ ...o, [k]: !o[k] }));
 
+  const getStartedSections = [];
+  NAV.getStartedItems.forEach((it) => {
+    const sec = it.section || "About";
+    let bucket = getStartedSections.find((s) => s.name === sec);
+    if (!bucket) { bucket = { name: sec, items: [] }; getStartedSections.push(bucket); }
+    bucket.items.push(it);
+  });
+
   return (
     <div className="apy-sidebar">
       <button onClick={() => navigate({ kind: "home" })} className={"apy-nav-home" + (page.kind === "home" ? " active" : "")}>Home</button>
@@ -24,10 +32,17 @@ function Sidebar({ page, navigate }) {
         <button onClick={() => toggle("getStarted")} className="apy-nav-section-label">
           {openGroups.getStarted ? "▾" : "▸"} Get Started
         </button>
-        {openGroups.getStarted && NAV.getStartedItems.map((it) => (
-          <button key={it.key} onClick={() => navigate({ kind: "getstarted", ref: it.key })} className={"apy-nav-item" + (page.kind === "getstarted" && page.ref === it.key ? " active" : "")}>
-            {it.label}
-          </button>
+        {openGroups.getStarted && getStartedSections.map((sec) => (
+          <div key={sec.name}>
+            <button onClick={() => toggle("gs-" + sec.name)} className="apy-nav-group-label">
+              {openGroups["gs-" + sec.name] !== false ? "▾" : "▸"} {sec.name}
+            </button>
+            {openGroups["gs-" + sec.name] !== false && sec.items.map((it) => (
+              <button key={it.key} onClick={() => navigate({ kind: "getstarted", ref: it.key })} className={"apy-nav-leaf" + (page.kind === "getstarted" && page.ref === it.key ? " active" : "")} style={{ paddingLeft: 52 }}>
+                <span>{it.label}</span>
+              </button>
+            ))}
+          </div>
         ))}
       </div>
 

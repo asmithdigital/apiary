@@ -51,7 +51,7 @@ function APIary() {
       <div className="apy-body-row">
         <Sidebar page={page} navigate={navigate} />
         <div className="apy-content-scroll">
-          {page.kind === "getstarted" && <GetStartedPage pageKey={page.ref} pageLabel={NAV.getStartedLabels[page.ref]} />}
+          {page.kind === "getstarted" && <GetStartedPage pageKey={page.ref} pageLabel={NAV.getStartedLabels[page.ref]} navigate={navigate} />}
           {page.kind === "foundation" && <FoundationsPage foundationKey={page.ref} foundationLabel={NAV.foundationLabels[page.ref]} />}
           {page.kind === "component" && <DetailPage id={page.ref.id} name={page.ref.name} />}
           {page.kind === "family" && <FamilyPage family={page.ref} />}
