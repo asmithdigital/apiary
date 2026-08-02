@@ -1,5 +1,5 @@
 /* App shell layout — the sidebar/topbar/content-column structure. */
-.apy-topbar { height: var(--topbar-height); flex-shrink: 0; display: flex; align-items: center; padding: 0 20px; gap: 20px; border-bottom: 1px solid var(--color-line); background: #fff; }
+.apy-topbar { height: 72px; flex-shrink: 0; display: flex; align-items: center; padding: 0 24px; gap: 20px; border-bottom: 1px solid var(--color-line); background: rgba(255,255,255,0.85); backdrop-filter: blur(8px); position: sticky; top: 0; z-index: 30; }
 .apy-topbar-logo { display: flex; align-items: center; gap: 8px; background: none; border: none; cursor: pointer; }
 .apy-topbar-logo span { font-size: var(--text-lg); font-weight: 800; letter-spacing: -0.01em; }
 

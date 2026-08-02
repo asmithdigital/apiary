@@ -37,6 +37,32 @@ function CaptionedStateGrid({ item }) {
   );
 }
 
+function CopyableCode({ code }) {
+  const [copied, setCopied] = useState(false);
+  return (
+    <div style={{ position: "relative", background: "var(--color-ink)", borderRadius: 8, padding: "14px 16px", marginTop: 10 }}>
+      <button
+        onClick={() => { navigator.clipboard?.writeText(code); setCopied(true); setTimeout(() => setCopied(false), 1500); }}
+        style={{ position: "absolute", top: 8, right: 8, fontSize: 11, padding: "3px 8px", borderRadius: 5, border: "none", background: "rgba(255,255,255,0.15)", color: "#fff", cursor: "pointer" }}>
+        {copied ? "Copied" : "Copy"}
+      </button>
+      <pre style={{ margin: 0, color: "#fff", fontFamily: "var(--font-mono)", fontSize: 12.5, lineHeight: 1.7, whiteSpace: "pre-wrap", paddingRight: 50 }}>{code}</pre>
+    </div>
+  );
+}
+
+// Real CSS built from this exact state's real captured values — not a
+// fabricated component API we don't actually have.
+function realCssFor(state) {
+  const lines = [];
+  if (state.bg) lines.push(`background: ${state.bg};`);
+  if (state.text) lines.push(`color: ${state.text};`);
+  if (state.border) lines.push(`border: ${state.border};`);
+  if (state.radius != null) lines.push(`border-radius: ${state.radius}px;`);
+  if (state.padding) lines.push(`padding: ${state.padding};`);
+  return lines.join("\n");
+}
+
 function ColorSwatch({ value }) {
   const match = typeof value === "string" && value.match(/#[0-9a-fA-F]{3,8}|rgba?\([^)]+\)/);
   if (!match) return null;
@@ -63,8 +89,8 @@ function useComponentContent(id, version) {
 function ComponentTabsBody({ id, version }) {
   const versions = sortVersions(MANIFEST.components[id] || ["v1"]);
   const { specs, doc, error, setDoc } = useComponentContent(id, version);
-  const [tab, setTab] = useState("Overview");
-  const tabs = ["Overview", "Guidelines", "Specs", "Known Issues", "Changelog"];
+  const [tab, setTab] = useState("Examples");
+  const tabs = ["Examples", "Usage", "Specs", "Known Issues", "Changelog"];
 
   if (error) return <div style={{ padding: 40, color: "var(--color-danger-text)" }}>Failed to load real content: {error}</div>;
   if (!specs || !doc) return <div style={{ padding: 40 }}><LoadingRow /></div>;
@@ -77,31 +103,36 @@ function ComponentTabsBody({ id, version }) {
       <div className="apy-content-col">
         <div className="apy-content-col-inner" style={{ display: "block" }}>
           <div style={{ maxWidth: 760, padding: "28px 0" }}>
-            {tab === "Overview" && (
+            {tab === "Examples" && (
               <Section id="preview">
-                <div className="apy-eyebrow">Preview</div>
                 <p className="apy-lead">{headline}</p>
-                <div className="apy-example-card" style={{ display: "flex", justifyContent: "center" }}>
-                  {doc.meta.image ? (
-                    <img src={`./content/components/${id}/${doc.meta.image}`} alt={`${specs.name} preview`} />
-                  ) : (
-                    <ComponentPreview item={specs} />
-                  )}
-                </div>
                 {doc.meta.image && (
-                  <p style={{ fontSize: 12, color: "var(--color-faint)", marginTop: 10, fontStyle: "italic" }}>
+                  <div className="apy-example-card" style={{ display: "flex", justifyContent: "center", marginBottom: 8 }}>
+                    <img src={`./content/components/${id}/${doc.meta.image}`} alt={`${specs.name} preview`} />
+                  </div>
+                )}
+                {doc.meta.image && (
+                  <p style={{ fontSize: 12, color: "var(--color-faint)", marginBottom: 32, fontStyle: "italic" }}>
                     Generated from real specs — swap in a real Figma export at <code>content/components/{id}/{doc.meta.image}</code> when ready.
                   </p>
                 )}
-                {specs.preview?.states?.length > 1 && (
-                  <div style={{ marginTop: 28 }}>
-                    <div className="apy-eyebrow">Real states</div>
-                    <CaptionedStateGrid item={specs} />
+
+                {/* Real per-state sections — matches atlassian.design's actual
+                    Button page pattern (description, live example, copyable
+                    code), built from this component's own real captured
+                    preview.states, not a fabricated component API. */}
+                {(specs.preview?.states || []).map((s, i) => (
+                  <div key={i} style={{ marginBottom: 40, paddingBottom: 32, borderBottom: i < specs.preview.states.length - 1 ? "1px solid var(--color-line)" : "none" }}>
+                    <h3 style={{ fontSize: 18, fontWeight: 653, color: "var(--color-ink)", marginBottom: 8, fontFamily: "var(--font-display)" }}>{s.label}</h3>
+                    <div className="apy-example-card" style={{ margin: "12px 0" }}>
+                      <ComponentPreview item={{ ...specs, preview: { ...specs.preview, states: [s] } }} />
+                    </div>
+                    <CopyableCode code={realCssFor(s)} />
                   </div>
-                )}
+                ))}
               </Section>
             )}
-            {tab === "Guidelines" && (
+            {tab === "Usage" && (
               <Section id="guidelines">
                 <EditableMarkdown url={`./content/components/${id}/${version}.md`} doc={doc} onSaved={setDoc} />
               </Section>
