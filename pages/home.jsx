@@ -43,7 +43,7 @@ function HomePage({ navigate }) {
           <p style={{ fontSize: 20, color: "var(--color-body)", lineHeight: 1.6, maxWidth: 480, marginBottom: 40 }}>
             {site.heroTagline}
           </p>
-          <button className="apy-btn-primary" onClick={() => navigate({ kind: "getstarted", ref: "what-is-apiary" })}>
+          <button className="apy-btn-primary apy-btn-hero" onClick={() => navigate({ kind: "getstarted", ref: "what-is-apiary" })}>
             {site.heroCtaLabel}
           </button>
         </div>
