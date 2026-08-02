@@ -7,8 +7,14 @@
   font-size: 15px; font-weight: 700; margin: 32px 0 14px; color: var(--color-ink);
   text-transform: uppercase; letter-spacing: 0.06em; font-family: var(--font-mono);
   padding-left: 12px; border-left: 3px solid var(--color-accent);
-  display: flex; align-items: center; height: 20px;
+  display: flex; align-items: center; height: 20px; gap: 6px;
+  position: relative;
 }
+.apy-prose h2::before {
+  content: "🔗"; font-size: 12px; opacity: 0; transition: opacity 120ms ease;
+  position: absolute; left: -20px;
+}
+.apy-prose h2:hover::before { opacity: 0.5; }
 .apy-prose h2:first-child { margin-top: 0; }
 .apy-prose p { margin: 0 0 14px; }
 .apy-prose strong { color: var(--color-ink); }
