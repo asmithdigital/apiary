@@ -1,0 +1,32 @@
+{
+  "name": "LiveChat",
+  "groupKey": "overlays",
+  "source": "src/imports/LiveChat/index.tsx",
+  "summary": "The floating live-chat launcher widget.",
+  "variantsRaw": "property1=Desktop|Mobile",
+  "tokenFindings": [
+    {
+      "field": "Button",
+      "value": "60×60px, bg #FFE600, radius 4px",
+      "token": "color-brand-primary / spacing-xl"
+    },
+    {
+      "field": "Shadow",
+      "value": "1px solid #4D4D4D border + 0px 2px 32px rgba(0,0,0,0.15)",
+      "token": "color-text-subtle"
+    }
+  ],
+  "capturedNotes": [],
+  "preview": {
+    "kind": "button",
+    "states": [
+      {
+        "label": "Widget",
+        "bg": "#FFE600",
+        "radius": 4,
+        "padding": "18px",
+        "sample": "💬"
+      }
+    ]
+  }
+}

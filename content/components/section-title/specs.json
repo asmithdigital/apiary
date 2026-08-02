@@ -1,0 +1,34 @@
+{
+  "name": "SectionTitle",
+  "groupKey": "navigation",
+  "source": "src/imports/SectionTitle/index.tsx",
+  "summary": "A heading with a full-width divider beneath it. No variants.",
+  "variantsRaw": "Fixed — no props",
+  "tokenFindings": [
+    {
+      "field": "Divider",
+      "value": "1px, #000000, full width",
+      "token": "color-ink"
+    },
+    {
+      "field": "Gap (title to divider)",
+      "value": "6px",
+      "token": "spacing-xs"
+    }
+  ],
+  "capturedNotes": [],
+  "preview": {
+    "kind": "container",
+    "states": [
+      {
+        "label": "Default",
+        "bg": "#fff",
+        "border": "none",
+        "radius": 0,
+        "w": 260,
+        "h": 40,
+        "sample": "Section title"
+      }
+    ]
+  }
+}

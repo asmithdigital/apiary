@@ -1,0 +1,39 @@
+{
+  "name": "CardCoverType",
+  "groupKey": "cards",
+  "source": "src/imports/CardCoverType/index.tsx",
+  "summary": "A selectable cover-level pricing card.",
+  "variantsRaw": "state=Default|Selected",
+  "tokenFindings": [
+    {
+      "field": "Background (Selected)",
+      "value": "#E6F1F0, border #007064",
+      "token": "color-selected"
+    },
+    {
+      "field": "Button (Default)",
+      "value": "bg #FFE600",
+      "token": "color-brand-primary"
+    },
+    {
+      "field": "Button (Selected)",
+      "value": "bg #007064, check icon white",
+      "token": "color-selected"
+    }
+  ],
+  "capturedNotes": [],
+  "preview": {
+    "kind": "container",
+    "states": [
+      {
+        "label": "Default",
+        "bg": "#fff",
+        "border": "1px solid #000",
+        "radius": 4,
+        "w": 260,
+        "h": 200,
+        "sample": "Cover card"
+      }
+    ]
+  }
+}

@@ -1,0 +1,56 @@
+{
+  "name": "Select",
+  "groupKey": "forms",
+  "source": "src/imports/Select/index.tsx",
+  "summary": "A dropdown select field.",
+  "variantsRaw": "state=Active|Default|Focus|Hover|Value|Disabled|Invalid",
+  "tokenFindings": [
+    {
+      "field": "Border (Default)",
+      "value": "1px solid #7F7F7F",
+      "token": "color-border-default"
+    },
+    {
+      "field": "Border (Focus/Active)",
+      "value": "1px solid #0D59FF + shadow",
+      "token": "color-focus"
+    },
+    {
+      "field": "Placeholder",
+      "value": "#7F7F7F",
+      "token": "color-border-default"
+    },
+    {
+      "field": "Value text",
+      "value": "#000000",
+      "token": "color-ink"
+    },
+    {
+      "field": "Container width",
+      "value": "240px",
+      "token": null
+    },
+    {
+      "field": "Corner radius",
+      "value": "4px",
+      "token": null
+    }
+  ],
+  "capturedNotes": [
+    "Active state placeholder reads \"Select an option\"; Focus state reads \"Placeholder\" for the same open condition — inconsistent copy."
+  ],
+  "preview": {
+    "kind": "field",
+    "states": [
+      {
+        "label": "Default",
+        "border": "1px solid #7F7F7F",
+        "sample": "Placeholder"
+      },
+      {
+        "label": "Invalid",
+        "border": "1px solid #E60E22"
+      }
+    ]
+  }
+}

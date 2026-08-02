@@ -1,0 +1,56 @@
+{
+  "name": "Date",
+  "groupKey": "forms",
+  "source": "src/imports/Date/index.tsx",
+  "summary": "A Day/Month/Year date field group with an inline calendar popup. 11 states × 3 variants.",
+  "variantsRaw": "state=Default|Disabled|Focus|Hover|Invalid(date/day/month/year)|Valid|Value|Calendar active · variant=Significant date|Date range|Choose date",
+  "tokenFindings": [
+    {
+      "field": "Container width",
+      "value": "282px",
+      "token": null
+    },
+    {
+      "field": "Border (Default)",
+      "value": "1px solid #7F7F7F",
+      "token": "color-border-default"
+    },
+    {
+      "field": "Border (Valid)",
+      "value": "1px solid #009923",
+      "token": "color-success"
+    },
+    {
+      "field": "Border (Invalid)",
+      "value": "1px solid #E60E22",
+      "token": "color-error"
+    },
+    {
+      "field": "Calendar popup",
+      "value": "256×284px, drop-shadow 0px 4px 2px rgba(0,0,0,0.25)",
+      "token": null
+    },
+    {
+      "field": "Selected date",
+      "value": "circle fill #0D59FF, text white",
+      "token": "color-focus"
+    }
+  ],
+  "capturedNotes": [],
+  "preview": {
+    "kind": "field",
+    "states": [
+      {
+        "label": "Default",
+        "w": 90,
+        "border": "1px solid #7F7F7F",
+        "sample": "DD"
+      },
+      {
+        "label": "Invalid",
+        "w": 90,
+        "border": "1px solid #E60E22"
+      }
+    ]
+  }
+}

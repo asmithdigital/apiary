@@ -1,0 +1,57 @@
+{
+  "name": "Vertical Stepper",
+  "groupKey": "feedback",
+  "source": "src/imports/VerticalStepper/index.tsx",
+  "summary": "A 5-step vertical progress indicator, captured entirely in its default/inactive state.",
+  "variantsRaw": "Fixed — no props exposed",
+  "tokenFindings": [
+    {
+      "field": "Circle",
+      "value": "stroke #B3B3B3, r 11",
+      "token": null
+    },
+    {
+      "field": "Label",
+      "value": "#4D4D4D",
+      "token": "color-text-subtle"
+    }
+  ],
+  "capturedNotes": [
+    "No Active or Completed state exists in this file — those only appear in ClaimsMobileMenuDropdown and StepItemHorizontal."
+  ],
+  "preview": {
+    "kind": "step",
+    "states": [
+      {
+        "label": "Default",
+        "bg": "transparent",
+        "border": "2px solid #B3B3B3",
+        "text": "#000"
+      },
+      {
+        "label": "Default",
+        "bg": "transparent",
+        "border": "2px solid #B3B3B3",
+        "text": "#000"
+      },
+      {
+        "label": "Default",
+        "bg": "transparent",
+        "border": "2px solid #B3B3B3",
+        "text": "#000"
+      },
+      {
+        "label": "Default",
+        "bg": "transparent",
+        "border": "2px solid #B3B3B3",
+        "text": "#000"
+      },
+      {
+        "label": "Default",
+        "bg": "transparent",
+        "border": "2px solid #B3B3B3",
+        "text": "#000"
+      }
+    ]
+  }
+}

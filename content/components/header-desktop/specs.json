@@ -1,0 +1,33 @@
+{
+  "name": "HeaderDesktop",
+  "groupKey": "journey",
+  "source": "src/imports/HeaderDesktop/index.tsx",
+  "summary": "The desktop site header — logo, brand title, and contextual actions per section.",
+  "variantsRaw": "property1=Default|Claims|My Account",
+  "tokenFindings": [
+    {
+      "field": "Background",
+      "value": "#FFFFFF",
+      "token": "color-surface"
+    },
+    {
+      "field": "\"Save and Exit\"/\"Log out\"",
+      "value": "border 1px solid #000000",
+      "token": "color-ink"
+    }
+  ],
+  "capturedNotes": [],
+  "preview": {
+    "kind": "container",
+    "states": [
+      {
+        "label": "Default",
+        "bg": "#fff",
+        "radius": 0,
+        "w": 340,
+        "h": 56,
+        "sample": "RAA   Need help ▾"
+      }
+    ]
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "name": "Accordion",
+  "groupKey": "content",
+  "source": "src/imports/Accordion/index.tsx",
+  "summary": "An expandable panel with a table-style detailed content mode.",
+  "variantsRaw": "state=Default|Hover|Focus|Active-table|Active-Basic content|Active-Custom content|Skeleton",
+  "tokenFindings": [
+    {
+      "field": "Border (Default)",
+      "value": "1px solid #7F7F7F",
+      "token": "color-border-default"
+    },
+    {
+      "field": "Border (Hover/Active)",
+      "value": "1px solid #000000",
+      "token": "color-ink"
+    },
+    {
+      "field": "Corner radius",
+      "value": "4px",
+      "token": null
+    },
+    {
+      "field": "Padding (header)",
+      "value": "20px vertical, 24px horizontal",
+      "token": "spacing-md"
+    },
+    {
+      "field": "Type (header)",
+      "value": "National 2 · Bold · 16px · line-height 20px",
+      "token": null
+    }
+  ],
+  "capturedNotes": [],
+  "preview": {
+    "kind": "container",
+    "states": [
+      {
+        "label": "Closed",
+        "bg": "#fff",
+        "border": "1px solid #7F7F7F",
+        "radius": 4,
+        "w": 300,
+        "h": 60,
+        "sample": "Accordion header ⌃"
+      }
+    ]
+  }
+}

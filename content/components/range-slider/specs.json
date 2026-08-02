@@ -1,0 +1,39 @@
+{
+  "name": "Range Slider",
+  "groupKey": "forms",
+  "source": "src/imports/Range50/index.tsx",
+  "summary": "A single-thumb range slider, captured fixed at its 50% value.",
+  "variantsRaw": "fixed at 50%",
+  "tokenFindings": [
+    {
+      "field": "Track",
+      "value": "rgba(0,0,0,0.1), radius 2px",
+      "token": null
+    },
+    {
+      "field": "Filled track",
+      "value": "#007064, radius 2px",
+      "token": "color-selected"
+    },
+    {
+      "field": "Thumb",
+      "value": "16×16px white circle, shadow matches Elevation-family values",
+      "token": null
+    }
+  ],
+  "capturedNotes": [],
+  "preview": {
+    "kind": "progress",
+    "states": [
+      {
+        "label": "50%",
+        "track": "rgba(0,0,0,0.1)",
+        "fill": "#007064",
+        "fillRight": "50%",
+        "segments": [
+          1
+        ]
+      }
+    ]
+  }
+}

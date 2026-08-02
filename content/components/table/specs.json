@@ -1,0 +1,47 @@
+{
+  "name": "Table",
+  "groupKey": "content",
+  "source": "src/imports/Table/index.tsx + TableRow + TableSecondColumn + TableItem",
+  "summary": "A striped data table (5 rows, alternating S230/White) with a two-column row layout and nested status items. Four closely related files merged into one entry.",
+  "variantsRaw": "device=Desktop|Tablet/Mobile|Skeleton",
+  "tokenFindings": [
+    {
+      "field": "Row backgrounds",
+      "value": "#F9F7F2 (S230) / #FFFFFF alternating",
+      "token": "color-surface-warm-100 / color-surface"
+    },
+    {
+      "field": "Divider",
+      "value": "1px, #7F7F7F",
+      "token": "color-border-default"
+    },
+    {
+      "field": "Row item (nested)",
+      "value": "bg rgba(0,0,0,0.03), border #999999",
+      "token": "color-text-disabled"
+    },
+    {
+      "field": "Lozenge in row",
+      "value": "bg #65BAAF",
+      "token": null
+    }
+  ],
+  "capturedNotes": [
+    "Some Tablet/Mobile rows use the TableRow component; two rows are written inline with the same structure — inconsistent composition.",
+    "TableSecondColumn's two row items are structurally identical duplicated code with no actual prop variation."
+  ],
+  "preview": {
+    "kind": "container",
+    "states": [
+      {
+        "label": "Table",
+        "bg": "#fff",
+        "border": "1px solid #000",
+        "radius": 4,
+        "w": 320,
+        "h": 140,
+        "sample": "Striped rows"
+      }
+    ]
+  }
+}

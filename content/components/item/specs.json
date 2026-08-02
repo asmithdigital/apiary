@@ -1,0 +1,34 @@
+{
+  "name": "Item",
+  "groupKey": "cards",
+  "source": "src/imports/Item/index.tsx",
+  "summary": "A record row (e.g. a claim) with icon, title/date, and edit/delete icon buttons.",
+  "variantsRaw": "No props — fixed layout",
+  "tokenFindings": [
+    {
+      "field": "Border",
+      "value": "1px solid #000000",
+      "token": "color-ink"
+    },
+    {
+      "field": "Icon buttons",
+      "value": "44×44px, no fill, no border",
+      "token": null
+    }
+  ],
+  "capturedNotes": [],
+  "preview": {
+    "kind": "container",
+    "states": [
+      {
+        "label": "Default",
+        "bg": "#fff",
+        "border": "1px solid #000",
+        "radius": 4,
+        "w": 300,
+        "h": 80,
+        "sample": "🚗  Claim #1234"
+      }
+    ]
+  }
+}

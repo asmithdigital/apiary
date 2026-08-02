@@ -1,0 +1,51 @@
+{
+  "name": "CheckboxHorizontal",
+  "groupKey": "forms",
+  "source": "src/imports/CheckboxHorizontal/index.tsx (+ -1, on/off states merged)",
+  "summary": "A large, illustrated checkbox card with a real price toggle. On and off states were originally two separate frames — merged here as one component's two states.",
+  "variantsRaw": "state=on(selected)|off(unselected)",
+  "tokenFindings": [
+    {
+      "field": "Background (on)",
+      "value": "#E6F1F0, border #007064",
+      "token": "color-selected"
+    },
+    {
+      "field": "Background (off)",
+      "value": "#FFFFFF, border #7F7F7F",
+      "token": "color-surface / color-border-default"
+    },
+    {
+      "field": "Toggle (on)",
+      "value": "bg #007064, radius 19px",
+      "token": "color-selected"
+    },
+    {
+      "field": "Toggle (off)",
+      "value": "bg #7F7F7F, radius 10px",
+      "token": "color-border-default",
+      "unconfirmed": true,
+      "note": "Same physical 40×20px toggle uses two different radii between states — likely a bug, both should read as a full pill."
+    },
+    {
+      "field": "Padding",
+      "value": "24px all sides",
+      "token": "spacing-md"
+    }
+  ],
+  "capturedNotes": [],
+  "preview": {
+    "kind": "container",
+    "states": [
+      {
+        "label": "On",
+        "bg": "#E6F1F0",
+        "border": "1px solid #007064",
+        "radius": 4,
+        "w": 260,
+        "h": 90,
+        "sample": "On"
+      }
+    ]
+  }
+}

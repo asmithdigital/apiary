@@ -1,0 +1,36 @@
+{
+  "name": "JourneyFooter",
+  "groupKey": "journey",
+  "source": "src/imports/JourneyFooter/index.tsx",
+  "summary": "The sticky footer bar used in multi-step flows — Next/Skip actions, default and stacked layouts.",
+  "variantsRaw": "action=None|Next|Skip · type=Default|Stacked",
+  "tokenFindings": [
+    {
+      "field": "Primary button",
+      "value": "bg #FFE600, radius 4px",
+      "token": "color-brand-primary"
+    },
+    {
+      "field": "Divider",
+      "value": "1px, #000000, full width",
+      "token": "color-ink"
+    }
+  ],
+  "capturedNotes": [
+    "Contains a full inline copy of the Button component (870+ lines) instead of importing it — same duplication risk as InputCounter-1."
+  ],
+  "preview": {
+    "kind": "container",
+    "states": [
+      {
+        "label": "Default",
+        "bg": "#fff",
+        "border": "none",
+        "radius": 0,
+        "w": 320,
+        "h": 70,
+        "sample": "Footer with Next"
+      }
+    ]
+  }
+}

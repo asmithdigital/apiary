@@ -1,0 +1,34 @@
+{
+  "name": "Pagination",
+  "groupKey": "navigation",
+  "source": "src/imports/Pagination/index.tsx",
+  "summary": "A page-number bar with prev/next arrows and an ellipsis for skipped ranges.",
+  "variantsRaw": "number=true|false · state=Default|Hover",
+  "tokenFindings": [
+    {
+      "field": "All cells",
+      "value": "border 1px solid #B3B3B3",
+      "token": null
+    },
+    {
+      "field": "Hover",
+      "value": "only the first number cell gets rgba(0,0,0,0.05)",
+      "token": null
+    }
+  ],
+  "capturedNotes": [],
+  "preview": {
+    "kind": "container",
+    "states": [
+      {
+        "label": "Pagination",
+        "bg": "#fff",
+        "border": "1px solid #B3B3B3",
+        "radius": 4,
+        "w": 260,
+        "h": 38,
+        "sample": "‹  1  2  3  …  10  ›"
+      }
+    ]
+  }
+}

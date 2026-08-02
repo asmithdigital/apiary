@@ -1,0 +1,34 @@
+{
+  "name": "Spinner",
+  "groupKey": "feedback",
+  "source": "src/imports/Spinner/index.tsx",
+  "summary": "A rotating loading indicator, 3 sizes.",
+  "variantsRaw": "size=Small|Medium|Large",
+  "tokenFindings": [
+    {
+      "field": "Sizes",
+      "value": "24×24 / 48×48 / 96×96px",
+      "token": "spacing-2xl"
+    },
+    {
+      "field": "Fill",
+      "value": "#000000",
+      "token": "color-ink"
+    }
+  ],
+  "capturedNotes": [
+    "Small size uses different inset percentages than Medium/Large — not proportionally identical."
+  ],
+  "preview": {
+    "kind": "button",
+    "states": [
+      {
+        "label": "Medium",
+        "bg": "transparent",
+        "border": "none",
+        "padding": "12px",
+        "sample": "↻"
+      }
+    ]
+  }
+}

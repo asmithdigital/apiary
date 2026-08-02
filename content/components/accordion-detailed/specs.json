@@ -1,0 +1,41 @@
+{
+  "name": "AccordionDetailed",
+  "groupKey": "content",
+  "source": "src/imports/AccordionDetailed/index.tsx",
+  "summary": "A richer accordion with a status Lozenge, device-specific widths, and inline action buttons in its expanded state.",
+  "variantsRaw": "device=Default|Mobile · state=Default|Hover|Focus|Active-table|Skeleton-closed|Skeleton-open",
+  "tokenFindings": [
+    {
+      "field": "Width (Default device)",
+      "value": "660px",
+      "token": null
+    },
+    {
+      "field": "Width (Mobile)",
+      "value": "327px",
+      "token": null
+    },
+    {
+      "field": "Lozenge",
+      "value": "bg #73AFD5, radius 2px",
+      "token": null
+    }
+  ],
+  "capturedNotes": [
+    "Mobile/Hover Lozenge renders an extra icon glyph no other state has — likely an export artefact."
+  ],
+  "preview": {
+    "kind": "container",
+    "states": [
+      {
+        "label": "Closed",
+        "bg": "#fff",
+        "border": "1px solid #7F7F7F",
+        "radius": 4,
+        "w": 320,
+        "h": 70,
+        "sample": "Accordion detailed ⌃"
+      }
+    ]
+  }
+}

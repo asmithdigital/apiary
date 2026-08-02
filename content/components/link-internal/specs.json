@@ -1,0 +1,29 @@
+{
+  "name": "LinkInternal",
+  "groupKey": "actions",
+  "source": "src/imports/LinkInternal/index.tsx",
+  "summary": "A plain internal text link, no icon.",
+  "variantsRaw": "property1=Active|Default|Focus|Hover|Visited",
+  "tokenFindings": [
+    {
+      "field": "Colours",
+      "value": "Same system as LinkBack",
+      "token": null
+    },
+    {
+      "field": "Type",
+      "value": "National 2 · Regular · 14px · line-height 20px",
+      "token": null
+    }
+  ],
+  "capturedNotes": [],
+  "preview": {
+    "kind": "link",
+    "states": [
+      {
+        "label": "Default",
+        "text": "#00349F"
+      }
+    ]
+  }
+}

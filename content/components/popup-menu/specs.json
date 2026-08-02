@@ -1,0 +1,41 @@
+{
+  "name": "PopupMenu",
+  "groupKey": "overlays",
+  "source": "src/imports/PopupMenu/index.tsx",
+  "summary": "A fixed live-chat/call contact popup with a speech-bubble caret shape.",
+  "variantsRaw": "No props — fixed content",
+  "tokenFindings": [
+    {
+      "field": "Size",
+      "value": "350×261px",
+      "token": null
+    },
+    {
+      "field": "Live chat border",
+      "value": "#B3B3B3",
+      "token": null
+    },
+    {
+      "field": "Call border",
+      "value": "#000000",
+      "token": "color-ink",
+      "unconfirmed": true,
+      "note": "Two adjacent, similar option cards use different border colours — real inconsistency."
+    }
+  ],
+  "capturedNotes": [],
+  "preview": {
+    "kind": "container",
+    "states": [
+      {
+        "label": "Default",
+        "bg": "#fff",
+        "border": "1px solid #B3B3B3",
+        "radius": 4,
+        "w": 280,
+        "h": 160,
+        "sample": "Need help?"
+      }
+    ]
+  }
+}

@@ -1,0 +1,85 @@
+{
+  "name": "TextFieldRegular",
+  "groupKey": "forms",
+  "source": "src/imports/TextFieldRegular/index.tsx",
+  "summary": "A single-line text input with optional left/right icon.",
+  "variantsRaw": "icon=Left|None|Right · state=Default|Disabled|Focus|Hover|Invalid|Valid|Value",
+  "tokenFindings": [
+    {
+      "field": "Border (Default)",
+      "value": "1px solid #7F7F7F",
+      "token": "color-border-default"
+    },
+    {
+      "field": "Border (Hover)",
+      "value": "1px solid #000000",
+      "token": "color-ink"
+    },
+    {
+      "field": "Border (Focus)",
+      "value": "1px solid #0D59FF + box-shadow 0 0 0 3px rgba(13,89,255,0.2)",
+      "token": "color-focus"
+    },
+    {
+      "field": "Border (Valid)",
+      "value": "1px solid #009923",
+      "token": "color-success"
+    },
+    {
+      "field": "Border (Invalid)",
+      "value": "1px solid #E60E22",
+      "token": "color-error"
+    },
+    {
+      "field": "Border (Disabled)",
+      "value": "1px solid #CCCCCC, bg rgba(0,0,0,0.05)",
+      "token": "color-border-disabled"
+    },
+    {
+      "field": "Padding",
+      "value": "12px",
+      "token": "spacing-sm"
+    },
+    {
+      "field": "Corner radius",
+      "value": "4px",
+      "token": null
+    },
+    {
+      "field": "Container width",
+      "value": "240px",
+      "token": null
+    },
+    {
+      "field": "Type",
+      "value": "National 2 · Regular · 14px · line-height 20px",
+      "token": null
+    }
+  ],
+  "capturedNotes": [],
+  "preview": {
+    "kind": "field",
+    "states": [
+      {
+        "label": "Default",
+        "border": "1px solid #7F7F7F",
+        "sample": "Placeholder"
+      },
+      {
+        "label": "Focus",
+        "border": "1px solid #0D59FF",
+        "sample": "Value"
+      },
+      {
+        "label": "Valid",
+        "border": "1px solid #009923",
+        "sample": "Field validation successful."
+      },
+      {
+        "label": "Invalid",
+        "border": "1px solid #E60E22",
+        "sample": "This field is invalid."
+      }
+    ]
+  }
+}

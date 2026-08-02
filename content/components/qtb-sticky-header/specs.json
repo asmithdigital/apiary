@@ -1,0 +1,35 @@
+{
+  "name": "QtbStickyHeader",
+  "groupKey": "journey",
+  "source": "src/imports/QtbStickyHeader/index.tsx",
+  "summary": "The sticky price bar for the Quote-to-Buy flow, with a live \"saving\" indicator.",
+  "variantsRaw": "property1=Desktop|Mobile|Tablet",
+  "tokenFindings": [
+    {
+      "field": "Background",
+      "value": "rgba(255,255,255,0.92), backdrop-blur 2px",
+      "token": null
+    },
+    {
+      "field": "Button",
+      "value": "bg #FFE600",
+      "token": "color-brand-primary"
+    }
+  ],
+  "capturedNotes": [],
+  "preview": {
+    "kind": "container",
+    "states": [
+      {
+        "label": "Desktop",
+        "bg": "rgba(255,255,255,0.92)",
+        "border": "1px solid #000",
+        "radius": 4,
+        "w": 320,
+        "h": 60,
+        "shadow": "0px 12px 24px rgba(0,0,0,0.1)",
+        "sample": "$39/month   Continue"
+      }
+    ]
+  }
+}

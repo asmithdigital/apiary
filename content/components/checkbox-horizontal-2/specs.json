@@ -1,0 +1,50 @@
+{
+  "name": "CheckboxHorizontal-2",
+  "groupKey": "forms",
+  "source": "src/imports/CheckboxHorizontal-2/index.tsx",
+  "summary": "A compact 8-state checkbox card used in FormRowCheckbox groups.",
+  "variantsRaw": "state=Default|Hover|Focus|Pressed|Disabled Unchecked|Disabled Checked|Selected|Invalid",
+  "tokenFindings": [
+    {
+      "field": "Background (Default/Hover/Focus)",
+      "value": "#FFFFFF",
+      "token": "color-surface"
+    },
+    {
+      "field": "Background (Selected)",
+      "value": "#E6F1F0",
+      "token": null
+    },
+    {
+      "field": "Border (Default)",
+      "value": "1px solid #7F7F7F",
+      "token": "color-border-default"
+    },
+    {
+      "field": "Border (Selected)",
+      "value": "1px solid #007064",
+      "token": "color-selected"
+    },
+    {
+      "field": "Border (Invalid)",
+      "value": "1px solid #E60E22",
+      "token": "color-error"
+    }
+  ],
+  "capturedNotes": [
+    "The Selected state does not visually render a checked checkbox mark in the code — only the border and background change. Real inconsistency vs CheckboxBasic's filled check state."
+  ],
+  "preview": {
+    "kind": "container",
+    "states": [
+      {
+        "label": "Selected",
+        "bg": "#E6F1F0",
+        "border": "1px solid #007064",
+        "radius": 4,
+        "w": 140,
+        "h": 60
+      }
+    ]
+  }
+}

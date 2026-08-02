@@ -1,0 +1,32 @@
+{
+  "name": "Helper",
+  "groupKey": "content",
+  "source": "src/imports/Helper/index.tsx",
+  "summary": "The RAA Helper character avatar, 5 sizes.",
+  "variantsRaw": "size=XS 32|SM 48|MD 64|LG 80|XL 96",
+  "tokenFindings": [
+    {
+      "field": "Background disc",
+      "value": "#9678D2",
+      "token": null
+    },
+    {
+      "field": "Character",
+      "value": "shirt/headset #FFE600, hair black, neck/head white",
+      "token": "color-brand-primary"
+    }
+  ],
+  "capturedNotes": [],
+  "preview": {
+    "kind": "button",
+    "states": [
+      {
+        "label": "MD 64",
+        "bg": "#9678D2",
+        "radius": 999,
+        "padding": "24px",
+        "sample": "🙂"
+      }
+    ]
+  }
+}

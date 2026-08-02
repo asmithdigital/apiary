@@ -1,0 +1,65 @@
+{
+  "name": "Badge",
+  "groupKey": "feedback",
+  "source": "src/imports/Badge/index.tsx",
+  "summary": "A small status marker, 8 types, corner radius 9px.",
+  "variantsRaw": "type=Default|Important|Primary|Changed|Added|Removed|Positive|Reversed",
+  "tokenFindings": [
+    {
+      "field": "Important",
+      "value": "#9F2241, text white",
+      "token": null
+    },
+    {
+      "field": "Primary",
+      "value": "#FFE600, text black",
+      "token": "color-brand-primary"
+    },
+    {
+      "field": "Added",
+      "value": "#E6F1F0, text #007064",
+      "token": "color-selected"
+    },
+    {
+      "field": "Removed",
+      "value": "rgba(159,34,65,0.1), text #9F2241",
+      "token": null
+    },
+    {
+      "field": "Padding",
+      "value": "6px horizontal",
+      "token": "spacing-xs"
+    },
+    {
+      "field": "Corner radius",
+      "value": "9px",
+      "token": null
+    }
+  ],
+  "capturedNotes": [],
+  "preview": {
+    "kind": "button",
+    "states": [
+      {
+        "label": "Primary",
+        "bg": "#FFE600",
+        "radius": 9,
+        "padding": "2px 6px"
+      },
+      {
+        "label": "Important",
+        "bg": "#9F2241",
+        "text": "#fff",
+        "radius": 9,
+        "padding": "2px 6px"
+      },
+      {
+        "label": "Added",
+        "bg": "#E6F1F0",
+        "text": "#007064",
+        "radius": 9,
+        "padding": "2px 6px"
+      }
+    ]
+  }
+}

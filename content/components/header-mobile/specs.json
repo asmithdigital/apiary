@@ -1,0 +1,33 @@
+{
+  "name": "HeaderMobile",
+  "groupKey": "journey",
+  "source": "src/imports/HeaderMobile/index.tsx",
+  "summary": "The mobile site header with a hamburger menu and Claims-specific open/close states.",
+  "variantsRaw": "property2=Claims|Default|Default+Menu|Claims+Open",
+  "tokenFindings": [
+    {
+      "field": "Menu button",
+      "value": "56×56px",
+      "token": null
+    },
+    {
+      "field": "Bottom divider (Claims)",
+      "value": "inset shadow rgba(0,0,0,0.1)",
+      "token": null
+    }
+  ],
+  "capturedNotes": [],
+  "preview": {
+    "kind": "container",
+    "states": [
+      {
+        "label": "Default",
+        "bg": "#fff",
+        "radius": 0,
+        "w": 260,
+        "h": 48,
+        "sample": "RAA        ☰"
+      }
+    ]
+  }
+}

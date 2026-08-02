@@ -1,0 +1,33 @@
+{
+  "name": "LinkInformation",
+  "groupKey": "actions",
+  "source": "src/imports/LinkInformation/index.tsx",
+  "summary": "An inline link with a leading info-circle icon. Same colour system as LinkBack.",
+  "variantsRaw": "State=Active|Default|Focus|Hover|Visited",
+  "tokenFindings": [
+    {
+      "field": "Colours",
+      "value": "Same as LinkBack: Default #00349F, Hover #0D59FF, Active/Visited #441FCC, Focus bg #0D59FF text white",
+      "token": "color-link / color-focus / color-visited"
+    },
+    {
+      "field": "Corner radius (non-Focus)",
+      "value": "18px",
+      "token": null
+    }
+  ],
+  "capturedNotes": [],
+  "preview": {
+    "kind": "link",
+    "states": [
+      {
+        "label": "Default",
+        "text": "#00349F"
+      },
+      {
+        "label": "Hover",
+        "text": "#0D59FF"
+      }
+    ]
+  }
+}
