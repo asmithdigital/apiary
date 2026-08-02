@@ -1,0 +1,30 @@
+{
+  "name": "NavigationSideAccordionMenu",
+  "groupKey": "navigation",
+  "source": "src/imports/NavigationSideAccordionMenu/index.tsx",
+  "summary": "The expand/collapse wrapper combining a parent nav item with its children.",
+  "variantsRaw": "property1=open|closed · state=Default|Active",
+  "tokenFindings": [
+    {
+      "field": "Open bg",
+      "value": "#F3F0E8",
+      "token": null
+    }
+  ],
+  "capturedNotes": [
+    "Open/Default wraps children in a plain <div>, but Open/Active and both Closed states use a real <button> — inconsistent interactive semantics."
+  ],
+  "preview": {
+    "kind": "container",
+    "states": [
+      {
+        "label": "Open",
+        "bg": "#F3F0E8",
+        "radius": 4,
+        "w": 220,
+        "h": 140,
+        "sample": "Menu + children"
+      }
+    ]
+  }
+}

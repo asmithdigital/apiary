@@ -1,0 +1,41 @@
+{
+  "name": "TileCoverLevel",
+  "groupKey": "cards",
+  "source": "src/imports/TileCoverLevelDesktop/index.tsx + TileCoverLevelMobile/index.tsx",
+  "summary": "A featured cover-level tile with icon list and price footer. Desktop and Mobile were separate frames — merged as one component's two layouts.",
+  "variantsRaw": "layout=Desktop|Mobile",
+  "tokenFindings": [
+    {
+      "field": "Border",
+      "value": "1px solid #000000",
+      "token": null
+    },
+    {
+      "field": "Tagline colour",
+      "value": "#9678D2",
+      "token": null
+    },
+    {
+      "field": "Button",
+      "value": "bg #FFE600",
+      "token": null
+    }
+  ],
+  "capturedNotes": [
+    "Desktop centres the price block; Mobile aligns amount+unit horizontally with the secondary line below — genuinely different layouts, not just a resize."
+  ],
+  "preview": {
+    "kind": "container",
+    "states": [
+      {
+        "label": "Desktop",
+        "bg": "#fff",
+        "border": "1px solid #000",
+        "radius": 4,
+        "w": 260,
+        "h": 220,
+        "sample": "Premium tile"
+      }
+    ]
+  }
+}

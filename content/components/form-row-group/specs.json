@@ -1,0 +1,37 @@
+{
+  "name": "Form Row family",
+  "groupKey": "journey",
+  "source": "FormRowInputs, FormRowSelect, FormRowRadio, FormRowCheckbox, FormRowButton, FormRowTitle, FormRowTile",
+  "summary": "Seven layout wrappers that arrange the real form components above into 1–6 column rows for journey pages. Merged into one entry since they're layout containers, not distinct visual components.",
+  "variantsRaw": "columns=01|02|03|04|05|06 (varies by wrapper)",
+  "tokenFindings": [
+    {
+      "field": "Column widths",
+      "value": "consistent step scale: 91 / 206 / 321 / 436 / 551px per added column",
+      "token": null
+    },
+    {
+      "field": "Row gap",
+      "value": "24px",
+      "token": null
+    }
+  ],
+  "capturedNotes": [
+    "FormRowInputs shows an error state by default in its 2-column example; FormRowSelect shows no error state at all — inconsistent example coverage, not necessarily a real API gap.",
+    "FormRowButton and JourneyFooter both duplicate the full Button component inline."
+  ],
+  "preview": {
+    "kind": "container",
+    "states": [
+      {
+        "label": "3 columns",
+        "bg": "#fff",
+        "border": "none",
+        "radius": 0,
+        "w": 320,
+        "h": 60,
+        "sample": "[field] [field] [field]"
+      }
+    ]
+  }
+}

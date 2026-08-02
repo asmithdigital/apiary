@@ -1,0 +1,41 @@
+{
+  "name": "Tooltip",
+  "groupKey": "feedback",
+  "source": "src/imports/Tooltip/index.tsx",
+  "summary": "A black tooltip with a single-path arrow reused and rotated for all 4 directions.",
+  "variantsRaw": "arrow=Bottom|Left|Right|Top",
+  "tokenFindings": [
+    {
+      "field": "Background",
+      "value": "#000000, radius 2px",
+      "token": null
+    },
+    {
+      "field": "Text",
+      "value": "National 2 · Regular · 12px, white, centred",
+      "token": null
+    },
+    {
+      "field": "Size",
+      "value": "198×76px",
+      "token": null
+    }
+  ],
+  "capturedNotes": [
+    "All four arrow directions reuse one SVG path and rotate it via CSS rather than four distinct shapes."
+  ],
+  "preview": {
+    "kind": "container",
+    "states": [
+      {
+        "label": "Top",
+        "bg": "#000",
+        "text": "#fff",
+        "radius": 2,
+        "w": 200,
+        "h": 60,
+        "sample": "Tooltip text"
+      }
+    ]
+  }
+}

@@ -1,0 +1,11 @@
+/* Base resets and typography — applies everywhere. */
+html, body { margin: 0; padding: 0; font-size: var(--text-base); }
+* { box-sizing: border-box; }
+body { font-family: var(--font-body); color: #000; }
+button, input, select { font-family: inherit; }
+
+.apy-app-shell { display: flex; flex-direction: column; height: 100vh; background: var(--color-white); font-family: var(--font-body); color: #000; }
+.apy-home-wrap { font-family: var(--font-body); color: #000; }
+
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.15); border-radius: 3px; }

@@ -1,0 +1,17 @@
+/* App shell layout — the sidebar/topbar/content-column structure. */
+.apy-topbar { height: 72px; flex-shrink: 0; display: flex; align-items: center; padding: 0 24px; gap: 20px; border-bottom: 1px solid var(--color-line); background: rgba(255,255,255,0.85); backdrop-filter: blur(8px); position: sticky; top: 0; z-index: 30; }
+.apy-topbar-logo { display: flex; align-items: center; gap: 8px; background: none; border: none; cursor: pointer; }
+.apy-topbar-logo span { font-size: var(--text-lg); font-weight: 800; letter-spacing: -0.01em; }
+
+.apy-body-row { flex: 1; display: flex; overflow: hidden; }
+.apy-content-scroll { flex: 1; overflow-y: auto; }
+
+.apy-gray-band { background: #FFFFFF; padding: 36px 40px; border-bottom: 1px solid var(--color-line); }
+.apy-gray-band-inner { max-width: var(--content-max); margin: 0 auto; }
+.apy-gray-band-title-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.apy-gray-band h1 { font-size: var(--text-2xl); font-weight: 800; color: #000; margin: 0; letter-spacing: -0.01em; font-family: var(--font-display); }
+.apy-gray-band-desc { font-size: var(--text-md); color: var(--color-body); margin-top: 8px; max-width: 680px; line-height: 1.6; }
+
+.apy-content-col { padding: 0 40px; }
+.apy-content-col-inner { display: flex; max-width: var(--content-max); margin: 0 auto; }
+.apy-content-main { flex: 1; padding: 28px 0; max-width: 720px; }

@@ -1,0 +1,38 @@
+{
+  "name": "RadioTile",
+  "groupKey": "forms",
+  "source": "src/imports/RadioTile/index.tsx",
+  "summary": "A square icon+label tile radio, used inside FormRowTile groups.",
+  "variantsRaw": "state=Active|Default|Focus|Hover|Pressed|Selected|Invalid|Disabled Selected|Disabled Unselected",
+  "tokenFindings": [
+    {
+      "field": "Tile width",
+      "value": "180px",
+      "token": null
+    },
+    {
+      "field": "Background (Selected)",
+      "value": "#E6F1F0, border #007064",
+      "token": null
+    },
+    {
+      "field": "Icon placeholder",
+      "value": "48×48px, rgba(0,0,0,0.1)",
+      "token": null
+    }
+  ],
+  "capturedNotes": [],
+  "preview": {
+    "kind": "container",
+    "states": [
+      {
+        "label": "Selected",
+        "bg": "#E6F1F0",
+        "border": "1px solid #007064",
+        "radius": 4,
+        "w": 140,
+        "h": 120
+      }
+    ]
+  }
+}

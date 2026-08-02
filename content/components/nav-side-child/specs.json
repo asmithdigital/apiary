@@ -1,0 +1,35 @@
+{
+  "name": "NavigationSideMenuChild",
+  "groupKey": "navigation",
+  "source": "src/imports/NavigationSideMenuChild/index.tsx",
+  "summary": "A nested sidebar nav item.",
+  "variantsRaw": "property1=Default|Selected|Hover|Focus|Active",
+  "tokenFindings": [
+    {
+      "field": "Hover",
+      "value": "#EDE8DC",
+      "token": null
+    },
+    {
+      "field": "Selected indicator",
+      "value": "4px black bar",
+      "token": null
+    }
+  ],
+  "capturedNotes": [
+    "Default/Active/Hover states all render an invisible transparent spacer element — a leftover Figma artefact, not a real visual feature."
+  ],
+  "preview": {
+    "kind": "container",
+    "states": [
+      {
+        "label": "Selected",
+        "bg": "#EBE5D8",
+        "radius": 4,
+        "w": 200,
+        "h": 44,
+        "sample": "Sub item"
+      }
+    ]
+  }
+}
