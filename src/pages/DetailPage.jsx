@@ -5,7 +5,7 @@
    code. Where I don't have a real number, I say so rather than invent one.
 ============================================================================= */
 import { useState, useEffect } from "react";
-import { store, fetchJSON } from "../lib/store.js";
+import { store, fetchJSON, resolveUrl } from "../lib/store.js";
 import { fetchMarkdown } from "../lib/content.js";
 import { TabStrip, Section } from "../components/LayoutChrome.jsx";
 import { EditableMarkdown, EditableTitle } from "../components/Editable.jsx";
@@ -86,7 +86,7 @@ function ComponentTabsBody({ id, version }) {
                 {doc.meta.image && (
                   <>
                     <div className="apy-example-card" style={{ display: "flex", justifyContent: "center", marginBottom: 8 }}>
-                      <img src={`./content/components/${id}/${doc.meta.image}`} alt={`${specs.name} preview`} />
+                      <img src={resolveUrl(`./content/components/${id}/${doc.meta.image}`)} alt={`${specs.name} preview`} />
                     </div>
                     <p style={{ fontSize: 12, color: "var(--color-faint)", marginBottom: 32, fontStyle: "italic" }}>
                       Generated from real specs — swap in a real Figma export at <code>content/components/{id}/{doc.meta.image}</code> when ready.

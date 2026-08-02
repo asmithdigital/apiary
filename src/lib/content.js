@@ -6,6 +6,7 @@
 import Handlebars from "handlebars";
 import { marked } from "marked";
 import { APIARY_API } from "./config.js";
+import { resolveUrl } from "./store.js";
 
 export { fetchJSON } from "./store.js";
 
@@ -70,7 +71,7 @@ async function registerContentPartials() {
   const names = ["do-dont", "callout"];
   await Promise.all(
     names.map(async (name) => {
-      const res = await fetch(`./partials/templates/${name}.hbs`);
+      const res = await fetch(resolveUrl(`./partials/templates/${name}.hbs`));
       const source = await res.text();
       Handlebars.registerPartial(name, source);
     })
@@ -98,7 +99,7 @@ export async function fetchMarkdown(url) {
       // No real Worker configured yet (src/lib/config.js still has the
       // placeholder) — fall back to the plain static file, exactly like
       // Stage 1, so the site still works before Stage 2 is wired up.
-      const res = await fetch(url);
+      const res = await fetch(resolveUrl(url));
       if (!res.ok) throw new Error(`Failed to load ${url}: ${res.status}`);
       raw = await res.text();
     }

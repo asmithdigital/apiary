@@ -9,8 +9,21 @@ export const store = {
   R: null,
 };
 
+// Relative fetches like "./content/x.json" resolve against the CURRENT
+// DOCUMENT URL, not against where the app is actually deployed — if
+// someone visits the site without a trailing slash (e.g. ".../apiary"
+// instead of ".../apiary/"), the browser drops the last path segment and
+// "./content/x.json" 404s. Resolving against import.meta.env.BASE_URL
+// (Vite's configured deploy base) instead makes every fetch work
+// regardless of the URL's trailing slash.
+export function resolveUrl(path) {
+  const clean = path.replace(/^\.\//, "");
+  const base = import.meta.env.BASE_URL.endsWith("/") ? import.meta.env.BASE_URL : import.meta.env.BASE_URL + "/";
+  return base + clean;
+}
+
 export async function fetchJSON(url) {
-  const res = await fetch(url);
+  const res = await fetch(resolveUrl(url));
   if (!res.ok) throw new Error(`Failed to load ${url}: ${res.status}`);
   return res.json();
 }
