@@ -1,20 +1,26 @@
 /* =============================================================================
-   PARTIAL: header — the top bar with the logo and search box. Edit this
-   file to change the header itself; edit css/sidebar.css (.apy-topbar,
+   COMPONENT: Header — the top bar with the logo and search box. Edit this
+   file to change the header itself; edit styles/_sidebar.scss (.apy-topbar,
    .apy-search-*) to restyle it.
 ============================================================================= */
-function Header({ onNavigate }) {
+import { useState, useMemo } from "react";
+import { store } from "../lib/store.js";
+import { Mark } from "./PreviewEngine.jsx";
+import { AuthButton } from "./Editable.jsx";
+
+export function Header({ onNavigate }) {
   const [query, setQuery] = useState("");
   const results = useMemo(() => {
     if (!query.trim()) return [];
     const q = query.toLowerCase();
-    return NAV.components.filter((c) => c.name.toLowerCase().includes(q)).slice(0, 8);
+    return store.NAV.components.filter((c) => c.name.toLowerCase().includes(q)).slice(0, 8);
   }, [query]);
 
   return (
     <div className="apy-topbar">
       <button onClick={() => onNavigate({ kind: "home" })} className="apy-topbar-logo">
-        <Mark /><span>Apiary</span>
+        <Mark />
+        <span>Apiary</span>
       </button>
       <div className="apy-search-wrap">
         <input
@@ -26,7 +32,14 @@ function Header({ onNavigate }) {
         {results.length > 0 && (
           <div className="apy-search-results">
             {results.map((r) => (
-              <button key={r.id} onClick={() => { setQuery(""); onNavigate({ kind: "component", ref: r }); }} className="apy-search-result">
+              <button
+                key={r.id}
+                onClick={() => {
+                  setQuery("");
+                  onNavigate({ kind: "component", ref: r });
+                }}
+                className="apy-search-result"
+              >
                 {r.name}
               </button>
             ))}

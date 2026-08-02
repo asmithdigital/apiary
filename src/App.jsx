@@ -1,10 +1,14 @@
-// Populated once by boot() below, before APIary ever renders. Everything
-// that reads these does so inside a render or effect — never at the
-// top of a file — so there's no chance of reading them before they exist.
-let NAV = null;
-let MANIFEST = null;
+import { useState, useEffect } from "react";
+import { store } from "./lib/store.js";
+import { Header } from "./components/Header.jsx";
+import { Sidebar } from "./components/Sidebar.jsx";
+import { HomePage } from "./pages/HomePage.jsx";
+import { GetStartedPage } from "./pages/GetStartedPage.jsx";
+import { FoundationsPage } from "./pages/FoundationsPage.jsx";
+import { DetailPage, FamilyPage } from "./pages/DetailPage.jsx";
 
 function parseHash() {
+  const NAV = store.NAV;
   const h = window.location.hash.replace(/^#\/?/, "");
   const [kind, ref] = h.split("/").map(decodeURIComponent);
   if (!kind || kind === "home") return { kind: "home" };
@@ -28,7 +32,7 @@ function encodeHash(page) {
   return "#/";
 }
 
-function APIary() {
+export default function App() {
   const [page, setPage] = useState(() => parseHash());
   const navigate = (target) => {
     const next = ["foundation", "component", "getstarted", "family"].includes(target.kind) ? target : { kind: target.kind };
@@ -43,7 +47,11 @@ function APIary() {
   }, []);
 
   if (page.kind === "home") {
-    return <div className="apy-home-wrap"><HomePage navigate={navigate} /></div>;
+    return (
+      <div className="apy-home-wrap">
+        <HomePage navigate={navigate} />
+      </div>
+    );
   }
   return (
     <div className="apy-app-shell">
@@ -51,8 +59,8 @@ function APIary() {
       <div className="apy-body-row">
         <Sidebar page={page} navigate={navigate} />
         <div className="apy-content-scroll">
-          {page.kind === "getstarted" && <GetStartedPage pageKey={page.ref} pageLabel={NAV.getStartedLabels[page.ref]} navigate={navigate} />}
-          {page.kind === "foundation" && <FoundationsPage foundationKey={page.ref} foundationLabel={NAV.foundationLabels[page.ref]} />}
+          {page.kind === "getstarted" && <GetStartedPage pageKey={page.ref} pageLabel={store.NAV.getStartedLabels[page.ref]} navigate={navigate} />}
+          {page.kind === "foundation" && <FoundationsPage foundationKey={page.ref} foundationLabel={store.NAV.foundationLabels[page.ref]} />}
           {page.kind === "component" && <DetailPage id={page.ref.id} name={page.ref.name} />}
           {page.kind === "family" && <FamilyPage family={page.ref} />}
         </div>
@@ -60,22 +68,3 @@ function APIary() {
     </div>
   );
 }
-
-async function boot() {
-  const root = document.getElementById("root");
-  root.innerHTML = '<div style="font-family:Inter,sans-serif;padding:60px;color:#64748B">Loading real data…</div>';
-  try {
-    const [nav, manifest, r] = await Promise.all([
-      fetchJSON("./content/nav.json"),
-      fetchJSON("./content/manifest.json"),
-      fetchJSON("./content/R.json"),
-    ]);
-    NAV = nav; MANIFEST = manifest; R = r;
-    ReactDOM.createRoot(root).render(<APIary />);
-  } catch (err) {
-    root.innerHTML = `<div style="font-family:Inter,sans-serif;padding:60px;color:#DC2626">Failed to load real data: ${err.message}. Check /content/ files exist and this is served over http(s), not file://.</div>`;
-  }
-}
-
-if (window.__bootReady) boot();
-else window.addEventListener("apiary-boot-ready", boot);
