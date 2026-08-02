@@ -31,18 +31,21 @@
 .apy-prose .apy-deflist dt:first-child { margin-top: 0; }
 .apy-prose .apy-deflist dd { margin: 4px 0 0; font-size: 14px; color: var(--color-body); line-height: 1.7; padding-left: 14px; border-left: 2px solid var(--color-line); }
 
-.apy-prose .apy-do-dont-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 16px 0; }
-.apy-prose .apy-do-dont-grid .apy-do, .apy-prose .apy-do-dont-grid .apy-dont { margin: 0; }
-@media (max-width: 640px) { .apy-prose .apy-do-dont-grid { grid-template-columns: 1fr; } }
-
-.apy-prose .apy-do { border: 2px solid var(--color-success-border); background: #ECFDF599; border-radius: 16px; padding: 20px; margin: 16px 0; }
-.apy-prose .apy-do strong { display: inline-flex; align-items: center; gap: 6px; color: var(--color-success-text); text-transform: uppercase; font-size: 12px; letter-spacing: 0.06em; font-weight: 700; }
-.apy-prose .apy-do strong::before { content: "✓"; display: inline-flex; align-items: center; justify-content: center; width: 16px; height: 16px; border-radius: 50%; background: var(--color-success-text); color: #fff; font-size: 10px; }
-.apy-prose .apy-dont { border: 2px solid var(--color-danger-border); background: #FEF2F299; border-radius: 16px; padding: 20px; margin: 16px 0; }
-.apy-prose .apy-dont strong { display: inline-flex; align-items: center; gap: 6px; color: var(--color-danger-text); text-transform: uppercase; font-size: 12px; letter-spacing: 0.06em; font-weight: 700; }
-.apy-prose .apy-dont strong::before { content: "✕"; display: inline-flex; align-items: center; justify-content: center; width: 16px; height: 16px; border-radius: 50%; background: var(--color-danger-text); color: #fff; font-size: 10px; }
-.apy-prose .apy-warn { border: 1px solid var(--color-warn-border); background: var(--color-warn-bg); border-radius: 8px; padding: 14px 18px; margin: 16px 0; }
-.apy-prose .apy-warn strong { color: var(--color-warn-text); text-transform: uppercase; font-size: 13px; letter-spacing: 0.04em; }
+.apy-prose .apy-do-dont-grid { display: flex; gap: 32px; margin: 20px 0; }
+.apy-prose .apy-do, .apy-prose .apy-dont { flex: 1; }
+.apy-prose .apy-do h4, .apy-prose .apy-dont h4 { display: flex; align-items: center; gap: 6px; font-size: 16px; font-weight: 653; margin: 0 0 8px; font-family: var(--font-display); }
+.apy-prose .apy-do h4 { color: var(--color-ink); }
+.apy-prose .apy-do h4 svg { color: #6A9A23; }
+.apy-prose .apy-dont h4 { color: var(--color-ink); }
+.apy-prose .apy-dont h4 svg { color: #C9372C; }
+.apy-prose .apy-do ul, .apy-prose .apy-dont ul { margin: 0; }
+@media (max-width: 640px) { .apy-prose .apy-do-dont-grid { flex-direction: column; gap: 20px; } }
+.apy-prose .apy-warn { margin: 20px 0; }
+.apy-prose .apy-warn h4 { display: flex; align-items: center; gap: 6px; font-size: 16px; font-weight: 653; margin: 0 0 8px; color: var(--color-ink); font-family: var(--font-display); }
+.apy-prose .apy-warn h4 svg { color: #B65C02; }
+.apy-prose .apy-success { margin: 20px 0; }
+.apy-prose .apy-success h4 { display: flex; align-items: center; gap: 6px; font-size: 16px; font-weight: 653; margin: 0 0 8px; color: var(--color-ink); font-family: var(--font-display); }
+.apy-prose .apy-success h4 svg { color: #6A9A23; }
 
 .apy-prose .apy-table { width: 100%; border-collapse: collapse; margin: 14px 0; font-size: var(--text-base); }
 .apy-prose .apy-table th { text-align: left; font-size: 13px; text-transform: uppercase; color: var(--color-faint); padding: 8px 10px; border-bottom: 2px solid var(--color-line); }
