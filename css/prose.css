@@ -1,0 +1,58 @@
+/* Styling for rendered markdown content (real documentation, guidelines). */
+.apy-prose { font-size: var(--text-md); line-height: 1.8; color: var(--color-body); }
+
+/* Section headers get a coloured accent bar so the page has real rhythm
+   instead of every section looking identical. */
+.apy-prose h2 {
+  font-size: 15px; font-weight: 700; margin: 32px 0 14px; color: var(--color-ink);
+  text-transform: uppercase; letter-spacing: 0.06em; font-family: var(--font-mono);
+  padding-left: 12px; border-left: 3px solid var(--color-accent);
+  display: flex; align-items: center; height: 20px; gap: 6px;
+  position: relative;
+}
+.apy-prose h2::before {
+  content: "🔗"; font-size: 12px; opacity: 0; transition: opacity 120ms ease;
+  position: absolute; left: -20px;
+}
+.apy-prose h2:hover::before { opacity: 0.5; }
+.apy-prose h2:first-child { margin-top: 0; }
+.apy-prose p { margin: 0 0 14px; }
+.apy-prose strong { color: var(--color-ink); }
+.apy-prose blockquote { border-left: 3px solid var(--color-accent); background: var(--color-accent-tint); padding: 12px 16px; margin: 16px 0; border-radius: 0 6px 6px 0; }
+
+/* A clean divided list instead of plain browser-default bullets — real
+   content here ranges from short labels to full sentences, so this stays
+   readable either way rather than risking awkward oversized "chips". */
+.apy-prose ul { margin: 0 0 20px; padding: 0; list-style: none; }
+.apy-prose li {
+  padding: 10px 0 10px 22px; border-bottom: 1px solid #F1F5F9; position: relative; font-size: 14px;
+}
+.apy-prose li::before { content: "—"; position: absolute; left: 0; color: var(--color-accent); font-weight: 700; }
+.apy-prose li:last-child { border-bottom: none; }
+
+/* "Content guidelines"-style titled items — a real definition list, not
+   plain bold-then-dash paragraphs. */
+.apy-prose .apy-deflist { margin: 0 0 20px; }
+.apy-prose .apy-deflist dt { font-size: 14px; font-weight: 700; color: var(--color-ink); margin-top: 16px; }
+.apy-prose .apy-deflist dt:first-child { margin-top: 0; }
+.apy-prose .apy-deflist dd { margin: 4px 0 0; font-size: 14px; color: var(--color-body); line-height: 1.7; padding-left: 14px; border-left: 2px solid var(--color-line); }
+
+.apy-prose .apy-do-dont-grid { display: flex; gap: 32px; margin: 20px 0; }
+.apy-prose .apy-do, .apy-prose .apy-dont { flex: 1; }
+.apy-prose .apy-do h4, .apy-prose .apy-dont h4 { display: flex; align-items: center; gap: 6px; font-size: 16px; font-weight: 653; margin: 0 0 8px; font-family: var(--font-display); }
+.apy-prose .apy-do h4 { color: var(--color-ink); }
+.apy-prose .apy-do h4 svg { color: #6A9A23; }
+.apy-prose .apy-dont h4 { color: var(--color-ink); }
+.apy-prose .apy-dont h4 svg { color: #C9372C; }
+.apy-prose .apy-do ul, .apy-prose .apy-dont ul { margin: 0; }
+@media (max-width: 640px) { .apy-prose .apy-do-dont-grid { flex-direction: column; gap: 20px; } }
+.apy-prose .apy-warn { margin: 20px 0; }
+.apy-prose .apy-warn h4 { display: flex; align-items: center; gap: 6px; font-size: 16px; font-weight: 653; margin: 0 0 8px; color: var(--color-ink); font-family: var(--font-display); }
+.apy-prose .apy-warn h4 svg { color: #B65C02; }
+.apy-prose .apy-success { margin: 20px 0; }
+.apy-prose .apy-success h4 { display: flex; align-items: center; gap: 6px; font-size: 16px; font-weight: 653; margin: 0 0 8px; color: var(--color-ink); font-family: var(--font-display); }
+.apy-prose .apy-success h4 svg { color: #6A9A23; }
+
+.apy-prose .apy-table { width: 100%; border-collapse: collapse; margin: 14px 0; font-size: var(--text-base); }
+.apy-prose .apy-table th { text-align: left; font-size: 13px; text-transform: uppercase; color: var(--color-faint); padding: 8px 10px; border-bottom: 2px solid var(--color-line); }
+.apy-prose .apy-table td { padding: 8px 10px; border-bottom: 1px solid #F1F5F9; }
