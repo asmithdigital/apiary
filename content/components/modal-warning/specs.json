@@ -13,7 +13,7 @@
     {
       "field": "Header icon",
       "value": "exclamation-triangle, 24px",
-      "token": null
+      "token": "spacing-md"
     }
   ],
   "capturedNotes": [

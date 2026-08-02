@@ -8,7 +8,7 @@
     {
       "field": "Border",
       "value": "1px solid #000000",
-      "token": null
+      "token": "color-ink"
     },
     {
       "field": "Corner radius (image)",

@@ -103,8 +103,8 @@ function TokensPage() {
   return (
     <div>
       {tokens._meta?.note && (
-        <div style={{ borderLeft: "3px solid var(--color-warn-border)", background: "var(--color-warn-bg)", padding: "12px 16px", fontSize: 14, color: "var(--color-body)", lineHeight: 1.6, marginBottom: 24, borderRadius: "0 8px 8px 0" }}>
-          <strong style={{ color: "var(--color-warn-text)" }}>PROVISIONAL — </strong>{tokens._meta.note}
+        <div style={{ borderLeft: "3px solid var(--color-success-border)", background: "var(--color-success-bg)", padding: "12px 16px", fontSize: 14, color: "var(--color-body)", lineHeight: 1.6, marginBottom: 24, borderRadius: "0 8px 8px 0" }}>
+          <strong style={{ color: "var(--color-success-text)" }}>Real RAA data — </strong>{tokens._meta.note}
         </div>
       )}
       {Object.entries(tokens).filter(([k]) => k !== "_meta").map(([category, entries]) => (

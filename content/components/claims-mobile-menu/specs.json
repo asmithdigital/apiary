@@ -8,12 +8,12 @@
     {
       "field": "Completed",
       "value": "circle fill #007064, check white",
-      "token": null
+      "token": "color-selected"
     },
     {
       "field": "Active",
       "value": "circle fill #FFE600 with soft glow",
-      "token": null
+      "token": "color-brand-primary"
     },
     {
       "field": "Inactive",

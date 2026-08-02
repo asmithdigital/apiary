@@ -8,12 +8,12 @@
     {
       "field": "Padding in container",
       "value": "24px",
-      "token": null
+      "token": "spacing-md"
     },
     {
       "field": "Gap between elements",
       "value": "24px",
-      "token": null
+      "token": "spacing-md"
     }
   ],
   "capturedNotes": [],

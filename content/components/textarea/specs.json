@@ -23,37 +23,37 @@
     {
       "field": "Border (Default)",
       "value": "1px solid #7F7F7F",
-      "token": null
+      "token": "color-border-default"
     },
     {
       "field": "Border (Focus)",
       "value": "1px solid #0D59FF + shadow",
-      "token": null
+      "token": "color-focus"
     },
     {
       "field": "Border (Valid)",
       "value": "1px solid #009923",
-      "token": null
+      "token": "color-success"
     },
     {
       "field": "Border (Invalid)",
       "value": "1px solid #E60E22",
-      "token": null
+      "token": "color-error"
     },
     {
       "field": "Description (Valid)",
       "value": "\"Field validation successful.\", #009923",
-      "token": null
+      "token": "color-success"
     },
     {
       "field": "Description (Invalid)",
       "value": "\"This is a required field\", #E60E22",
-      "token": null
+      "token": "color-error"
     },
     {
       "field": "Character counter",
       "value": "\"000/000\", #7F7F7F, right-aligned",
-      "token": null
+      "token": "color-border-default"
     }
   ],
   "capturedNotes": [

@@ -8,12 +8,12 @@
     {
       "field": "Primary button",
       "value": "bg #FFE600, radius 4px",
-      "token": null
+      "token": "color-brand-primary"
     },
     {
       "field": "Divider",
       "value": "1px, #000000, full width",
-      "token": null
+      "token": "color-ink"
     }
   ],
   "capturedNotes": [

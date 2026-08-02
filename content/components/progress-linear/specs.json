@@ -8,12 +8,12 @@
     {
       "field": "Track",
       "value": "rgba(0,0,0,0.1)",
-      "token": null
+      "token": "color-divider"
     },
     {
       "field": "Fill",
       "value": "#007064",
-      "token": null
+      "token": "color-selected"
     },
     {
       "field": "Hover tooltip",

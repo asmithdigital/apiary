@@ -8,12 +8,12 @@
     {
       "field": "Shadow",
       "value": "0px 6px 30px 5px rgba(0,0,0,0.12), 0px 16px 24px 2px rgba(0,0,0,0.14)",
-      "token": null
+      "token": "spacing-xs / spacing-md"
     },
     {
       "field": "Padding",
       "value": "24px, gap 24px",
-      "token": null
+      "token": "spacing-md"
     }
   ],
   "capturedNotes": [],

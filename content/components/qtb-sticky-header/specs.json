@@ -13,7 +13,7 @@
     {
       "field": "Button",
       "value": "bg #FFE600",
-      "token": null
+      "token": "color-brand-primary"
     }
   ],
   "capturedNotes": [],

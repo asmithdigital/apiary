@@ -8,17 +8,17 @@
     {
       "field": "Row backgrounds",
       "value": "#F9F7F2 (S230) / #FFFFFF alternating",
-      "token": null
+      "token": "color-surface-warm-100 / color-surface"
     },
     {
       "field": "Divider",
       "value": "1px, #7F7F7F",
-      "token": null
+      "token": "color-border-default"
     },
     {
       "field": "Row item (nested)",
       "value": "bg rgba(0,0,0,0.03), border #999999",
-      "token": null
+      "token": "color-text-disabled"
     },
     {
       "field": "Lozenge in row",

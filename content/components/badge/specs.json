@@ -13,12 +13,12 @@
     {
       "field": "Primary",
       "value": "#FFE600, text black",
-      "token": null
+      "token": "color-brand-primary"
     },
     {
       "field": "Added",
       "value": "#E6F1F0, text #007064",
-      "token": null
+      "token": "color-selected"
     },
     {
       "field": "Removed",
@@ -28,7 +28,7 @@
     {
       "field": "Padding",
       "value": "6px horizontal",
-      "token": null
+      "token": "spacing-xs"
     },
     {
       "field": "Corner radius",

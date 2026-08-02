@@ -8,12 +8,12 @@
     {
       "field": "Background",
       "value": "#000000, radius 2px",
-      "token": null
+      "token": "color-ink"
     },
     {
       "field": "Text",
       "value": "National 2 · Regular · 12px, white, centred",
-      "token": null
+      "token": "spacing-sm"
     },
     {
       "field": "Size",

@@ -102,7 +102,6 @@ function ComponentTabsBody({ id, version }) {
                     <div className="apy-example-card" style={{ margin: "12px 0" }}>
                       <ComponentPreview item={{ ...specs, preview: { ...specs.preview, states: [s] } }} />
                     </div>
-                    <CopyableCode code={realCssFor(s)} />
                   </div>
                 ))}
               </Section>

@@ -13,17 +13,17 @@
     {
       "field": "Border (Default)",
       "value": "1px solid #7F7F7F",
-      "token": null
+      "token": "color-border-default"
     },
     {
       "field": "Border (Valid)",
       "value": "1px solid #009923",
-      "token": null
+      "token": "color-success"
     },
     {
       "field": "Border (Invalid)",
       "value": "1px solid #E60E22",
-      "token": null
+      "token": "color-error"
     },
     {
       "field": "Calendar popup",
@@ -33,7 +33,7 @@
     {
       "field": "Selected date",
       "value": "circle fill #0D59FF, text white",
-      "token": null
+      "token": "color-focus"
     }
   ],
   "capturedNotes": [],

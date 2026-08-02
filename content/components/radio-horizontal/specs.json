@@ -13,17 +13,17 @@
     {
       "field": "Border (Selected)",
       "value": "1px solid #007064",
-      "token": null
+      "token": "color-selected"
     },
     {
       "field": "Border (Invalid)",
       "value": "1px solid #E60E22",
-      "token": null
+      "token": "color-error"
     },
     {
       "field": "Padding",
       "value": "12px, gap 12px",
-      "token": null
+      "token": "spacing-sm"
     }
   ],
   "capturedNotes": [

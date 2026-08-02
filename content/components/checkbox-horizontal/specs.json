@@ -8,29 +8,29 @@
     {
       "field": "Background (on)",
       "value": "#E6F1F0, border #007064",
-      "token": null
+      "token": "color-selected"
     },
     {
       "field": "Background (off)",
       "value": "#FFFFFF, border #7F7F7F",
-      "token": null
+      "token": "color-surface / color-border-default"
     },
     {
       "field": "Toggle (on)",
       "value": "bg #007064, radius 19px",
-      "token": null
+      "token": "color-selected"
     },
     {
       "field": "Toggle (off)",
       "value": "bg #7F7F7F, radius 10px",
-      "token": null,
+      "token": "color-border-default",
       "unconfirmed": true,
       "note": "Same physical 40×20px toggle uses two different radii between states — likely a bug, both should read as a full pill."
     },
     {
       "field": "Padding",
       "value": "24px all sides",
-      "token": null
+      "token": "spacing-md"
     }
   ],
   "capturedNotes": [],

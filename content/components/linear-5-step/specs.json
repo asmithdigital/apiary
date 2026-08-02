@@ -8,7 +8,7 @@
     {
       "field": "Circle fill",
       "value": "#666666",
-      "token": null
+      "token": "color-text-muted"
     },
     {
       "field": "Connector tracks",

@@ -8,7 +8,7 @@
     {
       "field": "Hover/Active bg",
       "value": "#F9F7F2 family (warm grey)",
-      "token": null
+      "token": "color-surface-warm-100"
     },
     {
       "field": "Selected indicator",

@@ -8,12 +8,12 @@
     {
       "field": "Background",
       "value": "#FFFFFF",
-      "token": null
+      "token": "color-surface"
     },
     {
       "field": "\"Save and Exit\"/\"Log out\"",
       "value": "border 1px solid #000000",
-      "token": null
+      "token": "color-ink"
     }
   ],
   "capturedNotes": [],

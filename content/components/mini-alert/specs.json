@@ -13,7 +13,7 @@
     {
       "field": "Padding",
       "value": "12px vertical, 18px horizontal",
-      "token": null
+      "token": "spacing-sm"
     }
   ],
   "capturedNotes": [

@@ -13,7 +13,7 @@
     {
       "field": "Row gap",
       "value": "24px",
-      "token": null
+      "token": "spacing-md"
     }
   ],
   "capturedNotes": [

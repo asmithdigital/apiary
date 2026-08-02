@@ -13,7 +13,7 @@
     {
       "field": "Character",
       "value": "shirt/headset #FFE600, hair black, neck/head white",
-      "token": null
+      "token": "color-brand-primary"
     }
   ],
   "capturedNotes": [],

@@ -8,7 +8,7 @@
     {
       "field": "Background (Default/Hover/Focus)",
       "value": "#FFFFFF",
-      "token": null
+      "token": "color-surface"
     },
     {
       "field": "Background (Selected)",
@@ -18,17 +18,17 @@
     {
       "field": "Border (Default)",
       "value": "1px solid #7F7F7F",
-      "token": null
+      "token": "color-border-default"
     },
     {
       "field": "Border (Selected)",
       "value": "1px solid #007064",
-      "token": null
+      "token": "color-selected"
     },
     {
       "field": "Border (Invalid)",
       "value": "1px solid #E60E22",
-      "token": null
+      "token": "color-error"
     }
   ],
   "capturedNotes": [

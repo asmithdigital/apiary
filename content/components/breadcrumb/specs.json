@@ -8,22 +8,22 @@
     {
       "field": "Default link",
       "value": "#00349F, underlined",
-      "token": null
+      "token": "color-link"
     },
     {
       "field": "Hovered link",
       "value": "#0D59FF",
-      "token": null
+      "token": "color-focus"
     },
     {
       "field": "Separator",
       "value": "#666666",
-      "token": null
+      "token": "color-text-muted"
     },
     {
       "field": "Current page (non-link)",
       "value": "#333333",
-      "token": null
+      "token": "color-current-page"
     }
   ],
   "capturedNotes": [

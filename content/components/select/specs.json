@@ -8,22 +8,22 @@
     {
       "field": "Border (Default)",
       "value": "1px solid #7F7F7F",
-      "token": null
+      "token": "color-border-default"
     },
     {
       "field": "Border (Focus/Active)",
       "value": "1px solid #0D59FF + shadow",
-      "token": null
+      "token": "color-focus"
     },
     {
       "field": "Placeholder",
       "value": "#7F7F7F",
-      "token": null
+      "token": "color-border-default"
     },
     {
       "field": "Value text",
       "value": "#000000",
-      "token": null
+      "token": "color-ink"
     },
     {
       "field": "Container width",

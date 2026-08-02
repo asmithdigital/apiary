@@ -8,27 +8,27 @@
     {
       "field": "Default",
       "value": "#00349F, underlined",
-      "token": null
+      "token": "color-link"
     },
     {
       "field": "Hover",
       "value": "#0D59FF, underlined",
-      "token": null
+      "token": "color-focus"
     },
     {
       "field": "Active / Visited",
       "value": "#441FCC, underlined",
-      "token": null
+      "token": "color-visited"
     },
     {
       "field": "Focus",
       "value": "background #0D59FF, text white, no underline",
-      "token": null
+      "token": "color-focus"
     },
     {
       "field": "Gap (arrow to text)",
       "value": "6px",
-      "token": null
+      "token": "spacing-xs"
     }
   ],
   "capturedNotes": [],

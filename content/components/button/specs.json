@@ -8,34 +8,34 @@
     {
       "field": "Fill (Primary/Default)",
       "value": "#FFE600",
-      "token": null
+      "token": "color-brand-primary"
     },
     {
       "field": "Fill (Primary/Hover)",
       "value": "#FFF066",
-      "token": null,
+      "token": "color-brand-primary-hover",
       "unconfirmed": true,
       "note": "One Icon=Left variant reads #FFF600 — confirmed real bug via F18 palette cross-check, not an export artefact."
     },
     {
       "field": "Text colour",
       "value": "#000000",
-      "token": null
+      "token": "color-ink"
     },
     {
       "field": "Border (Secondary only)",
       "value": "1px solid #000000",
-      "token": null
+      "token": "color-ink"
     },
     {
       "field": "Padding",
       "value": "12px vertical, 24px horizontal",
-      "token": null
+      "token": "spacing-sm / spacing-md"
     },
     {
       "field": "Gap (label to icon)",
       "value": "12px",
-      "token": null
+      "token": "spacing-sm"
     },
     {
       "field": "Corner radius",

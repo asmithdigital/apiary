@@ -8,7 +8,7 @@
     {
       "field": "Colours",
       "value": "Same as LinkBack: Default #00349F, Hover #0D59FF, Active/Visited #441FCC, Focus bg #0D59FF text white",
-      "token": null
+      "token": "color-link / color-focus / color-visited"
     },
     {
       "field": "Corner radius (non-Focus)",

@@ -13,7 +13,7 @@
     {
       "field": "Item padding",
       "value": "12px (vs 24px/12px in PopupMenu)",
-      "token": null,
+      "token": "spacing-sm / spacing-md",
       "unconfirmed": true,
       "note": "Same visual pattern, different padding value from PopupMenu — real inconsistency between two similar components."
     }

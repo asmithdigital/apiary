@@ -13,12 +13,12 @@
     {
       "field": "Selected fill",
       "value": "#007064 (outer ring and inner dot)",
-      "token": null
+      "token": "color-selected"
     },
     {
       "field": "Unselected fill",
       "value": "#000000",
-      "token": null
+      "token": "color-ink"
     }
   ],
   "capturedNotes": [],

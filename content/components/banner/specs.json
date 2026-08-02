@@ -34,7 +34,7 @@
     {
       "field": "Title typography",
       "value": "P2/100 Extra Bold/42px | 48px",
-      "token": null
+      "token": "spacing-lg"
     }
   ],
   "capturedNotes": [],

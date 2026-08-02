@@ -8,12 +8,12 @@
     {
       "field": "Sizes",
       "value": "24×24 / 48×48 / 96×96px",
-      "token": null
+      "token": "spacing-2xl"
     },
     {
       "field": "Fill",
       "value": "#000000",
-      "token": null
+      "token": "color-ink"
     }
   ],
   "capturedNotes": [

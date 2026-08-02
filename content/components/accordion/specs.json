@@ -8,12 +8,12 @@
     {
       "field": "Border (Default)",
       "value": "1px solid #7F7F7F",
-      "token": null
+      "token": "color-border-default"
     },
     {
       "field": "Border (Hover/Active)",
       "value": "1px solid #000000",
-      "token": null
+      "token": "color-ink"
     },
     {
       "field": "Corner radius",
@@ -23,7 +23,7 @@
     {
       "field": "Padding (header)",
       "value": "20px vertical, 24px horizontal",
-      "token": null
+      "token": "spacing-md"
     },
     {
       "field": "Type (header)",

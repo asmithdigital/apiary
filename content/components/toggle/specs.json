@@ -8,12 +8,12 @@
     {
       "field": "Off",
       "value": "bg #7F7F7F, radius 10px",
-      "token": null
+      "token": "color-border-default"
     },
     {
       "field": "On",
       "value": "bg #007064, radius 19px",
-      "token": null,
+      "token": "color-selected",
       "unconfirmed": true,
       "note": "On/Focus uses radius 10px on the inner div — mismatched radius for the same conceptual state."
     },

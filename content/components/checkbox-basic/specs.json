@@ -13,12 +13,12 @@
     {
       "field": "Unchecked",
       "value": "border-2 #000000, radius 2px",
-      "token": null
+      "token": "color-ink"
     },
     {
       "field": "Checked",
       "value": "bg #007064, radius 2px, check icon white",
-      "token": null
+      "token": "color-selected"
     },
     {
       "field": "Label",

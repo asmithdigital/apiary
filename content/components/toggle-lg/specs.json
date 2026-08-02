@@ -13,12 +13,12 @@
     {
       "field": "Off",
       "value": "bg #7F7F7F",
-      "token": null
+      "token": "color-border-default"
     },
     {
       "field": "On",
       "value": "bg #007064",
-      "token": null
+      "token": "color-selected"
     }
   ],
   "capturedNotes": [

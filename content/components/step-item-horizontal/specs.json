@@ -8,12 +8,12 @@
     {
       "field": "Active",
       "value": "fill #FFE600 + soft glow",
-      "token": null
+      "token": "color-brand-primary"
     },
     {
       "field": "Completed",
       "value": "fill #007064, check icon white",
-      "token": null
+      "token": "color-selected"
     }
   ],
   "capturedNotes": [],

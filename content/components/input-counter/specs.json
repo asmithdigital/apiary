@@ -18,12 +18,12 @@
     {
       "field": "Border (Default input)",
       "value": "1px solid #7F7F7F",
-      "token": null
+      "token": "color-border-default"
     },
     {
       "field": "Border (Invalid)",
       "value": "1px solid #E60E22",
-      "token": null
+      "token": "color-error"
     },
     {
       "field": "Value text",

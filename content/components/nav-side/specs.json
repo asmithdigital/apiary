@@ -8,7 +8,7 @@
     {
       "field": "Background",
       "value": "#F9F7F2",
-      "token": null
+      "token": "color-surface-warm-100"
     },
     {
       "field": "OffCanvas header",

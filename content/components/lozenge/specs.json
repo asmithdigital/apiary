@@ -8,37 +8,37 @@
     {
       "field": "Primary 1",
       "value": "#FFE600, text #000000",
-      "token": null
+      "token": "color-brand-primary / color-ink"
     },
     {
       "field": "Primary 2",
       "value": "#000000, text #FFFFFF",
-      "token": null
+      "token": "color-ink / color-surface"
     },
     {
       "field": "Secondary 1",
       "value": "#130064, text #FFFFFF",
-      "token": null
+      "token": "color-surface"
     },
     {
       "field": "Tertiary 5",
       "value": "#007064, text #FFFFFF",
-      "token": null
+      "token": "color-selected / color-surface"
     },
     {
       "field": "Invalid",
       "value": "#E60E22, text #FFFFFF",
-      "token": null
+      "token": "color-error / color-surface"
     },
     {
       "field": "Muted",
       "value": "rgba(0,0,0,0.05), text #000000",
-      "token": null
+      "token": "color-ink"
     },
     {
       "field": "Padding",
       "value": "2px vertical, 6px horizontal",
-      "token": null
+      "token": "spacing-xs"
     },
     {
       "field": "Corner radius",
@@ -53,7 +53,7 @@
     {
       "field": "Type",
       "value": "National 2 · Medium · 12px · line-height 18px",
-      "token": null
+      "token": "spacing-sm"
     }
   ],
   "capturedNotes": [],

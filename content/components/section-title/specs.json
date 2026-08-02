@@ -8,12 +8,12 @@
     {
       "field": "Divider",
       "value": "1px, #000000, full width",
-      "token": null
+      "token": "color-ink"
     },
     {
       "field": "Gap (title to divider)",
       "value": "6px",
-      "token": null
+      "token": "spacing-xs"
     }
   ],
   "capturedNotes": [],

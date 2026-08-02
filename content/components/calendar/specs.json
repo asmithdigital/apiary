@@ -8,17 +8,17 @@
     {
       "field": "Selected date (day picker)",
       "value": "circle fill #0D59FF, text white",
-      "token": null
+      "token": "color-focus"
     },
     {
       "field": "Selected year",
       "value": "bg #0D59FF, radius 30px, text white",
-      "token": null
+      "token": "color-focus"
     },
     {
       "field": "Range highlight",
       "value": "bg rgba(13,89,255,0.2), border #0D59FF",
-      "token": null
+      "token": "color-focus"
     }
   ],
   "capturedNotes": [

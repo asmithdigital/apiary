@@ -8,17 +8,17 @@
     {
       "field": "Background",
       "value": "rgba(0,0,0,0.05)",
-      "token": null
+      "token": "color-scrim"
     },
     {
       "field": "Left border",
       "value": "box-shadow inset 6px 0 0 0 black (not a real border)",
-      "token": null
+      "token": "spacing-xs"
     },
     {
       "field": "Type",
       "value": "National 2 · Bold · 18px · line-height 24px",
-      "token": null
+      "token": "spacing-md"
     }
   ],
   "capturedNotes": [],

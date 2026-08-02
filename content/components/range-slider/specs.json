@@ -13,7 +13,7 @@
     {
       "field": "Filled track",
       "value": "#007064, radius 2px",
-      "token": null
+      "token": "color-selected"
     },
     {
       "field": "Thumb",

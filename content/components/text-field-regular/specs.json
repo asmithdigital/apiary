@@ -8,37 +8,37 @@
     {
       "field": "Border (Default)",
       "value": "1px solid #7F7F7F",
-      "token": null
+      "token": "color-border-default"
     },
     {
       "field": "Border (Hover)",
       "value": "1px solid #000000",
-      "token": null
+      "token": "color-ink"
     },
     {
       "field": "Border (Focus)",
       "value": "1px solid #0D59FF + box-shadow 0 0 0 3px rgba(13,89,255,0.2)",
-      "token": null
+      "token": "color-focus"
     },
     {
       "field": "Border (Valid)",
       "value": "1px solid #009923",
-      "token": null
+      "token": "color-success"
     },
     {
       "field": "Border (Invalid)",
       "value": "1px solid #E60E22",
-      "token": null
+      "token": "color-error"
     },
     {
       "field": "Border (Disabled)",
       "value": "1px solid #CCCCCC, bg rgba(0,0,0,0.05)",
-      "token": null
+      "token": "color-border-disabled"
     },
     {
       "field": "Padding",
       "value": "12px",
-      "token": null
+      "token": "spacing-sm"
     },
     {
       "field": "Corner radius",

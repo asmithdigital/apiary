@@ -13,17 +13,17 @@
     {
       "field": "Background (Confirmation)",
       "value": "#E6F1F0, border #007064",
-      "token": null
+      "token": "color-selected"
     },
     {
       "field": "Background (Warning)",
       "value": "#FFFDE6, border #FFE600",
-      "token": null
+      "token": "color-brand-primary"
     },
     {
       "field": "Background (Error)",
       "value": "rgba(230,14,34,0.1), border #E60E22",
-      "token": null
+      "token": "color-error"
     },
     {
       "field": "Background (Change)",
@@ -33,7 +33,7 @@
     {
       "field": "Padding",
       "value": "24px all sides",
-      "token": null
+      "token": "spacing-md"
     },
     {
       "field": "Corner radius",

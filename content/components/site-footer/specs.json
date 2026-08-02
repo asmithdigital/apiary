@@ -8,12 +8,12 @@
     {
       "field": "Backgrounds",
       "value": "#F9F7F2 (Grey) / #FFE600 (Yellow) / #FFFFFF (White)",
-      "token": null
+      "token": "color-surface-warm-100 / color-brand-primary / color-surface"
     },
     {
       "field": "Link colour",
       "value": "#00349F, underlined",
-      "token": null
+      "token": "color-link"
     },
     {
       "field": "Copyright text",

@@ -8,7 +8,7 @@
     {
       "field": "Border",
       "value": "1px solid #7F7F7F",
-      "token": null
+      "token": "color-border-default"
     },
     {
       "field": "Divider",
