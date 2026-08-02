@@ -95,7 +95,7 @@ function ComponentTabsBody({ id, version }) {
                 )}
                 {(specs.preview?.states || []).map((s, i) => (
                   <div key={i} style={{ marginBottom: 40 }}>
-                    <h3 style={{ fontSize: 24, fontWeight: 653, lineHeight: "28px", color: "var(--color-ink)", marginBottom: 12, fontFamily: "var(--font-display)" }}>{s.label}</h3>
+                    <h3 style={{ fontSize: 20, fontWeight: 653, lineHeight: "24px", color: "var(--color-ink)", marginBottom: 12, fontFamily: "var(--font-display)" }}>{s.label}</h3>
                     <div className="apy-example-card" style={{ margin: "12px 0" }}>
                       <ComponentPreview item={{ ...specs, preview: { ...specs.preview, states: [s] } }} />
                     </div>
