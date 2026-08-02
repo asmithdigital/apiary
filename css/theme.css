@@ -49,6 +49,13 @@
   --text-xl: 22px;
   --text-2xl: 32px;
 
+  /* Heading scale — measured directly off the real saved Atlassian pages
+     (computed styles, Aug 2026 capture), not estimated. h1 "Button" was
+     40px/700/44px line-height in rgb(41,42,46); h2 "Usage"/"Parts" were
+     24px/653/28px line-height in the same ink colour. */
+  --text-h1: 40px;
+  --text-h2: 24px;
+
   /* Real Atlassian 8px spacing grid (space.100 = 8px, space.200 = 16px...) */
   --space-025: 2px;
   --space-050: 4px;

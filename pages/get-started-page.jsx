@@ -75,9 +75,22 @@ function GetStartedPage({ pageKey, pageLabel, navigate }) {
 function PageOutline() {
   const [headings, setHeadings] = useState([]);
   useEffect(() => {
-    const els = document.querySelectorAll(".apy-prose h2");
-    setHeadings(Array.from(els).map((el) => el.textContent));
-  });
+    const collect = () => {
+      const els = document.querySelectorAll(".apy-prose h2");
+      const next = Array.from(els).map((el) => el.textContent);
+      setHeadings((prev) =>
+        prev.length === next.length && prev.every((h, i) => h === next[i]) ? prev : next
+      );
+    };
+    collect();
+    // Content loads async (markdown fetch) and can be swapped between
+    // versions/tabs, so watch for DOM changes instead of polling — this
+    // was previously an effect with no dependency array that called
+    // setState on every render, which looped forever.
+    const observer = new MutationObserver(collect);
+    observer.observe(document.body, { childList: true, subtree: true, characterData: true });
+    return () => observer.disconnect();
+  }, []);
   if (!headings.length) return <p style={{ fontSize: 13, color: "var(--color-faint)" }}>No sections on this page.</p>;
   return (
     <ul style={{ listStyle: "none", margin: 0, padding: 0, display: "flex", flexDirection: "column", gap: 8 }}>
