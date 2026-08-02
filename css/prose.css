@@ -16,7 +16,7 @@
 }
 .apy-prose h2:hover::before { opacity: 0.5; }
 .apy-prose h2:first-child { margin-top: 0; }
-.apy-prose p { margin: 0 0 14px; }
+.apy-prose p { margin: 0 0 14px; color: var(--color-paragraph); }
 .apy-prose strong { color: var(--color-ink); }
 .apy-prose blockquote { border-left: 3px solid var(--color-accent); background: var(--color-accent-tint); padding: 12px 16px; margin: 16px 0; border-radius: 0 6px 6px 0; }
 

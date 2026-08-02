@@ -20,6 +20,7 @@
 
   --color-ink: #292A2E;        /* color.text */
   --color-body: #505258;       /* color.text.subtle */
+  --color-paragraph: #172B4D;  /* real body paragraph text — confirmed via mechanical DOM extraction, distinct from muted labels */
   --color-faint: #6B6E76;      /* color.text.subtlest */
   --color-line: #0B120E24;     /* color.border (real alpha hex) */
   --color-band: #0515240F;     /* color.background.neutral (real alpha hex) */

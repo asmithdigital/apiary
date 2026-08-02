@@ -43,7 +43,7 @@ function APIary() {
   }, []);
 
   if (page.kind === "home") {
-    return <div className="apy-home-wrap"><HomePage navigate={navigate} /></div>;
+    return <div className="apy-home-wrap"><HomePage navigate={navigate} /><DataLayerPanel /></div>;
   }
   return (
     <div className="apy-app-shell">
@@ -57,6 +57,7 @@ function APIary() {
           {page.kind === "family" && <FamilyPage family={page.ref} />}
         </div>
       </div>
+      <DataLayerPanel />
     </div>
   );
 }

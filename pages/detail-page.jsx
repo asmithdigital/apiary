@@ -180,7 +180,64 @@ function ComponentTabsBody({ id, version }) {
   );
 }
 
+// A page created this session via "+ New page" — real block-based editing,
+// backed by DraftStore, not by content/ files (there's nothing on GitHub
+// for these yet — that's honest, since they were only just created).
+function DraftPageBody({ id }) {
+  const [, force] = useState(0);
+  useEffect(() => DraftStore.subscribe(() => force((n) => n + 1)), []);
+  const draft = DraftStore.getPage(id);
+  const [tab, setTab] = useState(draft.tabs[0].id);
+  const [showAddTab, setShowAddTab] = useState(false);
+  const [newTabLabel, setNewTabLabel] = useState("");
+
+  const activeTab = draft.tabs.find((t) => t.id === tab) || draft.tabs[0];
+
+  return (
+    <div>
+      <div className="apy-gray-band" style={{ paddingBottom: 20 }}>
+        <div className="apy-gray-band-inner" style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", flexWrap: "wrap", gap: 12 }}>
+          <div className="apy-gray-band-title-row">
+            <EditableTitle title={draft.title} onSave={(t) => DraftStore.updatePageMeta(id, { title: t })} />
+            <StatusBadge status={draft.status} />
+          </div>
+          <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+            <VersionPicker versions={draft.versions} active={draft.version} onChange={(v) => DraftStore.updatePageMeta(id, { version: v })} />
+            <button onClick={() => DraftStore.bumpVersion(id)} title="Create a new version" style={{ fontSize: 12, padding: "6px 10px", border: "1px solid var(--color-line)", background: "#fff", borderRadius: 6, cursor: "pointer" }}>+ New version</button>
+          </div>
+        </div>
+        <textarea value={draft.description} onChange={(e) => DraftStore.updatePageMeta(id, { description: e.target.value })} rows={1}
+          placeholder="One-line description…" className="apy-gray-band-desc" style={{ border: "none", background: "none", resize: "none", width: "100%", fontFamily: "inherit" }} />
+      </div>
+
+      <div style={{ display: "flex", alignItems: "center", position: "relative" }}>
+        <TabStrip tabs={draft.tabs.map((t) => t.label)} active={activeTab.label} onChange={(label) => setTab(draft.tabs.find((t) => t.label === label).id)} />
+        <button onClick={() => setShowAddTab((s) => !s)} title="Add a tab" style={{ marginLeft: 8, width: 26, height: 26, border: "1px solid var(--color-line)", background: "#fff", borderRadius: 5, cursor: "pointer", fontSize: 14 }}>+</button>
+        {showAddTab && (
+          <div style={{ position: "absolute", top: 34, left: 0, zIndex: 20, background: "#fff", border: "1px solid var(--color-line)", borderRadius: 8, boxShadow: "0 8px 24px rgba(0,0,0,0.12)", padding: 10, display: "flex", gap: 6 }}>
+            <input autoFocus value={newTabLabel} onChange={(e) => setNewTabLabel(e.target.value)} placeholder="Tab name" style={{ fontSize: 13, padding: "6px 8px", border: "1px solid var(--color-line)", borderRadius: 5, width: 140 }} />
+            <button onClick={() => { if (newTabLabel.trim()) { const t = DraftStore.addTab(id, newTabLabel.trim()); setTab(t.id); setNewTabLabel(""); setShowAddTab(false); } }} className="apy-btn-primary" style={{ padding: "6px 12px", fontSize: 12 }}>Add</button>
+          </div>
+        )}
+      </div>
+
+      <div className="apy-content-col">
+        <div className="apy-content-col-inner" style={{ display: "block" }}>
+          <div style={{ maxWidth: 760, padding: "24px 0 40px" }}>
+            {activeTab.blocks.map((b, i) => (
+              <DraftBlock key={b.id} block={b} pageId={id} tabId={activeTab.id} index={i} total={activeTab.blocks.length} />
+            ))}
+            <AddBlockMenu pageId={id} tabId={activeTab.id} />
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function DetailPage({ id, name }) {
+  if (DraftStore.isDraft(id)) return <DraftPageBody id={id} />;
+
   const versionsSorted = sortVersions(MANIFEST.components[id] || ["v1"]);
   const [version, setVersion] = useState(versionsSorted[versionsSorted.length - 1]);
   const [status, setStatus] = useState("stable");

@@ -14,7 +14,15 @@ function getFamilyMemberIds() {
 
 function Sidebar({ page, navigate }) {
   const [openGroups, setOpenGroups] = useState({ getStarted: true, foundations: true, actions: true });
+  const [showNewPage, setShowNewPage] = useState(false);
   const toggle = (k) => setOpenGroups((o) => ({ ...o, [k]: !o[k] }));
+
+  function createDraftPage({ id, type, title, description, status, groupKey }) {
+    DraftStore.createPage({ id, type, title, description, status, groupKey });
+    NAV.components.push({ id, name: title, groupKey, hasGuidelines: true, isDraft: true });
+    setShowNewPage(false);
+    navigate({ kind: "component", ref: { id, name: title } });
+  }
 
   // Stage 1 "add a page" — mutates the shared NAV object directly (it's
   // plain data, not React state) and seeds a blank session-only content
@@ -87,7 +95,11 @@ function Sidebar({ page, navigate }) {
       </div>
 
       <div className="apy-nav-section">
-        <div className="apy-components-heading">Components</div>
+        <div className="apy-components-heading" style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+          <span>Components</span>
+          <button className="apy-sidebar-add-btn" title="Add a new component or pattern" onClick={() => setShowNewPage(true)}>+</button>
+        </div>
+        {showNewPage && <NewPageModal onClose={() => setShowNewPage(false)} onCreate={createDraftPage} />}
         {NAV.componentGroups.map((g) => {
           const familiesInGroup = NAV.families.filter((f) => familyGroupKey(f) === g.key);
           const memberIds = getFamilyMemberIds();
