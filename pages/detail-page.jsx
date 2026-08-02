@@ -16,7 +16,7 @@ function sortVersions(versions) {
 
 function StatusBadge({ status }) {
   const key = (status || "stable").toLowerCase().replace(/\s+/g, "-");
-  const labels = { stable: "Stable", new: "New", updated: "Updated", "in-development": "In development", deprecated: "Deprecated" };
+  const labels = { stable: "Stable", new: "New", caution: "Caution", beta: "Beta", deprecated: "Deprecated" };
   return <span className={"apy-status apy-status-" + key}>{labels[key] || status}</span>;
 }
 
