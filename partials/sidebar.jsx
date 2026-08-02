@@ -94,8 +94,15 @@ function Sidebar({ page, navigate }) {
           const standalone = NAV.components.filter((c) => c.groupKey === g.key && !memberIds.has(c.id));
           return (
             <div key={g.key}>
-              <button onClick={() => toggle(g.key)} className="apy-nav-group-label">
-                {openGroups[g.key] ? "▾" : "▸"} {g.label}
+              <button onClick={() => toggle(g.key)} className="apy-nav-group-label" style={{ display: "flex", alignItems: "center", gap: 6 }}>
+                {openGroups[g.key] ? "▾" : "▸"}
+                {(() => {
+                  const style = CATEGORY_STYLE[g.key];
+                  if (!style) return null;
+                  const Icon = LucideIcons[style.icon] || LucideIcons.LayoutGrid;
+                  return <Icon size={12} color={style.fg} />;
+                })()}
+                {g.label}
               </button>
               {openGroups[g.key] && (
                 <>

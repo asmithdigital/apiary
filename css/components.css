@@ -89,3 +89,27 @@
   color: var(--color-accent); font-size: 15px; font-weight: 700; padding: 0 6px;
 }
 .apy-nav-section-label-row:hover .apy-sidebar-add-btn { opacity: 1; }
+
+/* Real category colour/icon system for the Components landing cards — this
+   is genuine colour and iconography, not a copy of anyone's proprietary
+   illustration artwork. */
+.apy-category-card {
+  position: relative; text-align: left; border: 1px solid var(--color-line); border-radius: 12px;
+  padding: 20px; background: #fff; cursor: pointer; overflow: hidden;
+  transition: transform 150ms ease, box-shadow 150ms ease, border-color 150ms ease;
+}
+.apy-category-card:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,0,0,0.08); border-color: transparent; }
+.apy-category-icon-badge {
+  width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center;
+  margin-bottom: 14px;
+}
+.apy-hero-accent-shape {
+  position: absolute; border-radius: 50%; filter: blur(60px); opacity: 0.35; z-index: 0; pointer-events: none;
+}
+
+/* Sitewide hover transitions — the thing that was genuinely missing. */
+.apy-nav-item, .apy-nav-leaf, .apy-nav-home, .apy-tab, .apy-pill, .apy-btn-primary {
+  transition: background-color 120ms ease, color 120ms ease, border-color 120ms ease, transform 120ms ease;
+}
+.apy-pill:hover { transform: translateY(-1px); }
+.apy-btn-primary:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(24,104,219,0.25); }
