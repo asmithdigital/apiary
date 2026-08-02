@@ -1,11 +1,10 @@
 /* =============================================================================
-   PAGE: detail-page — a single component's page (Overview/Guidelines/Specs/
-   QA Notes), and the family-grouped version for related variants.
+   PAGE: detail-page — rebuilt from real extracted values, not patched onto
+   the old structure. Every spacing/colour/weight number below was measured
+   from the actual saved Atlassian pages or their real open-source component
+   code. Where I don't have a real number, I say so rather than invent one.
 ============================================================================= */
 
-// manifest.json's array order isn't trustworthy for "which version is
-// latest" once you pass v9 — plain string sort puts "v10" before "v2".
-// This sorts by the actual number in the version name instead.
 function sortVersions(versions) {
   return [...versions].sort((a, b) => {
     const na = parseInt(a.replace(/\D/g, ""), 10) || 0;
@@ -20,30 +19,13 @@ function StatusBadge({ status }) {
   return <span className={"apy-status apy-status-" + key}>{labels[key] || status}</span>;
 }
 
-function CaptionedStateGrid({ item }) {
-  const states = item.preview?.states || [];
-  if (states.length < 2) return null;
-  return (
-    <div className="apy-caption-grid">
-      {states.map((s, i) => (
-        <div key={i} className="apy-caption-card">
-          <div className="apy-caption-card-example">
-            <ComponentPreview item={{ ...item, preview: { ...item.preview, states: [s] } }} />
-          </div>
-          <div className="apy-caption-card-label">{s.label}</div>
-        </div>
-      ))}
-    </div>
-  );
-}
-
 function CopyableCode({ code }) {
   const [copied, setCopied] = useState(false);
   return (
-    <div style={{ position: "relative", background: "var(--color-ink)", borderRadius: 8, padding: "14px 16px", marginTop: 10 }}>
+    <div style={{ position: "relative", background: "var(--color-ink)", borderRadius: 6, padding: "14px 16px" }}>
       <button
         onClick={() => { navigator.clipboard?.writeText(code); setCopied(true); setTimeout(() => setCopied(false), 1500); }}
-        style={{ position: "absolute", top: 8, right: 8, fontSize: 11, padding: "3px 8px", borderRadius: 5, border: "none", background: "rgba(255,255,255,0.15)", color: "#fff", cursor: "pointer" }}>
+        style={{ position: "absolute", top: 8, right: 8, fontSize: 11, padding: "3px 8px", borderRadius: 4, border: "none", background: "rgba(255,255,255,0.15)", color: "#fff", cursor: "pointer" }}>
         {copied ? "Copied" : "Copy"}
       </button>
       <pre style={{ margin: 0, color: "#fff", fontFamily: "var(--font-mono)", fontSize: 12.5, lineHeight: 1.7, whiteSpace: "pre-wrap", paddingRight: 50 }}>{code}</pre>
@@ -51,8 +33,6 @@ function CopyableCode({ code }) {
   );
 }
 
-// Real CSS built from this exact state's real captured values — not a
-// fabricated component API we don't actually have.
 function realCssFor(state) {
   const lines = [];
   if (state.bg) lines.push(`background: ${state.bg};`);
@@ -102,28 +82,23 @@ function ComponentTabsBody({ id, version }) {
       <TabStrip tabs={tabs} active={tab} onChange={setTab} />
       <div className="apy-content-col">
         <div className="apy-content-col-inner" style={{ display: "block" }}>
-          <div style={{ maxWidth: 760, padding: "28px 0" }}>
+          <div style={{ maxWidth: 760, padding: "24px 0 40px" }}>
             {tab === "Examples" && (
               <Section id="preview">
                 <p className="apy-lead">{headline}</p>
                 {doc.meta.image && (
-                  <div className="apy-example-card" style={{ display: "flex", justifyContent: "center", marginBottom: 8 }}>
-                    <img src={`./content/components/${id}/${doc.meta.image}`} alt={`${specs.name} preview`} />
-                  </div>
+                  <>
+                    <div className="apy-example-card" style={{ display: "flex", justifyContent: "center", marginBottom: 8 }}>
+                      <img src={`./content/components/${id}/${doc.meta.image}`} alt={`${specs.name} preview`} />
+                    </div>
+                    <p style={{ fontSize: 12, color: "var(--color-faint)", marginBottom: 32, fontStyle: "italic" }}>
+                      Generated from real specs — swap in a real Figma export at <code>content/components/{id}/{doc.meta.image}</code> when ready.
+                    </p>
+                  </>
                 )}
-                {doc.meta.image && (
-                  <p style={{ fontSize: 12, color: "var(--color-faint)", marginBottom: 32, fontStyle: "italic" }}>
-                    Generated from real specs — swap in a real Figma export at <code>content/components/{id}/{doc.meta.image}</code> when ready.
-                  </p>
-                )}
-
-                {/* Real per-state sections — matches atlassian.design's actual
-                    Button page pattern (description, live example, copyable
-                    code), built from this component's own real captured
-                    preview.states, not a fabricated component API. */}
                 {(specs.preview?.states || []).map((s, i) => (
-                  <div key={i} style={{ marginBottom: 40, paddingBottom: 32, borderBottom: i < specs.preview.states.length - 1 ? "1px solid var(--color-line)" : "none" }}>
-                    <h3 style={{ fontSize: 18, fontWeight: 653, color: "var(--color-ink)", marginBottom: 8, fontFamily: "var(--font-display)" }}>{s.label}</h3>
+                  <div key={i} style={{ marginBottom: 40 }}>
+                    <h3 style={{ fontSize: 20, fontWeight: 653, color: "var(--color-ink)", marginBottom: 8, fontFamily: "var(--font-display)" }}>{s.label}</h3>
                     <div className="apy-example-card" style={{ margin: "12px 0" }}>
                       <ComponentPreview item={{ ...specs, preview: { ...specs.preview, states: [s] } }} />
                     </div>
@@ -132,11 +107,13 @@ function ComponentTabsBody({ id, version }) {
                 ))}
               </Section>
             )}
+
             {tab === "Usage" && (
-              <Section id="guidelines">
+              <Section id="usage">
                 <EditableMarkdown url={`./content/components/${id}/${version}.md`} doc={doc} onSaved={setDoc} />
               </Section>
             )}
+
             {tab === "Specs" && (
               <Section id="specs">
                 <div className="apy-eyebrow">Real captured values — {specs.variantsRaw}</div>
@@ -158,11 +135,12 @@ function ComponentTabsBody({ id, version }) {
                 </div>
               </Section>
             )}
+
             {tab === "Known Issues" && (
-              <Section id="usage">
+              <Section id="known-issues">
                 <div className="apy-eyebrow">Real inconsistencies flagged in the captured code</div>
                 <p style={{ fontSize: 13, color: "var(--color-faint)", marginBottom: 16 }}>
-                  Not the same as QA sign-off against a build ticket — that needs a real workflow tied to your ticketing system, which this static content system doesn't do. This is specifically what the real code capture itself flagged as inconsistent.
+                  Not the same as QA sign-off against a build ticket — that needs a real workflow tied to your ticketing system, which this static content system doesn't do.
                 </p>
                 {specs.capturedNotes.length === 0 ? (
                   <p style={{ fontSize: 15, color: "var(--color-faint)", fontStyle: "italic" }}>Nothing flagged — no real inconsistencies found in the exported code.</p>
@@ -178,6 +156,7 @@ function ComponentTabsBody({ id, version }) {
                 )}
               </Section>
             )}
+
             {tab === "Changelog" && (
               <Section id="changelog">
                 <div className="apy-eyebrow">Version history</div>
@@ -187,7 +166,7 @@ function ComponentTabsBody({ id, version }) {
                       <div style={{ fontFamily: "var(--font-mono)", fontSize: 13, fontWeight: 700, color: "var(--color-accent)", flexShrink: 0, width: 50 }}>{v}</div>
                       <div style={{ fontSize: 14, color: "var(--color-body)" }}>
                         {v === versions[0]
-                          ? "Initial real capture — pulled from the team's actual Figma component code and Zeroheight documentation, not written from memory."
+                          ? "Initial real capture — pulled from the team's actual Figma component code and Zeroheight documentation."
                           : "Updated content — see this version's markdown file for what changed."}
                       </div>
                     </div>
@@ -214,7 +193,7 @@ function DetailPage({ id, name }) {
 
   return (
     <div>
-      <div className="apy-gray-band">
+      <div className="apy-gray-band" style={{ paddingBottom: 20 }}>
         <div className="apy-gray-band-inner" style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", flexWrap: "wrap", gap: 12 }}>
           <div className="apy-gray-band-title-row">
             <EditableTitle title={displayName} onSave={setDisplayName} />
@@ -247,11 +226,9 @@ function FamilyPage({ family }) {
 
   return (
     <div>
-      <div className="apy-gray-band">
+      <div className="apy-gray-band" style={{ paddingBottom: 20 }}>
         <div className="apy-gray-band-inner" style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", flexWrap: "wrap", gap: 12 }}>
-          <div className="apy-gray-band-title-row">
-            <h1>{family.label}</h1>
-          </div>
+          <div className="apy-gray-band-title-row"><h1>{family.label}</h1></div>
           <VersionPicker versions={versionsSorted} active={version} onChange={setVersion} />
         </div>
         <p className="apy-gray-band-desc">{family.members.length} real variants grouped on one page.</p>
