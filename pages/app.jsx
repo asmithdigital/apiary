@@ -30,11 +30,13 @@ function encodeHash(page) {
 
 function APIary() {
   const [page, setPage] = useState(() => parseHash());
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const navigate = (target) => {
     const next = ["foundation", "component", "getstarted", "family"].includes(target.kind) ? target : { kind: target.kind };
     setPage(next);
     window.location.hash = encodeHash(next);
     window.scrollTo?.(0, 0);
+    setMobileMenuOpen(false);
   };
   useEffect(() => {
     const onHashChange = () => setPage(parseHash());
@@ -47,9 +49,13 @@ function APIary() {
   }
   return (
     <div className="apy-app-shell">
-      <Header onNavigate={navigate} />
+      <Header onNavigate={navigate} onToggleMobileMenu={() => setMobileMenuOpen((o) => !o)} />
       <div className="apy-body-row">
-        <Sidebar page={page} navigate={navigate} />
+        <div className={"apy-sidebar-wrap" + (mobileMenuOpen ? " apy-sidebar-open" : "")}>
+          <Sidebar page={page} navigate={navigate} />
+          <div className="apy-mobile-auth-row"><AuthButton /></div>
+        </div>
+        {mobileMenuOpen && <div className="apy-mobile-scrim" onClick={() => setMobileMenuOpen(false)} />}
         <div className="apy-content-scroll">
           {page.kind === "getstarted" && <GetStartedPage pageKey={page.ref} pageLabel={NAV.getStartedLabels[page.ref]} navigate={navigate} />}
           {page.kind === "foundation" && <FoundationsPage foundationKey={page.ref} foundationLabel={NAV.foundationLabels[page.ref]} />}
