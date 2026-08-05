@@ -67,7 +67,7 @@ function HomePage({ navigate }) {
   return (
     <div>
       <Header onNavigate={navigate} onToggleMobileMenu={() => setMobileMenuOpen((o) => !o)} />
-      <div className={"apy-sidebar-wrap" + (mobileMenuOpen ? " apy-sidebar-open" : "")}>
+      <div className={"apy-sidebar-wrap apy-sidebar-wrap-home" + (mobileMenuOpen ? " apy-sidebar-open" : "")}>
         <Sidebar page={{ kind: "home" }} navigate={(t) => { setMobileMenuOpen(false); navigate(t); }} />
         <div className="apy-mobile-auth-row"><AuthButton /></div>
       </div>

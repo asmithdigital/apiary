@@ -5,6 +5,15 @@
 .apy-mobile-auth-row { display: none; }
 .apy-mobile-scrim { display: none; }
 
+/* The home page never had a permanent desktop sidebar — this wrapper
+   should only exist as the mobile drawer. Without this, it renders as a
+   normal full-width block between the header and hero on desktop,
+   pushing the whole page down. */
+.apy-sidebar-wrap-home { display: none; }
+@media (max-width: 880px) {
+  .apy-sidebar-wrap-home { display: flex; }
+}
+
 /* Explore grid — steps down cleanly instead of staying locked at 4
    columns and squeezing/overflowing on narrower screens. */
 .apy-explore-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
