@@ -57,9 +57,8 @@ function GetStartedPage({ pageKey, pageLabel, navigate }) {
             )}
           </div>
 
-          <div style={{ width: 240, flexShrink: 0 }}>
-            <div className="apy-caption-card">
-              <div className="apy-eyebrow" style={{ marginBottom: 10 }}>On this page</div>
+          <div style={{ width: 220, flexShrink: 0 }}>
+            <div style={{ position: "sticky", top: 20 }}>
               <PageOutline />
             </div>
           </div>
@@ -71,18 +70,29 @@ function GetStartedPage({ pageKey, pageLabel, navigate }) {
 
 // Builds a real "on this page" list from whatever ## headings actually
 // exist in the rendered content — no separate content file needed for this,
-// same principle as the main ContentsRail.
+// same principle as the main ContentsRail. Assigns each heading a real id
+// so the links are genuine anchors, not decorative text.
 function PageOutline() {
   const [headings, setHeadings] = useState([]);
   useEffect(() => {
     const els = document.querySelectorAll(".apy-prose h2");
-    setHeadings(Array.from(els).map((el) => el.textContent));
+    const list = Array.from(els).map((el, i) => {
+      const slug = el.textContent.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "") || `section-${i}`;
+      el.id = slug;
+      return { id: slug, label: el.textContent };
+    });
+    setHeadings(list);
   });
-  if (!headings.length) return <p style={{ fontSize: 13, color: "var(--color-faint)" }}>No sections on this page.</p>;
+  if (!headings.length) return null;
   return (
-    <ul style={{ listStyle: "none", margin: 0, padding: 0, display: "flex", flexDirection: "column", gap: 8 }}>
-      {headings.map((h, i) => (
-        <li key={i} style={{ fontSize: 13, color: "var(--color-body)" }}>{h}</li>
+    <ul style={{ listStyle: "none", margin: 0, padding: 0, display: "flex", flexDirection: "column", gap: 10 }}>
+      {headings.map((h) => (
+        <li key={h.id}>
+          <a href={`#${h.id}`} onClick={(e) => { e.preventDefault(); document.getElementById(h.id)?.scrollIntoView({ behavior: "smooth", block: "start" }); }}
+            style={{ fontSize: 13.5, color: "var(--color-accent)", textDecoration: "underline" }}>
+            {h.label}
+          </a>
+        </li>
       ))}
     </ul>
   );

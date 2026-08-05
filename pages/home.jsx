@@ -66,10 +66,10 @@ function HomePage({ navigate }) {
   return (
     <div>
       <Header onNavigate={navigate} />
-      <section style={{ position: "relative", padding: "96px 64px 80px", maxWidth: 1100, margin: "0 auto", overflow: "hidden" }}>
+      <div style={{ position: "relative", overflow: "hidden", background: "linear-gradient(180deg, var(--color-accent-tint), #fff 70%)" }}>
         <div className="apy-hero-accent-shape" style={{ width: 420, height: 420, background: "var(--color-accent)", top: -180, right: -120 }} />
         <div className="apy-hero-accent-shape" style={{ width: 300, height: 300, background: "#F59E0B", top: 120, left: -140 }} />
-        <div style={{ position: "relative", zIndex: 1 }}>
+        <section style={{ position: "relative", zIndex: 1, padding: "96px 64px 80px", maxWidth: 1300, margin: "0 auto" }}>
           <h1 style={{ fontSize: "clamp(48px, 8vw, 112px)", fontWeight: 700, lineHeight: 1.03, letterSpacing: "normal", color: "var(--color-ink)", margin: "0 0 32px", fontFamily: "var(--font-display)" }}>
             {site.heroHeadingLine1}<br /><span style={{ color: "var(--color-accent)" }}>{site.heroHeadingLine2}</span>
           </h1>
@@ -79,12 +79,12 @@ function HomePage({ navigate }) {
           <button className="apy-btn-primary apy-btn-hero" onClick={() => navigate({ kind: "getstarted", ref: "what-is-apiary" })}>
             {site.heroCtaLabel}
           </button>
-        </div>
-      </section>
+        </section>
+      </div>
 
-      <section style={{ padding: "0 64px 80px", maxWidth: 1100, margin: "0 auto" }}>
+      <section style={{ padding: "0 64px 80px", maxWidth: 1300, margin: "0 auto" }}>
         <h2 style={{ fontSize: 24, fontWeight: 653, fontFamily: "var(--font-display)", marginBottom: 24, color: "var(--color-ink)" }}>{site.exploreHeading}</h2>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))", gap: 12 }}>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 16 }}>
           {NAV.componentGroups.map((g) => {
             const count = NAV.components.filter((c) => c.groupKey === g.key).length;
             const first = NAV.components.find((c) => c.groupKey === g.key);

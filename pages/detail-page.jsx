@@ -66,44 +66,130 @@ function useComponentContent(id, version) {
   return { specs, doc, error, setDoc };
 }
 
+// For a given preview state, work out which visual properties are new or
+// different compared to the Default state — Default itself always shows
+// everything. This is computed from the real per-state data, not
+// hardcoded per component, so it works the same way for all 68.
+function computeStateDeltas(states) {
+  if (!states || !states.length) return [];
+  const defaultState = states[0];
+  const props = ["bg", "border", "radius", "padding", "text"];
+  return states.map((s, i) => {
+    const shown = {};
+    for (const p of props) {
+      if (s[p] == null) continue;
+      if (i === 0 || s[p] !== defaultState[p]) shown[p] = s[p];
+    }
+    return { state: s, shown };
+  });
+}
+
+// Exact-match only — the previous substring check produced real false
+// positives (e.g. "#fff" matching inside "#fff066", or the digit "4"
+// matching inside "24px"). A numeric radius like 4 is compared against a
+// "4px"-style token value as a specific, narrow exception.
+function findTokenFor(value, tokenFindings) {
+  if (value == null) return null;
+  const v = String(value).trim().toLowerCase();
+  for (const f of tokenFindings || []) {
+    if (typeof f.value !== "string") continue;
+    const fv = f.value.trim().toLowerCase();
+    if (fv === v) return f.token || null;
+    if (/^\d+$/.test(v) && fv === `${v}px`) return f.token || null;
+  }
+  return null;
+}
+
+const PROP_LABEL = { bg: "Background", border: "Border", radius: "Corner radius", padding: "Padding", text: "Text colour" };
+
+function StateSpecRow({ label, shown, tokenFindings, first, kind }) {
+  return (
+    <div style={{ display: "flex", gap: 24, marginBottom: 28, alignItems: "flex-start" }}>
+      <div className="apy-example-card" style={{ margin: 0, width: 180, flexShrink: 0, display: "flex", alignItems: "center", justifyContent: "center" }}>
+        <ComponentPreview item={{ preview: { kind, states: [{ ...shown, label }] } }} />
+      </div>
+      <div style={{ flex: 1 }}>
+        <h4 style={{ fontSize: 15, fontWeight: 700, marginBottom: 8, color: "var(--color-ink)" }}>{label}{!first && <span style={{ fontWeight: 400, color: "var(--color-faint)", fontSize: 13 }}> — only what's different from Default</span>}</h4>
+        {Object.keys(shown).length === 0 ? (
+          <p style={{ fontSize: 13.5, color: "var(--color-faint)", fontStyle: "italic" }}>Nothing differs from Default.</p>
+        ) : (
+          <table className="apy-data-table">
+            <tbody>
+              {Object.entries(shown).map(([prop, val]) => {
+                const token = findTokenFor(val, tokenFindings);
+                return (
+                  <tr key={prop}>
+                    <td style={{ fontWeight: 600, width: 140 }}>{PROP_LABEL[prop] || prop}</td>
+                    <td>
+                      <span style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                        <ColorSwatch value={val} />
+                        {token ? <span className="apy-spec-token-code">{token}</span> : <span style={{ fontFamily: "var(--font-mono)", fontSize: 13 }}>{String(val)}</span>}
+                      </span>
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        )}
+      </div>
+    </div>
+  );
+}
+
 function ComponentTabsBody({ id, version }) {
   const versions = sortVersions(MANIFEST.components[id] || ["v1"]);
   const { specs, doc, error, setDoc } = useComponentContent(id, version);
-  const [tab, setTab] = useState("Examples");
-  const tabs = ["Examples", "Usage", "Specs", "Known Issues", "Changelog"];
+  const [tab, setTab] = useState("Overview");
+  const tabs = ["Overview", "Usage", "Specs", "Changelog"];
 
   if (error) return <div style={{ padding: 40, color: "var(--color-danger-text)" }}>Failed to load real content: {error}</div>;
   if (!specs || !doc) return <div style={{ padding: 40 }}><LoadingRow /></div>;
 
-  const headline = specs.summary ? specs.summary.split(/(?<=\.)\s+/)[0] : "";
+  const sentences = specs.summary ? specs.summary.split(/(?<=\.)\s+/) : [];
+  const paraOne = sentences.slice(0, Math.ceil(sentences.length / 2)).join(" ");
+  const paraTwo = sentences.slice(Math.ceil(sentences.length / 2)).join(" ");
+  const stateDeltas = computeStateDeltas(specs.preview?.states);
+  const versionsDesc = [...versions].reverse();
 
   return (
     <div>
       <TabStrip tabs={tabs} active={tab} onChange={setTab} />
       <div className="apy-content-col">
         <div className="apy-content-col-inner" style={{ display: "block" }}>
-          <div style={{ maxWidth: 760, padding: "24px 0 40px" }}>
-            {tab === "Examples" && (
-              <Section id="preview">
-                <p className="apy-lead">{headline}</p>
-                {doc.meta.image && (
-                  <>
-                    <div className="apy-example-card" style={{ display: "flex", justifyContent: "center", marginBottom: 8 }}>
-                      <img src={`./content/components/${id}/${doc.meta.image}`} alt={`${specs.name} preview`} />
-                    </div>
-                    <p style={{ fontSize: 12, color: "var(--color-faint)", marginBottom: 32, fontStyle: "italic" }}>
-                      Generated from real specs — swap in a real Figma export at <code>content/components/{id}/{doc.meta.image}</code> when ready.
-                    </p>
-                  </>
+          <div style={{ maxWidth: 760, padding: "0 0 40px" }}>
+
+            {tab === "Overview" && (
+              <Section id="overview">
+                {paraOne && <p className="apy-lead" style={{ marginBottom: 14 }}>{paraOne}</p>}
+                {paraTwo && <p className="apy-lead" style={{ fontSize: 15 }}>{paraTwo}</p>}
+
+                {specs.preview?.states?.length > 0 && (
+                  <div style={{ display: "flex", gap: 12, flexWrap: "wrap", margin: "24px 0" }}>
+                    {specs.preview.states.map((s, i) => (
+                      <div key={i} style={{ textAlign: "center" }}>
+                        <div className="apy-example-card" style={{ margin: "0 0 6px", padding: 16 }}>
+                          <ComponentPreview item={{ preview: { kind: specs.preview.kind, states: [s] } }} />
+                        </div>
+                        <div style={{ fontSize: 12, color: "var(--color-faint)" }}>{s.label}</div>
+                      </div>
+                    ))}
+                  </div>
                 )}
-                {(specs.preview?.states || []).map((s, i) => (
-                  <div key={i} style={{ marginBottom: 40 }}>
-                    <h3 style={{ fontSize: 20, fontWeight: 653, color: "var(--color-ink)", marginBottom: 8, fontFamily: "var(--font-display)" }}>{s.label}</h3>
-                    <div className="apy-example-card" style={{ margin: "12px 0" }}>
-                      <ComponentPreview item={{ ...specs, preview: { ...specs.preview, states: [s] } }} />
+
+                {specs.capturedNotes?.length > 0 && (
+                  <div style={{ marginTop: 28 }}>
+                    <h3 style={{ fontSize: 16, fontWeight: 700, marginBottom: 10 }}>Known issues</h3>
+                    <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+                      {specs.capturedNotes.map((n, i) => (
+                        <div key={i} className="apy-note-box">
+                          <span className="apy-note-icon">⚑</span>
+                          <span>{n}</span>
+                        </div>
+                      ))}
                     </div>
                   </div>
-                ))}
+                )}
               </Section>
             )}
 
@@ -115,62 +201,27 @@ function ComponentTabsBody({ id, version }) {
 
             {tab === "Specs" && (
               <Section id="specs">
-                <div className="apy-eyebrow">Real captured values — {specs.variantsRaw}</div>
-                <div className="apy-spec-layout">
-                  <div className="apy-example-card" style={{ margin: 0 }}>
-                    <ComponentPreview item={specs} />
-                  </div>
-                  <div className="apy-spec-token-list">
-                    {specs.tokenFindings.map((f, i) => (
-                      <div key={i} className="apy-spec-token-row">
-                        <div>
-                          <div className="apy-spec-token-name">{f.field}</div>
-                          {f.note && <div className="apy-spec-note">{f.note}</div>}
-                        </div>
-                        <span className="apy-spec-token-code"><ColorSwatch value={f.value} />{f.token || f.value}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </Section>
-            )}
-
-            {tab === "Known Issues" && (
-              <Section id="known-issues">
-                <div className="apy-eyebrow">Real inconsistencies flagged in the captured code</div>
-                <p style={{ fontSize: 13, color: "var(--color-faint)", marginBottom: 16 }}>
-                  Not the same as QA sign-off against a build ticket — that needs a real workflow tied to your ticketing system, which this static content system doesn't do.
-                </p>
-                {specs.capturedNotes.length === 0 ? (
-                  <p style={{ fontSize: 15, color: "var(--color-faint)", fontStyle: "italic" }}>Nothing flagged — no real inconsistencies found in the exported code.</p>
-                ) : (
-                  <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
-                    {specs.capturedNotes.map((n, i) => (
-                      <div key={i} className="apy-note-box">
-                        <span className="apy-note-icon">⚑</span>
-                        <span>{n}</span>
-                      </div>
-                    ))}
-                  </div>
-                )}
+                {stateDeltas.map(({ state, shown }, i) => (
+                  <StateSpecRow key={i} label={state.label} shown={shown} tokenFindings={specs.tokenFindings} first={i === 0} kind={specs.preview.kind} />
+                ))}
               </Section>
             )}
 
             {tab === "Changelog" && (
               <Section id="changelog">
-                <div className="apy-eyebrow">Version history</div>
-                <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
-                  {versions.map((v, i) => (
-                    <div key={v} style={{ display: "flex", gap: 16, padding: "14px 0", borderBottom: i < versions.length - 1 ? "1px solid var(--color-line)" : "none" }}>
-                      <div style={{ fontFamily: "var(--font-mono)", fontSize: 13, fontWeight: 700, color: "var(--color-accent)", flexShrink: 0, width: 50 }}>{v}</div>
-                      <div style={{ fontSize: 14, color: "var(--color-body)" }}>
-                        {v === versions[0]
+                <table className="apy-data-table">
+                  <thead><tr><th style={{ width: 90 }}>Version</th><th>Notes</th></tr></thead>
+                  <tbody>
+                    {versionsDesc.map((v) => (
+                      <tr key={v}>
+                        <td style={{ fontFamily: "var(--font-mono)", fontWeight: 700, color: "var(--color-accent)" }}>{v}</td>
+                        <td>{v === versionsDesc[versionsDesc.length - 1]
                           ? "Initial real capture — pulled from the team's actual Figma component code and Zeroheight documentation."
-                          : "Updated content — see this version's markdown file for what changed."}
-                      </div>
-                    </div>
-                  ))}
-                </div>
+                          : "Updated content — see this version's markdown file for what changed."}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
               </Section>
             )}
           </div>
@@ -195,7 +246,7 @@ function DraftPageBody({ id }) {
 
   return (
     <div>
-      <div className="apy-gray-band" style={{ paddingBottom: 20 }}>
+      <div className="apy-gray-band">
         <div className="apy-gray-band-inner" style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", flexWrap: "wrap", gap: 12 }}>
           <div className="apy-gray-band-title-row">
             <EditableTitle title={draft.title} onSave={(t) => DraftStore.updatePageMeta(id, { title: t })} />
@@ -249,7 +300,7 @@ function DetailPage({ id, name }) {
 
   return (
     <div>
-      <div className="apy-gray-band" style={{ paddingBottom: 20 }}>
+      <div className="apy-gray-band">
         <div className="apy-gray-band-inner" style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", flexWrap: "wrap", gap: 12 }}>
           <div className="apy-gray-band-title-row">
             <EditableTitle title={displayName} onSave={setDisplayName} />
@@ -282,7 +333,7 @@ function FamilyPage({ family }) {
 
   return (
     <div>
-      <div className="apy-gray-band" style={{ paddingBottom: 20 }}>
+      <div className="apy-gray-band">
         <div className="apy-gray-band-inner" style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", flexWrap: "wrap", gap: 12 }}>
           <div className="apy-gray-band-title-row"><h1>{family.label}</h1></div>
           <VersionPicker versions={versionsSorted} active={version} onChange={setVersion} />

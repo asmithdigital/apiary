@@ -135,15 +135,13 @@ function TokensPage() {
 
 const FOUNDATION_DATA_RENDERERS = { colour: ColourData, spacing: SpacingData, typography: TypographyData, elevation: ElevationData, icons: IconsData };
 
-function FoundationsPage({ foundationKey, foundationLabel }) {
+function FoundationsBody({ foundationKey, foundationLabel }) {
   const [doc, setDoc] = useState(null);
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
   const [displayLabel, setDisplayLabel] = useState(foundationLabel);
-  useEffect(() => { setDisplayLabel(foundationLabel); }, [foundationLabel]);
   useEffect(() => {
     let cancelled = false;
-    setDoc(null); setData(null); setError(null);
     Promise.all([
       fetchMarkdown(`./content/foundations/${foundationKey}/v1.md`),
       fetchJSON(`./content/foundations/${foundationKey}/data.json`).catch(() => ({})),
@@ -167,9 +165,8 @@ function FoundationsPage({ foundationKey, foundationLabel }) {
             {DataRenderer && <div style={{ marginTop: 24 }}><DataRenderer data={data} /></div>}
             </>}
           </div>
-          <div style={{ width: 240, flexShrink: 0 }}>
-            <div className="apy-caption-card">
-              <div className="apy-eyebrow" style={{ marginBottom: 10 }}>On this page</div>
+          <div style={{ width: 220, flexShrink: 0 }}>
+            <div style={{ position: "sticky", top: 20 }}>
               <PageOutline />
             </div>
           </div>
@@ -177,4 +174,14 @@ function FoundationsPage({ foundationKey, foundationLabel }) {
       </div>
     </div>
   );
+}
+
+// key={foundationKey} forces a real fresh mount on every switch — the
+// previous version reused one component instance across foundations,
+// which meant a render could momentarily see the NEW foundationKey with
+// the OLD foundation's data shape (e.g. Colour's renderer fed Spacing's
+// data), throwing and taking down the whole page to a blank screen.
+// A fresh mount per key makes that mismatch impossible.
+function FoundationsPage({ foundationKey, foundationLabel }) {
+  return <FoundationsBody key={foundationKey} foundationKey={foundationKey} foundationLabel={foundationLabel} />;
 }

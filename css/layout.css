@@ -6,11 +6,18 @@
 .apy-body-row { flex: 1; display: flex; overflow: hidden; }
 .apy-content-scroll { flex: 1; overflow-y: auto; }
 
-.apy-gray-band { background: #FFFFFF; padding: 36px 40px; border-bottom: 1px solid var(--color-line); }
+.apy-gray-band {
+  background-color: #FFFDF5;
+  background-image:
+    radial-gradient(circle, rgba(0,0,0,0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,230,0,0.16), rgba(255,230,0,0));
+  background-size: 16px 16px, 100% 100%;
+  padding: 88px 40px 40px;
+}
 .apy-gray-band-inner { max-width: var(--content-max); margin: 0 auto; }
 .apy-gray-band-title-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
-.apy-gray-band h1 { font-size: var(--text-2xl); font-weight: 800; color: #000; margin: 0; letter-spacing: -0.01em; font-family: var(--font-display); }
-.apy-gray-band-desc { font-size: var(--text-md); color: var(--color-body); margin-top: 8px; max-width: 680px; line-height: 1.6; }
+.apy-gray-band h1 { font-size: 40px; font-weight: 800; color: #000; margin: 0; letter-spacing: -0.01em; font-family: var(--font-display); }
+.apy-gray-band-desc { font-size: var(--text-lg); color: var(--color-body); margin-top: 10px; max-width: 680px; line-height: 1.6; }
 
 .apy-content-col { padding: 0 40px; }
 .apy-content-col-inner { display: flex; max-width: var(--content-max); margin: 0 auto; }

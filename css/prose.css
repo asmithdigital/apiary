@@ -4,10 +4,9 @@
 /* Section headers get a coloured accent bar so the page has real rhythm
    instead of every section looking identical. */
 .apy-prose h2 {
-  font-size: 15px; font-weight: 700; margin: 32px 0 14px; color: var(--color-ink);
-  text-transform: uppercase; letter-spacing: 0.06em; font-family: var(--font-mono);
-  padding-left: 12px; border-left: 3px solid var(--color-accent);
-  display: flex; align-items: center; height: 20px; gap: 6px;
+  font-size: 20px; font-weight: 700; margin: 32px 0 14px; color: var(--color-ink);
+  font-family: var(--font-body);
+  display: flex; align-items: center; gap: 6px;
   position: relative;
 }
 .apy-prose h2::before {
@@ -20,15 +19,13 @@
 .apy-prose strong { color: var(--color-ink); }
 .apy-prose blockquote { border-left: 3px solid var(--color-accent); background: var(--color-accent-tint); padding: 12px 16px; margin: 16px 0; border-radius: 0 6px 6px 0; }
 
-/* A clean divided list instead of plain browser-default bullets — real
-   content here ranges from short labels to full sentences, so this stays
-   readable either way rather than risking awkward oversized "chips". */
+/* Real, normal dot-point bullets — not the blue dash that was blending
+   list items in with body copy. */
 .apy-prose ul { margin: 0 0 20px; padding: 0; list-style: none; }
 .apy-prose li {
-  padding: 10px 0 10px 22px; border-bottom: 1px solid #F1F5F9; position: relative; font-size: 14px;
+  padding: 6px 0 6px 20px; position: relative; font-size: 15px; color: var(--color-paragraph);
 }
-.apy-prose li::before { content: "—"; position: absolute; left: 0; color: var(--color-accent); font-weight: 700; }
-.apy-prose li:last-child { border-bottom: none; }
+.apy-prose li::before { content: "•"; position: absolute; left: 4px; color: var(--color-body); font-weight: 700; }
 
 /* "Content guidelines"-style titled items — a real definition list, not
    plain bold-then-dash paragraphs. */
@@ -56,3 +53,13 @@
 .apy-prose .apy-table { width: 100%; border-collapse: collapse; margin: 14px 0; font-size: var(--text-base); }
 .apy-prose .apy-table th { text-align: left; font-size: 13px; text-transform: uppercase; color: var(--color-faint); padding: 8px 10px; border-bottom: 2px solid var(--color-line); }
 .apy-prose .apy-table td { padding: 8px 10px; border-bottom: 1px solid #F1F5F9; }
+
+/* Shared, high-contrast table — used outside prose too (Changelog,
+   Resources, anywhere real tabular data needs to look consistent). */
+.apy-data-table { width: 100%; border-collapse: collapse; font-size: 14.5px; border: 1px solid var(--color-line); border-radius: 10px; overflow: hidden; }
+.apy-data-table th { text-align: left; font-size: 12.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.03em; color: var(--color-body); padding: 12px 16px; background: var(--color-band); border-bottom: 1px solid var(--color-line); }
+.apy-data-table td { padding: 13px 16px; border-bottom: 1px solid var(--color-line); color: var(--color-paragraph); }
+.apy-data-table tr:last-child td { border-bottom: none; }
+.apy-data-table tr:hover td { background: var(--color-band); }
+.apy-data-table a { color: var(--color-accent); font-weight: 600; text-decoration: none; }
+.apy-data-table a:hover { text-decoration: underline; }
