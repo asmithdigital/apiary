@@ -6,37 +6,13 @@
    replaces the Save handler with a real GitHub API commit; nothing else
    here needs to change when that happens.
 ============================================================================= */
-// Real GitHub login — click it, approve on GitHub's real login screen, land
-// back here with a real token stored for this browser tab (sessionStorage,
-// not localStorage — closing the tab signs you out, which is the safer
-// default for a shared/team machine).
+// There's no real login screen yet — that's real future work (a proper
+// auth flow, a database, an admin dashboard). For now this is honestly
+// just a link to the real repository, not a sign-in action.
 function AuthButton() {
-  const [user, setUser] = useState(sessionStorage.getItem("apiary_gh_user"));
-
-  useEffect(() => {
-    const hash = window.location.hash;
-    const match = hash.match(/token=([^&]+)/);
-    if (match && hash.includes("auth-success")) {
-      const token = decodeURIComponent(match[1]);
-      sessionStorage.setItem("apiary_gh_token", token);
-      fetch("https://api.github.com/user", { headers: { Authorization: `Bearer ${token}` } })
-        .then((r) => r.json())
-        .then((u) => { sessionStorage.setItem("apiary_gh_user", u.login); setUser(u.login); window.location.hash = "#/"; });
-    }
-  }, []);
-
-  if (user) {
-    return (
-      <div style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 13 }}>
-        <span style={{ color: "var(--color-faint)" }}>Signed in as <strong style={{ color: "var(--color-ink)" }}>{user}</strong></span>
-        <button onClick={() => { sessionStorage.removeItem("apiary_gh_token"); sessionStorage.removeItem("apiary_gh_user"); setUser(null); }}
-          style={{ background: "none", border: "1px solid var(--color-line)", borderRadius: 6, padding: "4px 10px", cursor: "pointer", fontSize: 12 }}>Sign out</button>
-      </div>
-    );
-  }
   return (
-    <a href={`${window.APIARY_API}/auth/start`} className="apy-btn-primary" style={{ padding: "6px 14px", fontSize: 13, textDecoration: "none" }}>
-      Sign in with GitHub
+    <a href="https://github.com/asmithdigital/apiary" target="_blank" rel="noopener noreferrer" className="apy-btn-primary" style={{ padding: "6px 14px", fontSize: 13, textDecoration: "none", display: "inline-flex", alignItems: "center", gap: 6 }}>
+      ⌥ View source on GitHub
     </a>
   );
 }

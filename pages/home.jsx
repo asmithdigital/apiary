@@ -60,12 +60,18 @@ function CategoryCard({ group, count, onClick }) {
 function HomePage({ navigate }) {
   const [site, setSite] = useState(null);
   const [, force] = useState(0);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   useEffect(() => { fetchMarkdown("./content/site.md").then((d) => setSite(d.meta)); }, []);
   if (!site) return <div style={{ padding: 60 }}><LoadingRow /></div>;
 
   return (
     <div>
-      <Header onNavigate={navigate} />
+      <Header onNavigate={navigate} onToggleMobileMenu={() => setMobileMenuOpen((o) => !o)} />
+      <div className={"apy-sidebar-wrap" + (mobileMenuOpen ? " apy-sidebar-open" : "")}>
+        <Sidebar page={{ kind: "home" }} navigate={(t) => { setMobileMenuOpen(false); navigate(t); }} />
+        <div className="apy-mobile-auth-row"><AuthButton /></div>
+      </div>
+      {mobileMenuOpen && <div className="apy-mobile-scrim" onClick={() => setMobileMenuOpen(false)} />}
       <div style={{ position: "relative", overflow: "hidden", background: "linear-gradient(180deg, var(--color-accent-tint), #fff 70%)" }}>
         <div className="apy-hero-accent-shape" style={{ width: 420, height: 420, background: "var(--color-accent)", top: -180, right: -120 }} />
         <div className="apy-hero-accent-shape" style={{ width: 300, height: 300, background: "#F59E0B", top: 120, left: -140 }} />
@@ -84,7 +90,7 @@ function HomePage({ navigate }) {
 
       <section style={{ padding: "0 64px 80px", maxWidth: 1300, margin: "0 auto" }}>
         <h2 style={{ fontSize: 24, fontWeight: 653, fontFamily: "var(--font-display)", marginBottom: 24, color: "var(--color-ink)" }}>{site.exploreHeading}</h2>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 16 }}>
+        <div className="apy-explore-grid">
           {NAV.componentGroups.map((g) => {
             const count = NAV.components.filter((c) => c.groupKey === g.key).length;
             const first = NAV.components.find((c) => c.groupKey === g.key);

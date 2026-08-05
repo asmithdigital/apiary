@@ -104,7 +104,7 @@ const PROP_LABEL = { bg: "Background", border: "Border", radius: "Corner radius"
 
 function StateSpecRow({ label, shown, tokenFindings, first, kind }) {
   return (
-    <div style={{ display: "flex", gap: 24, marginBottom: 28, alignItems: "flex-start" }}>
+    <div className="apy-state-spec-row" style={{ display: "flex", gap: 24, marginBottom: 28, alignItems: "flex-start" }}>
       <div className="apy-example-card" style={{ margin: 0, width: 180, flexShrink: 0, display: "flex", alignItems: "center", justifyContent: "center" }}>
         <ComponentPreview item={{ preview: { kind, states: [{ ...shown, label }] } }} />
       </div>
@@ -209,6 +209,7 @@ function ComponentTabsBody({ id, version }) {
 
             {tab === "Changelog" && (
               <Section id="changelog">
+                <div className="apy-table-scroll">
                 <table className="apy-data-table">
                   <thead><tr><th style={{ width: 90 }}>Version</th><th>Notes</th></tr></thead>
                   <tbody>
@@ -222,6 +223,7 @@ function ComponentTabsBody({ id, version }) {
                     ))}
                   </tbody>
                 </table>
+                </div>
               </Section>
             )}
           </div>

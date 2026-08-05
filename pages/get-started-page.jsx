@@ -57,11 +57,7 @@ function GetStartedPage({ pageKey, pageLabel, navigate }) {
             )}
           </div>
 
-          <div style={{ width: 220, flexShrink: 0 }}>
-            <div style={{ position: "sticky", top: 20 }}>
-              <PageOutline />
-            </div>
-          </div>
+          <ResponsiveOutline />
         </div>
       </div>
     </div>
@@ -95,5 +91,30 @@ function PageOutline() {
         </li>
       ))}
     </ul>
+  );
+}
+
+// Desktop: a normal sticky rail alongside the content. Mobile: that rail
+// is hidden (via CSS) and this renders a small floating button instead —
+// tapping it opens the same real outline in a popover, so the page never
+// gets wider than the viewport just to fit a sidebar that has nowhere
+// good to go on a narrow screen.
+function ResponsiveOutline() {
+  const [open, setOpen] = useState(false);
+  return (
+    <>
+      <div className="apy-outline-rail-inline" style={{ width: 220, flexShrink: 0 }}>
+        <div style={{ position: "sticky", top: 20 }}>
+          <PageOutline />
+        </div>
+      </div>
+      <button className="apy-outline-float-btn" onClick={() => setOpen((o) => !o)} aria-label="On this page">☰</button>
+      {open && (
+        <div className="apy-outline-float-panel">
+          <div style={{ fontSize: 11, fontWeight: 700, color: "var(--color-faint)", textTransform: "uppercase", marginBottom: 10 }}>On this page</div>
+          <PageOutline />
+        </div>
+      )}
+    </>
   );
 }

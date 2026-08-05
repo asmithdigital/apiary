@@ -165,11 +165,7 @@ function FoundationsBody({ foundationKey, foundationLabel }) {
             {DataRenderer && <div style={{ marginTop: 24 }}><DataRenderer data={data} /></div>}
             </>}
           </div>
-          <div style={{ width: 220, flexShrink: 0 }}>
-            <div style={{ position: "sticky", top: 20 }}>
-              <PageOutline />
-            </div>
-          </div>
+          <ResponsiveOutline />
         </div>
       </div>
     </div>

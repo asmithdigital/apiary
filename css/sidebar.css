@@ -5,6 +5,42 @@
 .apy-mobile-auth-row { display: none; }
 .apy-mobile-scrim { display: none; }
 
+/* Explore grid — steps down cleanly instead of staying locked at 4
+   columns and squeezing/overflowing on narrower screens. */
+.apy-explore-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+
+/* Wrap any real data table in this so it scrolls horizontally on narrow
+   screens instead of forcing the whole page to scroll sideways. */
+.apy-table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+
+.apy-outline-float-btn { display: none; position: fixed; top: 76px; right: 16px; z-index: 45; width: 42px; height: 42px; border-radius: 50%; background: #fff; border: 1px solid var(--color-line); box-shadow: 0 4px 14px rgba(0,0,0,0.15); align-items: center; justify-content: center; cursor: pointer; font-size: 16px; }
+.apy-outline-float-panel { position: fixed; top: 122px; right: 16px; z-index: 45; width: 240px; max-height: 60vh; overflow-y: auto; background: #fff; border: 1px solid var(--color-line); border-radius: 10px; box-shadow: 0 8px 28px rgba(0,0,0,0.18); padding: 14px 16px; }
+
+@media (max-width: 880px) {
+  .apy-explore-grid { grid-template-columns: repeat(2, 1fr); }
+
+  /* Banner: title/badge and the version dropdown stack instead of being
+     squeezed onto one cramped row. */
+  .apy-gray-band { padding: 48px 20px 28px; }
+  .apy-gray-band-inner { flex-direction: column; align-items: flex-start !important; }
+  .apy-gray-band-inner > * { width: 100%; }
+
+  /* Main content + right rail (Specs state rows, Contents outline, etc.)
+     stack instead of squeezing side by side and overflowing. */
+  .apy-content-col-inner { flex-direction: column; }
+  .apy-state-spec-row { flex-direction: column; }
+  .apy-state-spec-row .apy-example-card { width: 100% !important; }
+
+  /* The "on this page" outline rail becomes a floating button instead of
+     a fixed-width column that pushes the page wider than the viewport. */
+  .apy-outline-rail-inline { display: none; }
+  .apy-outline-float-btn { display: flex; }
+}
+
+@media (max-width: 520px) {
+  .apy-explore-grid { grid-template-columns: 1fr; }
+}
+
 /* ---- Responsive: below this width, the sidebar becomes a slide-in
    drawer instead of a permanent column, and the header collapses to
    just the hamburger + logo + search, with Sign in moved into the
